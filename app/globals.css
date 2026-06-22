@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — single source of truth (PRD §5)
+   Raw values live on :root with the PRD's exact names, then are
+   mapped into the Tailwind theme below so both `var(--brand)` and
+   utilities like `bg-brand` resolve to the same value.
+   ============================================================ */
+:root {
+  --ink: #0b0e14; /* primary text + dark sections */
+  --ink-soft: #1a1f2b;
+  --surface: #ffffff;
+  --surface-muted: #f6f7f9;
+  --hairline: #e7e9ee;
+  --text-muted: #5a6472;
+  --brand: #f4a300; /* solar amber — primary CTA/accent */
+  --brand-hover: #d98c00;
+  --brand-tint: #fff4e0; /* soft amber wash backgrounds */
+  --brand-ink: #9a6a00; /* amber-800 — eyebrows/labels on light */
+  --business: #16315a; /* deep navy — C&I/credibility only */
+  --business-tint: #eef2f8;
+  --success: #0fa47a; /* MICRO use only */
+  --danger: #d64545; /* form errors only */
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-hairline: var(--hairline);
+  --color-text-muted: var(--text-muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-ink: var(--brand-ink);
+  --color-business: var(--business);
+  --color-business-tint: var(--business-tint);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-fraunces), var(--font-geist-sans), Georgia, serif;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* body */
+    line-height: 1.65;
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* On dark (ink) surfaces, the amber focus ring carries the accent. */
+  .on-ink :focus-visible {
+    outline-color: var(--brand);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ============================================================
+   TYPE SCALE (PRD §5) — Apple-style fluid display, calm body
+   ============================================================ */
+@layer components {
+  .text-display {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+
+  .text-h2 {
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+  .text-h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .text-lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .text-body {
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--brand-ink);
+  }
+
+  .text-caption {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  /* Figures use Geist Mono with tabular numerals (PRD: mono for figures). */
+  .figure {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+  }
+
+  /* Optional Fraunces display for hero only. */
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+}
+
+/* ============================================================
+   LAYOUT PRIMITIVES — generous Apple-style whitespace (PRD §5)
+   ============================================================ */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 760px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .section-y {
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
+
+  .section-y-sm {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .hairline {
+    border-color: var(--hairline);
+  }
+}
+
+/* ============================================================
+   MOTION — subtle, premium; respects reduced-motion
+   ============================================================ */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
