@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
+import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/cn";
 
 /**
@@ -37,7 +38,7 @@ export function PageHero({
   return (
     <section className={cn(toneCls, "pt-28 pb-16 sm:pt-32 sm:pb-20")}>
       <div className="container-page">
-        <div
+        <Reveal
           className={cn(
             "max-w-3xl",
             align === "center" && "mx-auto text-center",
@@ -87,7 +88,7 @@ export function PageHero({
             </div>
           )}
           {children}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
