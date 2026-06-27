@@ -9,7 +9,6 @@
 export type UpgradeIcon =
   | "solar"
   | "heat-pump"
-  | "hot-water"
   | "battery"
   | "air-con"
   | "led";
@@ -46,8 +45,12 @@ export interface UpgradeContent {
   commercialAngle?: string;
   /** Upgrade-specific FAQ (block 6). */
   faqs: UpgradeFaq[];
-  /** Accent treatment — most use brand amber; keep single-accent rule. */
-  available: "residential" | "both";
+  /**
+   * Audience scope. `residential`/`both` show in the home & residential grids;
+   * `commercial` is filtered OUT of those and surfaced in the Business journey
+   * (e.g. Commercial LED – NBB, which no longer fits homes).
+   */
+  available: "residential" | "both" | "commercial";
 }
 
 export const UPGRADES: UpgradeContent[] = [
@@ -68,7 +71,7 @@ export const UPGRADES: UpgradeContent[] = [
         "A system sized to how and when you actually use power — not an off-the-shelf number.",
         "Federal STC value deducted from your price at point of sale.",
         "A Solar Victoria rebate applied on top for eligible homes.",
-        "Pairs with a battery and with eligible hot-water or heat-pump upgrades to stack further.",
+        "Pairs with a battery and with eligible heat-pump (incl. hot water) upgrades to stack further.",
       ],
     },
     howItWorks: [
@@ -78,7 +81,7 @@ export const UPGRADES: UpgradeContent[] = [
       "You pay the reduced price — we handle the certificate paperwork.",
     ],
     fullChain:
-      "Because we're the Accredited Person, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
+      "Because we operate under our Accredited Person, Aussie Eco Marks, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
     flagship: true,
     commercialAngle:
       "Commercial rooftop and ground-mount solar can run into six figures of combined value, with a longer measurement & verification path. We run that as a managed project — see the Business journey.",
@@ -101,83 +104,46 @@ export const UPGRADES: UpgradeContent[] = [
   {
     slug: "heat-pumps",
     name: "Heat Pumps",
-    longName: "Reverse-cycle heat pumps",
+    longName: "Heat pumps — heating, cooling & hot water",
     icon: "heat-pump",
-    tagline: "Efficient electric heating and cooling — a strong VEU discount.",
-    eyebrow: "Heating & cooling",
-    heroHeadline: "Heat and cool for a fraction of the running cost.",
+    tagline:
+      "Heating, cooling and hot water — the clearest three-layer stack (VEU + STC + Solar Victoria).",
+    eyebrow: "Heating, cooling & hot water",
+    heroHeadline: "One efficient system for heating, cooling and hot water.",
     heroSub:
-      "Replacing old gas or resistive heating with an efficient reverse-cycle heat pump is one of the highest-value VEU activities. The discount comes off your install price upfront.",
+      "A reverse-cycle heat pump replaces old gas or resistive heating — and a heat-pump hot water system is the clearest example of stacking, drawing the VEU discount, federal STCs and, for eligible homes, a Solar Victoria rebate at once.",
     whatItIs: {
       heading: "What you actually get",
-      body: "A right-sized, high-efficiency reverse-cycle system installed by our accredited team, with the VEU certificate value already discounted.",
+      body: "A right-sized, high-efficiency heat pump installed by our accredited team — for space heating and cooling, hot water, or both — with the combined incentive value already taken off your price.",
       points: [
-        "One system that heats in winter and cools in summer.",
-        "Far lower running cost than gas or old electric heaters.",
-        "The VEU discount applied upfront — the biggest savings come from replacing gas or resistive heating.",
-        "Works well alongside solar to cut running costs further.",
+        "Reverse-cycle heating and cooling, plus efficient heat-pump hot water.",
+        "Far lower running cost than gas or old electric storage.",
+        "The VEU discount applied upfront — replacing gas or resistive systems saves the most.",
+        "Heat-pump hot water can stack VEU + federal STCs + a Solar Victoria rebate for eligible homes.",
       ],
     },
     howItWorks: [
-      "We assess your home and current heating to size the unit.",
+      "We assess your home — heating, cooling and hot-water needs — and size the system.",
       "Our accredited installers complete the changeover.",
-      "VEECs are created from the energy saved and discounted off your price.",
-      "You pay the reduced price — paperwork handled.",
+      "VEECs (and STCs on eligible hot water) are created and discounted off your price; any Solar Victoria rebate is applied.",
+      "You pay the reduced price — all paperwork handled.",
     ],
     fullChain:
-      "We size, install and certify in one chain. No hand-off between a sales rep, an installer and a certificate trader who don't talk to each other.",
+      "Stacking three programs cleanly on a hot-water system is exactly where a full-chain operator earns its keep — we line up VEU, STC and Solar Victoria so you don't have to, all in one chain with no hand-offs.",
     commercialAngle:
-      "Commercial sites can upgrade heating/cooling at scale with a managed VEU project.",
+      "Commercial sites can upgrade heating/cooling at scale — and high hot-water loads (hospitality, aged care, gyms) make a strong managed VEU project.",
     faqs: [
+      {
+        q: "Does this cover hot water too?",
+        a: "Yes. Heat pumps now cover both space heating/cooling and hot water. A heat-pump hot water system is the clearest stacking example — it can draw VEU, federal STCs and a Solar Victoria rebate together for eligible homes.",
+      },
       {
         q: "Do I have to remove my gas heater?",
         a: "Replacing gas or resistive heating is where the discount is largest, but we'll assess your situation and explain the options before anything changes.",
       },
       {
         q: "Is it means-tested?",
-        a: "No. VEU is not means-tested — it's open to Victorian households and businesses.",
-      },
-    ],
-    available: "both",
-  },
-  {
-    slug: "hot-water",
-    name: "Hot Water",
-    longName: "Heat-pump & solar hot water",
-    icon: "hot-water",
-    tagline: "The clearest three-layer stack — VEU + STC + Solar Victoria.",
-    eyebrow: "Hot water",
-    heroHeadline: "The upgrade where all three incentives can stack.",
-    heroSub:
-      "A heat-pump hot water system can draw the VEU discount, federal STCs and — for eligible homes — a Solar Victoria rebate at the same time. It's the clearest example of the stacking story.",
-    whatItIs: {
-      heading: "What you actually get",
-      body: "An efficient heat-pump (or solar) hot water system installed by our accredited team, with the combined incentive value taken off your price.",
-      points: [
-        "Hot water for a fraction of the energy of gas or old electric storage.",
-        "VEU discount applied upfront.",
-        "Federal STCs deducted from the price.",
-        "Solar Victoria hot-water rebate on top for eligible homes.",
-      ],
-    },
-    howItWorks: [
-      "We assess your hot-water use and existing system.",
-      "Our accredited installers complete the swap.",
-      "VEECs and STCs are created and discounted; any Solar Victoria rebate is applied.",
-      "You pay the reduced price — all paperwork handled.",
-    ],
-    fullChain:
-      "Stacking three programs cleanly is exactly where a full-chain Accredited Person earns its keep — we line up VEU, STC and Solar Victoria so you don't have to.",
-    commercialAngle:
-      "High hot-water loads (hospitality, aged care, gyms) make commercial hot-water upgrades a strong managed VEU project.",
-    faqs: [
-      {
-        q: "Can I really get all three?",
-        a: "For eligible homes installing the right system, yes — VEU, STC and a Solar Victoria rebate can apply together. Eligibility for the Solar Victoria layer depends on income and property thresholds.",
-      },
-      {
-        q: "Heat pump or solar hot water?",
-        a: "Both can be eligible. We'll recommend based on your roof, climate zone and usage.",
+        a: "VEU is not means-tested — it's open to Victorian households and businesses. Only the Solar Victoria layer (which can apply to heat-pump hot water) has income and property thresholds.",
       },
     ],
     available: "both",
@@ -262,41 +228,46 @@ export const UPGRADES: UpgradeContent[] = [
   },
   {
     slug: "led",
-    name: "LED",
-    longName: "LED lighting",
+    name: "Commercial LED – NBB",
+    longName: "Commercial LED – NBB (Non-Building Based)",
     icon: "led",
-    tagline: "A quick VEU win for homes — and high-volume for business.",
-    eyebrow: "Lighting",
-    heroHeadline: "The simplest place to start.",
+    tagline:
+      "High-efficiency LED for eligible non-building-based commercial lighting.",
+    eyebrow: "Commercial lighting",
+    heroHeadline: "Cut the running cost of your outdoor & non-building lighting.",
     heroSub:
-      "Switching to efficient LED lighting is a fast, low-friction VEU activity. Modest for a single home, but high-volume — and high-value — for commercial sites.",
+      "Commercial LED – NBB covers eligible non-building-based lighting only — outdoor and area lighting such as car parks, yards, sports and public-realm sites. A high-volume VEU activity, with the certificate value discounted upfront. (This is a commercial upgrade, not a residential one.)",
     whatItIs: {
       heading: "What you actually get",
-      body: "Efficient LED lighting installed under the VEU program, with the certificate value discounted.",
+      body: "High-efficiency LED upgrades for eligible non-building-based (NBB) commercial lighting, installed under the VEU program with the certificate value discounted.",
       points: [
-        "Lower lighting energy use across the property.",
-        "VEU discount applied upfront.",
-        "An easy first upgrade to start the relationship.",
-        "Scales dramatically for warehouses, offices and retail.",
+        "Scoped to eligible non-building-based lighting — car parks, yards, outdoor and public-realm areas.",
+        "Sharply lower lighting energy use across large sites.",
+        "VEU discount applied upfront on a high-volume activity.",
+        "Strong, fast-payback project for commercial and industrial operators.",
       ],
     },
     howItWorks: [
-      "We assess your lighting.",
-      "Our accredited team completes the upgrade.",
-      "VEECs are created and discounted off your price.",
-      "You pay the reduced price.",
+      "We audit your non-building-based lighting and confirm NBB eligibility.",
+      "Our accredited team completes the LED upgrade.",
+      "VEECs are created from the energy saved and discounted off your price.",
+      "You pay the reduced price — paperwork handled.",
     ],
     fullChain:
-      "Even on a small job, you get the same accredited, full-chain handling — and it's often the doorway to a bigger upgrade plan.",
+      "On a high-volume NBB lighting roll-out, full-chain handling matters — one accountable team for the audit, the install and the certificates, with no hand-offs across a large site.",
     commercialAngle:
-      "Commercial lighting is one of the highest-volume VEU activities — a strong, fast-payback project for warehouses, offices and retail.",
+      "Non-building-based lighting (car parks, yards, sports and public-realm sites) is one of the highest-volume VEU activities — a strong, fast-payback commercial project.",
     faqs: [
       {
-        q: "Is it worth it for one home?",
-        a: "The per-home figure is modest, but it's quick and there's no means test. For commercial sites the numbers are much larger.",
+        q: "What does “non-building-based” mean?",
+        a: "It's the VEU category for lighting that isn't inside a building — outdoor and area lighting such as car parks, yards, sports facilities and public spaces. We confirm eligibility against the NBB activity before any work.",
+      },
+      {
+        q: "Is this available for homes?",
+        a: "No — Commercial LED – NBB is a commercial activity for eligible non-building-based lighting only. It isn't a residential upgrade.",
       },
     ],
-    available: "both",
+    available: "commercial",
   },
 ];
 

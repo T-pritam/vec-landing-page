@@ -6,6 +6,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyMobileCTA } from "@/components/sticky-mobile-cta";
+import { Watermark } from "@/components/brand/watermark";
 import { SITE } from "@/lib/site";
 
 // Optional Fraunces — hero display only (PRD §5 fonts). Variable font: omit
@@ -59,6 +60,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Watermark />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

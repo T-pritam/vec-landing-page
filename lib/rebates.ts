@@ -115,7 +115,7 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
       },
     },
     stackingNote:
-      "Solar PV draws federal STCs and, for eligible homes, a Solar Victoria rebate. Pair it with an eligible hot-water or heat-pump upgrade and the VEU layer stacks on top.",
+      "Solar PV draws federal STCs and, for eligible homes, a Solar Victoria rebate. Pair it with an eligible heat-pump (incl. hot water) upgrade and the VEU layer stacks on top.",
   },
   "heat-pumps": {
     slug: "heat-pumps",
@@ -124,36 +124,23 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
         min: 500,
         max: 3000,
         kind: "discount",
-        note: "Replacing gas/electric resistive heating saves the most",
-      },
-    },
-    stackingNote:
-      "Efficient reverse-cycle heating is a VEU activity. Combine it with solar to cut both the install cost and the running cost.",
-  },
-  "hot-water": {
-    slug: "hot-water",
-    layers: {
-      veu: {
-        min: 300,
-        max: 1000,
-        kind: "discount",
-        note: "Heat-pump hot water replacing gas/electric",
+        note: "Heating/cooling or hot water — replacing gas/electric saves most",
       },
       stc: {
         min: 200,
         max: 900,
         kind: "discount",
-        note: "Solar / heat-pump hot water creates STCs",
+        note: "Heat-pump hot water also creates federal STCs",
       },
       solarVictoria: {
         min: 0,
         max: 1000,
         kind: "rebate",
-        note: "Eligible homes only — income & property thresholds",
+        note: "Hot water, eligible homes only — income & property thresholds",
       },
     },
     stackingNote:
-      "Hot water is the clearest stacking story: a heat-pump system can draw the VEU discount, federal STCs and a Solar Victoria rebate at once for eligible homes.",
+      "Heat pumps cover heating, cooling and hot water. Heat-pump hot water is the clearest stacking story — it can draw the VEU discount, federal STCs and a Solar Victoria rebate at once for eligible homes.",
   },
   battery: {
     slug: "battery",
@@ -185,14 +172,14 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
     slug: "led",
     layers: {
       veu: {
-        min: 50,
-        max: 400,
+        min: 200,
+        max: 5000,
         kind: "discount",
-        note: "Per-home; commercial lighting upgrades can be far larger",
+        note: "Per site — non-building-based lighting scales with fixture count",
       },
     },
     stackingNote:
-      "Lighting upgrades are a quick VEU win for homes — and a high-volume one for commercial sites.",
+      "Commercial LED – NBB is a high-volume VEU activity for eligible non-building-based lighting — the discount scales with the size of the roll-out.",
   },
 };
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { UpgradesGrid } from "@/components/sections/upgrades-grid";
+import { StandaloneProducts } from "@/components/sections/standalone-products";
 import { FullChain } from "@/components/sections/full-chain";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
@@ -11,7 +12,7 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Residential upgrades for your home",
   description:
-    "Solar, heat pumps, hot water, batteries, air con and LED — household energy upgrades with a large upfront discount, handled end-to-end by an Accredited Person.",
+    "Solar, heat pumps (incl. hot water), batteries and air conditioning — household energy upgrades with a large upfront discount, handled end-to-end by AEM Energy, operating under our Accredited Person, Aussie Eco Marks.",
 };
 
 export default function ResidentialPage() {
@@ -34,6 +35,18 @@ export default function ResidentialPage() {
         />
         <div className="mt-10">
           <UpgradesGrid />
+        </div>
+
+        {/* Also from AEM Energy — standalone (non-VEU) products */}
+        <div className="mt-14 border-t border-hairline pt-12">
+          <SectionHeader
+            eyebrow="Also from AEM Energy"
+            title="A standalone product, too."
+            lead="Not everything we do is a VEU upgrade. Distillo Water Filtration is a separate product — no rebate or scheme, just a quality system and a clean install."
+          />
+          <div className="mt-8">
+            <StandaloneProducts />
+          </div>
         </div>
       </Section>
 

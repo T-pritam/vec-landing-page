@@ -4,13 +4,14 @@ import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { TrustStrip } from "@/components/trust-strip";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CtaBand } from "@/components/sections/cta-band";
+import { CredibilityBand } from "@/components/sections/credibility-band";
 import { CheckIcon, ShieldCheckIcon } from "@/components/icons";
 import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About & Why Us — accreditation, proven",
   description:
-    "We're a full-chain Accredited Person under the VEU program — re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
+    "AEM Energy operates under our Accredited Person, Aussie Eco Marks — a full-chain operation re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
@@ -24,7 +25,7 @@ const FULL_CHAIN_POINTS = [
   },
   {
     t: "We own the certificates",
-    b: "Only an Accredited Person can create VEECs. That's us — the value isn't outsourced.",
+    b: "Only an Accredited Person can create VEECs — that's our AP, Aussie Eco Marks, so the value isn't outsourced.",
   },
   {
     t: "We own the outcome",
@@ -38,7 +39,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Accredited isn't a slogan here. It's the whole business."
-        lead="We're a full-chain Accredited Person under the Victorian Energy Upgrades program. That's a specific, verifiable status — and it's the reason we can do what most providers can't."
+        lead="AEM Energy operates under our Accredited Person, Aussie Eco Marks, in the Victorian Energy Upgrades program. That's a specific, verifiable status — and it's the reason we can do what most providers can't."
         tone="ink"
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
@@ -54,8 +55,9 @@ export default function AboutPage() {
             />
             <p className="mt-5 text-body">
               Under the VEU program, only an Accredited Person can create the
-              tradable certificates (VEECs) that fund the rebates. We own the
-              entire chain — the lead, the assessment, the install (via our
+              tradable certificates (VEECs) that fund the rebates. AEM Energy
+              operates under our Accredited Person, Aussie Eco Marks, and owns
+              the entire chain — the lead, the assessment, the install (via our
               registered installers), the certificate creation, and the sale.
             </p>
             <p className="mt-4 text-body">
@@ -71,7 +73,8 @@ export default function AboutPage() {
             </p>
             <dl className="mt-4 space-y-4">
               {[
-                ["Status", "Accredited Person (VEU)"],
+                ["Trading as", SITE.name],
+                ["Accredited Person", `${SITE.accreditedPerson} (VEU)`],
                 ["Accreditation no.", SITE.accreditationNo],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],
@@ -111,23 +114,8 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-        {/* Official badges placeholder */}
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          {["Accredited Person", "VEU program", "Solar Victoria", "Clean Energy"].map(
-            (b) => (
-              <div
-                key={b}
-                className="flex h-16 items-center gap-2 rounded-xl border border-dashed border-hairline px-5 text-sm text-text-muted"
-              >
-                <ShieldCheckIcon className="h-5 w-5 text-text-muted" />
-                {b} badge
-              </div>
-            ),
-          )}
-        </div>
-        <p className="mt-3 text-caption">
-          Official accreditation badges — client to supply before launch.
-        </p>
+        {/* Credibility band — established/credible cue + badge row */}
+        <CredibilityBand className="mt-10" />
       </Section>
 
       {/* 3 — The full-chain advantage */}

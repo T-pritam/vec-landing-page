@@ -17,7 +17,7 @@ const STEPS = [
   {
     n: "02",
     title: "We create the certificates",
-    body: "As an Accredited Person, we generate VEECs from the energy your upgrade saves. Only an accredited person can do this.",
+    body: "Through our Accredited Person, Aussie Eco Marks, we generate VEECs from the energy your upgrade saves. Only an Accredited Person can do this.",
   },
   {
     n: "03",

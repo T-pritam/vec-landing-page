@@ -7,6 +7,7 @@ import { FullChain } from "@/components/sections/full-chain";
 import { UpgradesGrid } from "@/components/sections/upgrades-grid";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
+import { CredibilityBand } from "@/components/sections/credibility-band";
 import { CtaBand } from "@/components/sections/cta-band";
 import { TrustStrip } from "@/components/trust-strip";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -59,7 +60,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Full-chain, in-house"
             title="We assess. We install. We handle the paperwork. You save."
-            lead="Because we're the Accredited Person, every step sits with one team — no chasing a separate installer, rebate agent and certificate trader."
+            lead="Because we operate under our Accredited Person, Aussie Eco Marks, every step sits with one team — no chasing a separate installer, rebate agent and certificate trader."
           />
         </Reveal>
         <Reveal delay={0.08} className="mt-10">
@@ -94,7 +95,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Proof, not a slogan"
             title="“Accredited” should mean something. Here's what ours means."
-            lead="Most sites say “accredited” with no evidence. The genuinely strong fact — that we're re-tested every year — is used by almost nobody."
+            lead="Most sites say “accredited” with no evidence. The genuinely strong fact — that our Accredited Person, Aussie Eco Marks, is re-tested every year — is used by almost nobody."
             onInk
           />
         </Reveal>
@@ -121,6 +122,9 @@ export default function HomePage() {
         </Reveal>
         <Reveal delay={0.08} className="mt-10">
           <SocialProof />
+        </Reveal>
+        <Reveal delay={0.12} className="mt-6">
+          <CredibilityBand />
         </Reveal>
       </Section>
 

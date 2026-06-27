@@ -3,6 +3,7 @@ import { UpgradeGlyph, CheckIcon, LayersIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { IndicativeChip, IndicativeDisclaimer } from "@/components/indicative";
+import { ProductGallery } from "@/components/brand/product-gallery";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
@@ -61,45 +62,24 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
               </div>
             </div>
 
-            {/* Value teaser card */}
-            <div className="on-ink rounded-3xl bg-ink p-7 text-white sm:p-8">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-white/60">
-                  {loanLayers.length && !discountLayers.length
-                    ? "Interest-free loan"
-                    : "Indicative value"}
-                </span>
-                <IndicativeChip onInk />
-              </div>
-              <div className="mt-4 flex items-end gap-2">
-                <span className="text-sm text-white/55">up to</span>
-                <span className="figure text-5xl font-semibold leading-none text-white">
-                  {formatAUD(
-                    headline || (loanLayers[0]?.[1].max ?? 0),
-                  )}
-                </span>
-              </div>
-              <ul className="mt-6 space-y-2">
-                {layerEntries.map(([id, v]) => (
-                  <li
-                    key={id}
-                    className="flex items-center justify-between gap-3 border-t border-white/10 pt-2 text-sm first:border-0 first:pt-0"
-                  >
-                    <span className="flex items-center gap-2 text-white/80">
-                      <span className="h-2 w-2 rounded-full bg-brand" />
-                      {INCENTIVE_LAYERS[id].short}
-                      {v.kind === "loan" && (
-                        <span className="text-xs text-white/45">(loan)</span>
-                      )}
-                    </span>
-                    <span className="figure text-white/70">
-                      {formatRange(v.min, v.max)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-5">
-                <IndicativeDisclaimer onInk />
+            {/* Product carousel (Change #1) — one carousel per product, with a
+                compact indicative-value line beneath so the figure stays visible
+                (full breakdown lives in section 2). */}
+            <div>
+              <ProductGallery slug={upgrade.slug} name={upgrade.name} />
+              <div className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface-muted px-5 py-4">
+                <div>
+                  <span className="block text-xs font-medium text-text-muted">
+                    {loanLayers.length && !discountLayers.length
+                      ? "Interest-free loan"
+                      : "Indicative value"}
+                  </span>
+                  <span className="figure text-2xl font-semibold text-ink">
+                    up to{" "}
+                    {formatAUD(headline || (loanLayers[0]?.[1].max ?? 0))}
+                  </span>
+                </div>
+                <IndicativeChip />
               </div>
             </div>
           </div>

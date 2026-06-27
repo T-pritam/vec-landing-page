@@ -17,6 +17,13 @@
   --brand-hover: #d98c00;
   --brand-tint: #fff4e0; /* soft amber wash backgrounds */
   --brand-ink: #9a6a00; /* amber-800 — eyebrows/labels on light */
+  /* AEM leaf-green — SECONDARY accent only (renewable/eco + accreditation
+     cues, credibility band, standalone products). Amber stays primary. */
+  --leaf: #1a7f4b;
+  --leaf-hover: #156a3e;
+  --leaf-tint: #eaf5ee; /* soft green wash backgrounds */
+  --leaf-ink: #126b3e; /* green eyebrows/labels on light */
+  --lime: #9bc53d; /* logo highlight — sparing use */
   --business: #16315a; /* deep navy — C&I/credibility only */
   --business-tint: #eef2f8;
   --success: #0fa47a; /* MICRO use only */
@@ -34,6 +41,11 @@
   --color-brand-hover: var(--brand-hover);
   --color-brand-tint: var(--brand-tint);
   --color-brand-ink: var(--brand-ink);
+  --color-leaf: var(--leaf);
+  --color-leaf-hover: var(--leaf-hover);
+  --color-leaf-tint: var(--leaf-tint);
+  --color-leaf-ink: var(--leaf-ink);
+  --color-lime: var(--lime);
   --color-business: var(--business);
   --color-business-tint: var(--business-tint);
   --color-success: var(--success);

@@ -49,7 +49,7 @@ export function SiteHeader() {
       <div className="container-page flex h-16 items-center justify-between gap-4 sm:h-18">
         <Link
           href="/"
-          aria-label="Accredited Energy — home"
+          aria-label="AEM Energy — home"
           className="shrink-0 rounded-lg py-1"
         >
           <Logo />

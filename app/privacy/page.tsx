@@ -20,7 +20,7 @@ const PRIVACY = [
   },
   {
     h: "Who sees it",
-    p: "Your details are handled by our accredited team. As a full-chain Accredited Person we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
+    p: "Your details are handled by our team. As a full-chain operation under our Accredited Person, Aussie Eco Marks, we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
   },
   {
     h: "Your choices",

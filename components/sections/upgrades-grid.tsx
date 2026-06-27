@@ -9,15 +9,24 @@ import { cn } from "@/lib/cn";
  * Entry tiles to the upgrade pages (PRD §7.1 block 5). Re-conceived from the
  * stock icon grid — figures pulled live from the rebate config and framed
  * indicative. The flagship (Solar) gets a wider, emphasised tile.
+ *
+ * `audience` scopes which upgrades show: residential contexts (home, hub) hide
+ * commercial-only upgrades like Commercial LED – NBB; "all" shows everything.
  */
 export function UpgradesGrid({
   className,
+  audience = "residential",
 }: {
   className?: string;
+  audience?: "residential" | "all";
 }) {
+  const items =
+    audience === "all"
+      ? UPGRADES
+      : UPGRADES.filter((u) => u.available !== "commercial");
   return (
     <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}>
-      {UPGRADES.map((u) => {
+      {items.map((u) => {
         const flagship = Boolean(u.flagship);
         const headline = maxHeadlineValue(u.slug);
         const rebate = getUpgradeRebate(u.slug);

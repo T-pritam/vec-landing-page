@@ -22,7 +22,7 @@ const LAYER_ORDER: LayerId[] = ["veu", "solarVictoria", "stc"];
 
 export function StackingCalculator() {
   const [audience, setAudience] = useState<Audience>("home");
-  const [selected, setSelected] = useState<string[]>(["solar", "hot-water"]);
+  const [selected, setSelected] = useState<string[]>(["solar", "heat-pumps"]);
   const [sv, setSv] = useState<SvStatus>("unsure");
 
   const result = useMemo(
@@ -78,7 +78,7 @@ export function StackingCalculator() {
               step={2}
             >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-                {UPGRADES.map((u) => {
+                {UPGRADES.filter((u) => u.available !== "commercial").map((u) => {
                   const on = selected.includes(u.slug);
                   return (
                     <button

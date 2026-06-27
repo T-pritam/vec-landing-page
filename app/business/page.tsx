@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { Button, ArrowLink } from "@/components/ui/button";
-import { CheckIcon, ShieldCheckIcon } from "@/components/icons";
+import { CheckIcon, ShieldCheckIcon, UpgradeGlyph } from "@/components/icons";
 import { CtaBand } from "@/components/sections/cta-band";
-import { PRIMARY_CTA } from "@/lib/site";
+import { PRIMARY_CTA, SITE } from "@/lib/site";
+import { UPGRADES } from "@/lib/upgrades";
 
 export const metadata: Metadata = {
   title: "Business & Commercial energy upgrades (C&I)",
   description:
-    "Commercial solar, lighting and HVAC upgrades managed end-to-end by an Accredited Person. ROI-driven, compliant, and credible — with combined value that can reach six figures.",
+    "Commercial solar, lighting (Commercial LED – NBB) and HVAC upgrades managed end-to-end by AEM Energy, operating under our Accredited Person, Aussie Eco Marks. ROI-driven, compliant and credible — with combined value that can reach six figures.",
 };
+
+// Commercial-relevant upgrades (everything except residential-only items).
+const COMMERCIAL_UPGRADES = UPGRADES.filter((u) => u.available !== "residential");
 
 const OPPORTUNITY = [
   {
@@ -21,7 +26,7 @@ const OPPORTUNITY = [
   {
     stat: "One partner",
     label: "for the whole project",
-    body: "Assessment, install, certificate creation and compliance — managed by the Accredited Person, so your team isn't running the scheme.",
+    body: "Assessment, install, certificate creation and compliance — managed by AEM Energy with our Accredited Person, Aussie Eco Marks, so your team isn't running the scheme.",
   },
   {
     stat: "M&V",
@@ -80,6 +85,34 @@ export default function BusinessPage() {
         </p>
       </Section>
 
+      {/* Commercial upgrades we deliver (incl. Commercial LED – NBB) */}
+      <Section tone="surface" spacing="sm">
+        <SectionHeader
+          eyebrow="Commercial upgrades"
+          title="What we deliver for C&I sites."
+          lead="The activities that scale for business — including Commercial LED – NBB for eligible non-building-based lighting."
+        />
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {COMMERCIAL_UPGRADES.map((u) => (
+            <Link
+              key={u.slug}
+              href={`/upgrades/${u.slug}`}
+              className="group flex items-start gap-3 rounded-2xl border border-hairline bg-surface p-5 transition-colors hover:border-business/40"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-business-tint text-business [&>span>svg]:h-6 [&>span>svg]:w-6">
+                <UpgradeGlyph icon={u.icon} />
+              </span>
+              <span>
+                <span className="block font-semibold text-ink">{u.name}</span>
+                <span className="mt-0.5 block text-sm leading-snug text-text-muted">
+                  {u.commercialAngle ? "Managed C&I project" : u.tagline}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       {/* 3 — How it works for business */}
       <Section tone="muted">
         <SectionHeader
@@ -112,13 +145,14 @@ export default function BusinessPage() {
               The compliance burden sits with us — not your business.
             </h2>
             <p className="mt-5 text-white/75">
-              As a full-chain Accredited Person, we create the certificates and
-              carry the program obligations. Your finance and facilities teams
-              get a clean, ROI-driven project — not a scheme to administer.
+              As a full-chain operation under our Accredited Person, Aussie Eco
+              Marks, we create the certificates and carry the program
+              obligations. Your finance and facilities teams get a clean,
+              ROI-driven project — not a scheme to administer.
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Accredited to create VEECs — re-tested every year",
+                "Our Accredited Person creates VEECs — re-tested every year",
                 "Measurement & verification handled to method",
                 "Audit-ready documentation across the project",
                 "One accountable partner, start to finish",

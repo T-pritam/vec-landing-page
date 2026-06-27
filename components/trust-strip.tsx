@@ -9,11 +9,11 @@ import { ShieldCheckIcon } from "@/components/icons";
 const TRUST_POINTS = [
   {
     label: "Accredited Person",
-    detail: "Authorised to create VEECs — most providers can't",
+    detail: "We operate under Aussie Eco Marks — authorised to create VEECs",
   },
   {
     label: "Re-tested every year",
-    detail: "“Fit & proper” + “competent & capable” annually",
+    detail: "Our AP passes “fit & proper” + “competent & capable” annually",
   },
   {
     label: "Full-chain, in-house",

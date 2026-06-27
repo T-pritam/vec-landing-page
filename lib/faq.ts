@@ -42,7 +42,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Money & eligibility",
     q: "Do I need a special provider?",
-    a: "Yes — only an Accredited Person can create the certificates that fund the discount. That's us. It's the single most important thing to check when comparing providers.",
+    a: "Yes — only an Accredited Person can create the certificates that fund the discount. We operate under our Accredited Person, Aussie Eco Marks, so it's handled in-house. It's the single most important thing to check when comparing providers.",
   },
   {
     category: "Money & eligibility",
@@ -77,7 +77,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "Do you handle compliance and paperwork?",
-    a: "Yes. As the Accredited Person we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
+    a: "Yes. Through our Accredited Person, Aussie Eco Marks, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
   },
 ];
 

@@ -1,9 +1,11 @@
 import type { UpgradeIcon } from "@/lib/upgrades";
 import { cn } from "@/lib/cn";
+import { BrandMark } from "@/components/brand/brand-mark";
 
 /* ---------------------------------------------------------------------------
- * Brand logo — inline so it themes (ink wordmark on light, white on dark) and
- * stays crisp. Mirrors /public/logo-mark.svg. Swap on client brand confirm.
+ * Brand logo — the AEM Energy rising-sun mark (components/brand/brand-mark)
+ * plus an inline wordmark so the type themes (ink on light, white on dark).
+ * Mirrors /public/logo-horizontal.svg.
  * ------------------------------------------------------------------------- */
 export function Logo({
   variant = "horizontal",
@@ -14,32 +16,24 @@ export function Logo({
   onInk?: boolean;
   className?: string;
 }) {
-  const Mark = (
-    <svg
-      viewBox="0 0 64 64"
-      className="h-9 w-9 shrink-0"
-      role="img"
-      aria-hidden={variant === "horizontal"}
-      aria-label={variant === "mark" ? "Accredited Energy" : undefined}
-    >
-      <rect width="64" height="64" rx="16" fill={onInk ? "#FFFFFF" : "#0B0E14"} />
-      <path d="M37 11 L19 36 H30 L27 53 L46 27 H35 Z" fill="#F4A300" />
-    </svg>
-  );
-
-  if (variant === "mark") return <span className={className}>{Mark}</span>;
+  if (variant === "mark")
+    return (
+      <span className={className}>
+        <BrandMark title="AEM Energy" />
+      </span>
+    );
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      {Mark}
+      <BrandMark />
       <span className="flex flex-col leading-none">
         <span
           className={cn(
-            "text-[1.05rem] font-bold tracking-tight",
+            "text-[1.15rem] font-bold tracking-tight",
             onInk ? "text-white" : "text-ink",
           )}
         >
-          Accredited Energy
+          AEM Energy
         </span>
         <span
           className={cn(
@@ -47,7 +41,7 @@ export function Logo({
             onInk ? "text-white/55" : "text-text-muted",
           )}
         >
-          Victorian Energy Upgrades
+          Renewable Energy Company
         </span>
       </span>
     </span>
@@ -91,15 +85,6 @@ function HeatPump() {
   );
 }
 
-function HotWater() {
-  return (
-    <svg {...iconProps}>
-      <path d="M12 3s5 5.2 5 9a5 5 0 0 1-10 0c0-3.8 5-9 5-9Z" />
-      <path d="M9.5 13.5c.8.9 1.7.9 2.5 0s1.7-.9 2.5 0" />
-    </svg>
-  );
-}
-
 function Battery() {
   return (
     <svg {...iconProps}>
@@ -132,7 +117,6 @@ function Led() {
 const ICONS: Record<UpgradeIcon, () => React.ReactElement> = {
   solar: Solar,
   "heat-pump": HeatPump,
-  "hot-water": HotWater,
   battery: Battery,
   "air-con": AirCon,
   led: Led,
@@ -209,6 +193,30 @@ export function LayersIcon({ className }: { className?: string }) {
     <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
       <path
         d="M12 3 21 8l-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Water-filtration glyph — kept OUTSIDE the VEU `UpgradeIcon` set on purpose,
+ * so the standalone Distillo product stays decoupled from the rebate system.
+ */
+export function WaterFilterIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
+      <path
+        d="M12 3s5 5.2 5 9a5 5 0 0 1-10 0c0-3.8 5-9 5-9Z"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.5 13.2c.8.9 1.7.9 2.5 0s1.7-.9 2.5 0"
         stroke="currentColor"
         strokeWidth={1.5}
         strokeLinecap="round"

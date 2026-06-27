@@ -4,14 +4,21 @@ import { TrustStrip } from "@/components/trust-strip";
 import { Button } from "@/components/ui/button";
 import { SITE, PRIMARY_CTA } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
+import { STANDALONE_PRODUCTS } from "@/lib/products";
 
 const columns = [
   {
-    title: "Upgrades",
-    links: UPGRADES.map((u) => ({
-      label: u.name,
-      href: `/upgrades/${u.slug}`,
-    })),
+    title: "Products",
+    links: [
+      ...UPGRADES.map((u) => ({
+        label: u.name,
+        href: `/upgrades/${u.slug}`,
+      })),
+      ...STANDALONE_PRODUCTS.map((p) => ({
+        label: p.name,
+        href: `/products/${p.slug}`,
+      })),
+    ],
   },
   {
     title: "Explore",
@@ -117,8 +124,9 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {SITE.legalName}. Accredited Person{" "}
-            {SITE.accreditationNo} · ABN {SITE.abn}.
+            © {new Date().getFullYear()} {SITE.legalName}. Operating under our
+            Accredited Person, {SITE.accreditedPerson} ({SITE.accreditationNo}) ·
+            ABN {SITE.abn}.
           </p>
           <p className="max-w-2xl sm:text-right">
             Indicative figures only — not a quote or guarantee. VEU and Solar

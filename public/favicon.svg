@@ -1,4 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Accredited Energy">
-  <rect width="64" height="64" rx="14" fill="#0B0E14"/>
-  <path d="M37 11 L19 36 H30 L27 53 L46 27 H35 Z" fill="#F4A300"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="AEM Energy">
+  <defs>
+    <radialGradient id="sun" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#FFD24D"/>
+      <stop offset="60%" stop-color="#F6B11F"/>
+      <stop offset="100%" stop-color="#F08A1D"/>
+    </radialGradient>
+    <linearGradient id="waveBack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7FB541"/>
+      <stop offset="100%" stop-color="#A6CE4E"/>
+    </linearGradient>
+    <linearGradient id="waveFront" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0E6E40"/>
+      <stop offset="100%" stop-color="#3F9E54"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#FBFAF6"/>
+  <g stroke="#F6B11F" stroke-width="2" stroke-linecap="round">
+    <line x1="42.4" y1="27.4" x2="46.2" y2="26.5"/>
+    <line x1="41.0" y1="24.2" x2="44.8" y2="21.7"/>
+    <line x1="38.6" y1="21.6" x2="41.8" y2="17.4"/>
+    <line x1="35.5" y1="19.9" x2="37.4" y2="14.3"/>
+    <line x1="32" y1="19.3" x2="32" y2="12.7"/>
+    <line x1="28.5" y1="19.9" x2="26.6" y2="14.3"/>
+    <line x1="25.4" y1="21.6" x2="22.2" y2="17.4"/>
+    <line x1="23.0" y1="24.2" x2="19.2" y2="21.7"/>
+    <line x1="21.6" y1="27.4" x2="17.8" y2="26.5"/>
+  </g>
+  <circle cx="32" cy="30" r="8.5" fill="url(#sun)"/>
+  <path d="M6 41c8-5 15-5 23-1 7 3 14 4 22-1l5-2c-3 7-11 12-21 12-9 0-15-3-22-3-3 0-6 .6-8 1z" fill="url(#waveBack)"/>
+  <path d="M9 47c7-4 13-4 21-1 8 3 16 3 24-3-3 6-9 11-19 11-8 0-13-3-19-4-3-.5-5-.3-7 1z" fill="url(#waveFront)"/>
 </svg>

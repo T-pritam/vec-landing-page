@@ -3,17 +3,19 @@
  * items — these are clearly-labelled placeholders, swap on client confirm.
  */
 export const SITE = {
-  name: "Accredited Energy",
+  name: "AEM Energy",
   // PRD §9 item 7 — trading name & accreditation details (placeholder).
-  legalName: "Accredited Energy Pty Ltd",
+  legalName: "AEM Energy Pty Ltd (placeholder)",
+  // The Accredited Person AEM Energy operates under (Owner Summary Rule 4).
+  accreditedPerson: "Aussie Eco Marks",
   tagline: "The accredited team that handles your entire energy upgrade.",
   description:
-    "A Victorian Accredited Person under the Victorian Energy Upgrades (VEU) program. We own the whole chain — assessment, install, certificates and paperwork — so you get a large upfront discount and do almost nothing.",
-  url: "https://accredited-energy.example",
+    "AEM Energy operates under our Accredited Person, Aussie Eco Marks, in the Victorian Energy Upgrades (VEU) program. We own the whole chain — assessment, install, certificates and paperwork — so you get a large upfront discount and do almost nothing.",
+  url: "https://aem-energy.example",
   // PRD §9 item 3 — contact details (placeholder).
   phone: "1300 000 000",
   phoneHref: "tel:1300000000",
-  email: "hello@accredited-energy.example",
+  email: "hello@aem-energy.example",
   serviceArea: "Victoria — metro & regional",
   // PRD §9 item 7 — accreditation number (placeholder).
   accreditationNo: "AP-0000 (placeholder)",

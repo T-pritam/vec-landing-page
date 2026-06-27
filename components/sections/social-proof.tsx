@@ -19,7 +19,7 @@ const PLACEHOLDER_REVIEWS = [
   },
   {
     quote:
-      "Being an Accredited Person actually meant something — they could create the certificates themselves.",
+      "Having their own Accredited Person actually meant something — the certificates were created in-house, not outsourced.",
     name: "Placeholder, Melbourne",
     detail: "Solar + battery",
   },
@@ -28,6 +28,42 @@ const PLACEHOLDER_REVIEWS = [
 export function SocialProof({ onInk = false }: { onInk?: boolean }) {
   return (
     <div>
+      {/* Rating summary — established/credible cue (Greenmarks reference) */}
+      <div
+        className={cn(
+          "mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border p-4",
+          onInk ? "border-white/10 bg-white/[0.04]" : "border-hairline bg-surface",
+        )}
+      >
+        <span aria-hidden className="flex gap-0.5 text-brand">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} />
+          ))}
+        </span>
+        <span className={cn("font-semibold", onInk ? "text-white" : "text-ink")}>
+          4.9/5 average
+        </span>
+        <span className={cn("text-sm", onInk ? "text-white/55" : "text-text-muted")}>
+          across Victorian households &amp; businesses
+        </span>
+        <span
+          className={cn(
+            "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold",
+            onInk ? "bg-leaf/20 text-leaf-tint" : "bg-leaf-tint text-leaf-ink",
+          )}
+        >
+          Operating since 2009
+        </span>
+        <span
+          className={cn(
+            "w-full text-caption sm:w-auto sm:ml-auto",
+            onInk && "text-white/45",
+          )}
+        >
+          Placeholder rating — client to supply.
+        </span>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-3">
         {PLACEHOLDER_REVIEWS.map((r) => (
           <figure

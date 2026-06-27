@@ -46,7 +46,10 @@ interface Option {
   icon?: UpgradeIcon;
 }
 
-const homeInterestOptions: Option[] = UPGRADES.map((u) => ({
+// Home options exclude commercial-only upgrades (e.g. Commercial LED – NBB).
+const homeInterestOptions: Option[] = UPGRADES.filter(
+  (u) => u.available !== "commercial",
+).map((u) => ({
   value: u.slug,
   label: u.name,
   description: u.tagline,
@@ -55,10 +58,9 @@ const homeInterestOptions: Option[] = UPGRADES.map((u) => ({
 
 const businessInterestOptions: Option[] = [
   { value: "solar", label: "Commercial solar", icon: "solar", description: "Rooftop / ground-mount PV" },
-  { value: "led", label: "Lighting", icon: "led", description: "High-volume LED upgrades" },
-  { value: "heat-pumps", label: "Heating & cooling", icon: "heat-pump", description: "Efficient HVAC" },
+  { value: "led", label: "Commercial LED – NBB", icon: "led", description: "Non-building-based lighting" },
+  { value: "heat-pumps", label: "Heating, cooling & hot water", icon: "heat-pump", description: "Efficient HVAC & hot water" },
   { value: "air-con", label: "Air conditioning", icon: "air-con", description: "Reverse-cycle systems" },
-  { value: "hot-water", label: "Hot water", icon: "hot-water", description: "High hot-water loads" },
   { value: "battery", label: "Battery storage", icon: "battery", description: "Store generated power" },
 ];
 
