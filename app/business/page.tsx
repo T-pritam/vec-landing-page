@@ -97,7 +97,7 @@ export default function BusinessPage() {
             <Link
               key={u.slug}
               href={`/upgrades/${u.slug}`}
-              className="group flex items-start gap-3 rounded-2xl border border-hairline bg-surface p-5 transition-colors hover:border-business/40"
+              className="lift group flex items-start gap-3 rounded-2xl border border-hairline bg-surface p-5 transition-colors hover:border-business/40"
             >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-business-tint text-business [&>span>svg]:h-6 [&>span>svg]:w-6">
                 <UpgradeGlyph icon={u.icon} />

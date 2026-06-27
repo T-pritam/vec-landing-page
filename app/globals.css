@@ -213,6 +213,24 @@
     transform: translateY(14px);
     animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  /* Reusable hover-lift for cards. Transition is always defined so the
+     return-to-rest is smooth; the lift itself is gated below to hover-capable,
+     motion-allowed devices only — so touch/mobile never gets a stuck state. */
+  .lift {
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s ease,
+      border-color 0.25s ease;
+  }
+}
+
+/* Lift only where a real pointer exists and motion is welcome (desktop). */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px -16px rgba(11, 14, 20, 0.22);
+  }
 }
 
 @keyframes reveal {

@@ -38,7 +38,7 @@ export function UpgradesGrid({
             key={u.slug}
             href={`/upgrades/${u.slug}`}
             className={cn(
-              "group relative flex flex-col justify-between gap-6 rounded-2xl border p-6 transition-colors sm:p-7",
+              "lift group relative flex flex-col justify-between gap-6 rounded-2xl border p-6 transition-colors sm:p-7",
               flagship
                 ? "border-ink bg-ink text-white sm:col-span-2 on-ink hover:bg-ink-soft"
                 : "border-hairline bg-surface hover:border-text-muted/40",

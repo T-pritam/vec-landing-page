@@ -69,7 +69,7 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
           <figure
             key={r.name}
             className={cn(
-              "flex flex-col gap-5 rounded-2xl border p-6",
+              "lift flex flex-col gap-5 rounded-2xl border p-6",
               onInk ? "border-white/10 bg-white/[0.04]" : "border-hairline bg-surface",
             )}
           >

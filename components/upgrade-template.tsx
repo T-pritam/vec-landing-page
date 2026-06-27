@@ -6,12 +6,13 @@ import { IndicativeChip, IndicativeDisclaimer } from "@/components/indicative";
 import { ProductGallery } from "@/components/brand/product-gallery";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { Reveal } from "@/components/motion/reveal";
+import { CountUp } from "@/components/motion/count-up";
 import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
 import {
   getUpgradeRebate,
   maxHeadlineValue,
   formatRange,
-  formatAUD,
   INCENTIVE_LAYERS,
   type LayerId,
   type LayerValue,
@@ -41,7 +42,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
       <section className="bg-surface-muted pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
+            <Reveal>
               <div className="flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-ink [&>span>svg]:h-7 [&>span>svg]:w-7">
                   <UpgradeGlyph icon={upgrade.icon} />
@@ -60,12 +61,12 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                   {SECONDARY_CTA.label}
                 </Button>
               </div>
-            </div>
+            </Reveal>
 
             {/* Product carousel (Change #1) — one carousel per product, with a
                 compact indicative-value line beneath so the figure stays visible
                 (full breakdown lives in section 2). */}
-            <div>
+            <Reveal delay={0.12}>
               <ProductGallery slug={upgrade.slug} name={upgrade.name} />
               <div className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface-muted px-5 py-4">
                 <div>
@@ -76,12 +77,12 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                   </span>
                   <span className="figure text-2xl font-semibold text-ink">
                     up to{" "}
-                    {formatAUD(headline || (loanLayers[0]?.[1].max ?? 0))}
+                    <CountUp value={headline || (loanLayers[0]?.[1].max ?? 0)} />
                   </span>
                 </div>
                 <IndicativeChip />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -125,7 +126,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                     Combined, up to
                   </span>
                   <span className="figure text-3xl font-semibold text-ink">
-                    {formatAUD(headline)}
+                    <CountUp value={headline} />
                   </span>
                 </div>
               )}
@@ -148,7 +149,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
           {upgrade.howItWorks.map((step, i) => (
             <li
               key={step}
-              className="rounded-2xl border border-hairline bg-surface p-6"
+              className="lift rounded-2xl border border-hairline bg-surface p-6"
             >
               <span className="figure text-sm font-semibold text-brand-ink">
                 {String(i + 1).padStart(2, "0")}
@@ -176,7 +177,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-brand-tint p-6 sm:p-8">
+          <div className="lift rounded-2xl bg-brand-tint p-6 sm:p-8">
             <div className="flex items-center gap-2">
               <LayersIcon className="h-5 w-5 text-brand-ink" />
               <Eyebrow>Stacking note</Eyebrow>
@@ -212,7 +213,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             onInk
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <div className="lift rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
               <span className="eyebrow text-brand">For your home</span>
               <h3 className="text-h3 mt-3 text-white">
                 Fast, stacked, mostly upfront
@@ -226,7 +227,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                 {PRIMARY_CTA.label}
               </Button>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <div className="lift rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
               <span className="eyebrow text-brand">For your business</span>
               <h3 className="text-h3 mt-3 text-white">
                 A managed, six-figure project
@@ -274,7 +275,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             <Link
               key={u.slug}
               href={`/upgrades/${u.slug}`}
-              className="inline-flex items-center gap-2 rounded-full border border-hairline px-4 py-2 text-sm font-medium text-ink hover:border-text-muted/40"
+              className="lift inline-flex items-center gap-2 rounded-full border border-hairline px-4 py-2 text-sm font-medium text-ink hover:border-text-muted/40"
             >
               <UpgradeGlyph
                 icon={u.icon}

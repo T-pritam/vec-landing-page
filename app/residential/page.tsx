@@ -7,6 +7,7 @@ import { FullChain } from "@/components/sections/full-chain";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CtaBand } from "@/components/sections/cta-band";
+import { Reveal } from "@/components/motion/reveal";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -28,17 +29,19 @@ export default function ResidentialPage() {
       />
 
       <Section tone="surface">
-        <SectionHeader
-          eyebrow="Household upgrades"
-          title="Choose your upgrade."
-          lead="Every figure is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail."
-        />
-        <div className="mt-10">
+        <Reveal>
+          <SectionHeader
+            eyebrow="Household upgrades"
+            title="Choose your upgrade."
+            lead="Every figure is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail."
+          />
+        </Reveal>
+        <Reveal delay={0.08} className="mt-10">
           <UpgradesGrid />
-        </div>
+        </Reveal>
 
         {/* Also from AEM Energy — standalone (non-VEU) products */}
-        <div className="mt-14 border-t border-hairline pt-12">
+        <Reveal className="mt-14 block border-t border-hairline pt-12">
           <SectionHeader
             eyebrow="Also from AEM Energy"
             title="A standalone product, too."
@@ -47,31 +50,37 @@ export default function ResidentialPage() {
           <div className="mt-8">
             <StandaloneProducts />
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section tone="muted">
-        <SectionHeader
-          eyebrow="The easy part is you"
-          title="We assess. We install. We handle the paperwork. You save."
-        />
-        <div className="mt-10">
+        <Reveal>
+          <SectionHeader
+            eyebrow="The easy part is you"
+            title="We assess. We install. We handle the paperwork. You save."
+          />
+        </Reveal>
+        <Reveal delay={0.08} className="mt-10">
           <FullChain />
-        </div>
+        </Reveal>
       </Section>
 
       <Section tone="surface">
-        <StackingSection
-          eyebrow="Stack your savings"
-          title="See how the incentives stack for your home."
-        />
+        <Reveal>
+          <StackingSection
+            eyebrow="Stack your savings"
+            title="See how the incentives stack for your home."
+          />
+        </Reveal>
       </Section>
 
       <Section tone="muted">
-        <SectionHeader eyebrow="From our customers" title="Done properly, explained honestly." />
-        <div className="mt-10">
+        <Reveal>
+          <SectionHeader eyebrow="From our customers" title="Done properly, explained honestly." />
+        </Reveal>
+        <Reveal delay={0.08} className="mt-10">
           <SocialProof />
-        </div>
+        </Reveal>
       </Section>
 
       <Section tone="surface">

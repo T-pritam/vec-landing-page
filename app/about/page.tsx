@@ -107,7 +107,7 @@ export default function AboutPage() {
             ["Competent & capable", "Proven capability to deliver, reassessed every year."],
             ["Renewed annually", "Accreditation lapses if we don't keep meeting the bar."],
           ].map(([t, b]) => (
-            <div key={t} className="rounded-2xl border border-hairline bg-surface p-6">
+            <div key={t} className="lift rounded-2xl border border-hairline bg-surface p-6">
               <ShieldCheckIcon className="h-8 w-8 text-brand-ink" />
               <h3 className="mt-4 text-h3 text-[1.125rem]">{t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">{b}</p>

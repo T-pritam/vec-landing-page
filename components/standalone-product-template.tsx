@@ -4,6 +4,7 @@ import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { ProductGallery } from "@/components/brand/product-gallery";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { Reveal } from "@/components/motion/reveal";
 import { SECONDARY_CTA, SITE } from "@/lib/site";
 import type { StandaloneProduct } from "@/lib/products";
 import type { FaqItem } from "@/lib/faq";
@@ -30,7 +31,7 @@ export function StandaloneProductTemplate({
       <section className="bg-leaf-tint pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
+            <Reveal>
               <div className="flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-leaf text-white [&>svg]:h-7 [&>svg]:w-7">
                   <WaterFilterIcon />
@@ -49,10 +50,10 @@ export function StandaloneProductTemplate({
                   Talk to us
                 </Button>
               </div>
-            </div>
+            </Reveal>
 
             {/* Product carousel + standalone (no-rebate) note */}
-            <div>
+            <Reveal delay={0.12}>
               <ProductGallery slug={product.slug} name={product.name} />
               <div className="mt-4 rounded-2xl border border-leaf/30 bg-surface px-5 py-4">
                 <p className="flex items-start gap-2 text-sm text-ink">
@@ -65,7 +66,7 @@ export function StandaloneProductTemplate({
                   </span>
                 </p>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -102,7 +103,7 @@ export function StandaloneProductTemplate({
           {product.howItWorks.map((step, i) => (
             <li
               key={step}
-              className="rounded-2xl border border-hairline bg-surface p-6"
+              className="lift rounded-2xl border border-hairline bg-surface p-6"
             >
               <span className="figure text-sm font-semibold text-leaf-ink">
                 {String(i + 1).padStart(2, "0")}

@@ -16,7 +16,7 @@ export function StandaloneProducts({ className }: { className?: string }) {
         <Link
           key={p.slug}
           href={`/products/${p.slug}`}
-          className="group flex items-start justify-between gap-5 rounded-2xl border border-leaf/25 bg-leaf-tint p-6 transition-colors hover:border-leaf/50 sm:p-7"
+          className="lift group flex items-start justify-between gap-5 rounded-2xl border border-leaf/25 bg-leaf-tint p-6 transition-colors hover:border-leaf/50 sm:p-7"
         >
           <div className="flex items-start gap-4">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-leaf text-white [&>svg]:h-7 [&>svg]:w-7">
