@@ -15,25 +15,28 @@ import {
 import { cn } from "@/lib/cn";
 
 /**
- * Tier B eligibility quiz (PRD §7.3 target). A branching, multi-step flow that
- * adapts questions to earlier answers (home vs business fork; an extra heating
- * question only when relevant) and returns a TAILORED result — recommended
- * upgrades + an indicative, never-guaranteed combined value — then captures the
- * lead via the shared LeadForm. Indicative figures come from lib/rebates.ts.
+ * Tier B eligibility checker — built to the AEM handoff spec (doc §4/§5):
+ * SIX steps — (1) Victorian postcode, (2) audience, (3) property/business type
+ * + tenure, (4) upgrades of interest, (5) timing, (6) result + contact — that
+ * branch on earlier answers and return one of THREE result states:
+ *   • qualify       — "you likely qualify"
+ *   • partial       — "let's talk — it's partial"
+ *   • outside-scope — non-Victorian postcode (VEU is Victoria-only)
+ * All three capture the lead via the shared LeadForm. Indicative figures come
+ * from lib/rebates.ts and are framed "up to / indicative", never guaranteed.
  */
 
 type Audience = "home" | "business";
-type Single = string;
+type ResultState = "qualify" | "partial" | "outside-scope";
 
 interface Answers {
+  postcode?: string;
   audience?: Audience;
-  tenure?: string;
-  propertyType?: string;
-  sector?: string;
+  propertyType?: string; // home
+  sector?: string; // business
+  tenure?: string; // own/rent (home) | own/lease (business)
   interests: string[];
-  heating?: string;
-  scale?: string;
-  sv?: string; // home Solar Victoria signal
+  timing?: string;
 }
 
 interface Option {
@@ -41,14 +44,6 @@ interface Option {
   label: string;
   description?: string;
   icon?: UpgradeIcon;
-}
-
-interface Question {
-  key: keyof Answers;
-  title: string;
-  hint?: string;
-  type: "single" | "multi";
-  options: Option[];
 }
 
 const homeInterestOptions: Option[] = UPGRADES.map((u) => ({
@@ -67,150 +62,92 @@ const businessInterestOptions: Option[] = [
   { value: "battery", label: "Battery storage", icon: "battery", description: "Store generated power" },
 ];
 
-const QUESTIONS: Record<string, Question> = {
-  "home-tenure": {
-    key: "tenure",
-    title: "Do you own or rent your home?",
-    hint: "Renters can still benefit, but some upgrades need the owner's go-ahead.",
-    type: "single",
-    options: [
-      { value: "own", label: "I own it" },
-      { value: "rent", label: "I rent it" },
-    ],
-  },
-  "home-type": {
-    key: "propertyType",
-    title: "What kind of property is it?",
-    type: "single",
-    options: [
-      { value: "house", label: "House" },
-      { value: "townhouse", label: "Townhouse" },
-      { value: "apartment", label: "Apartment / unit" },
-    ],
-  },
-  "home-interests": {
-    key: "interests",
-    title: "Which upgrades are you interested in?",
-    hint: "Pick everything that's on your mind — stacking several is where the value is.",
-    type: "multi",
-    options: homeInterestOptions,
-  },
-  "home-heating": {
-    key: "heating",
-    title: "How do you heat your home now?",
-    hint: "Replacing gas or old electric heating is where the discount is largest.",
-    type: "single",
-    options: [
-      { value: "gas", label: "Gas ducted / heater" },
-      { value: "electric", label: "Old electric heating" },
-      { value: "split", label: "A split system already" },
-      { value: "unsure", label: "Not sure" },
-    ],
-  },
-  "home-sv": {
-    key: "sv",
-    title: "A quick eligibility signal for Solar Victoria",
-    hint: "It's the only layer that's income- and property-tested. VEU and STCs aren't — so this only affects one part of your result.",
-    type: "single",
-    options: [
-      { value: "yes", label: "Likely under the thresholds" },
-      { value: "unsure", label: "Not sure" },
-      { value: "no", label: "Over the thresholds" },
-    ],
-  },
-  "biz-sector": {
-    key: "sector",
-    title: "What kind of site is it?",
-    type: "single",
-    options: [
-      { value: "office", label: "Office" },
-      { value: "retail", label: "Retail" },
-      { value: "warehouse", label: "Warehouse / industrial" },
-      { value: "hospitality", label: "Hospitality / accommodation" },
-      { value: "other", label: "Something else" },
-    ],
-  },
-  "biz-tenure": {
-    key: "tenure",
-    title: "Do you own or lease the premises?",
-    hint: "Either can work — it affects how we structure the project.",
-    type: "single",
-    options: [
-      { value: "own", label: "We own it" },
-      { value: "lease", label: "We lease it" },
-    ],
-  },
-  "biz-interests": {
-    key: "interests",
-    title: "What are you looking to upgrade?",
-    hint: "Pick as many as apply.",
-    type: "multi",
-    options: businessInterestOptions,
-  },
-  "biz-scale": {
-    key: "scale",
-    title: "Roughly how large is the site?",
-    hint: "A ballpark is fine — it helps us gauge the scale of the opportunity.",
-    type: "single",
-    options: [
-      { value: "small", label: "Small", description: "Single small premises" },
-      { value: "medium", label: "Medium", description: "A larger site or a few locations" },
-      { value: "large", label: "Large", description: "Major site / multi-site portfolio" },
-    ],
-  },
-};
+const TIMING_OPTIONS: Option[] = [
+  { value: "asap", label: "As soon as possible", description: "Ready to go now" },
+  { value: "1-3m", label: "In 1–3 months", description: "Planning ahead" },
+  { value: "3-6m", label: "In 3–6 months", description: "Further out" },
+  { value: "researching", label: "Just researching", description: "Gathering information" },
+];
 
-function buildSteps(a: Answers): string[] {
-  if (!a.audience) return ["audience"];
-  if (a.audience === "home") {
-    const steps = ["audience", "home-tenure", "home-type", "home-interests"];
-    if (a.interests.some((s) => s === "heat-pumps" || s === "air-con")) {
-      steps.push("home-heating");
-    }
-    steps.push("home-sv", "result");
-    return steps;
-  }
-  return ["audience", "biz-sector", "biz-tenure", "biz-interests", "biz-scale", "result"];
+const STEPS = ["postcode", "audience", "details", "interests", "timing", "result"] as const;
+type StepId = (typeof STEPS)[number];
+const TOTAL = STEPS.length;
+
+/** Victorian postcodes: 3000–3999 and 8000–8999. */
+function isVictorianPostcode(pc?: string): boolean {
+  if (!pc || !/^\d{4}$/.test(pc)) return false;
+  const n = Number(pc);
+  return (n >= 3000 && n <= 3999) || (n >= 8000 && n <= 8999);
+}
+
+/** Upgrades that deliver a price-reducing incentive (not battery's loan-only). */
+const ELIGIBLE_UPGRADES = new Set(
+  UPGRADES.filter((u) => u.slug !== "battery").map((u) => u.slug),
+);
+
+function resolveResult(a: Answers): ResultState {
+  if (!isVictorianPostcode(a.postcode)) return "outside-scope";
+  const hasEligible = a.interests.some((s) => ELIGIBLE_UPGRADES.has(s));
+  const partial =
+    a.audience === "business" ||
+    a.tenure === "rent" ||
+    a.timing === "researching" ||
+    !hasEligible;
+  return partial ? "partial" : "qualify";
 }
 
 export function EligibilityQuiz() {
   const [answers, setAnswers] = useState<Answers>({ interests: [] });
   const [index, setIndex] = useState(0);
 
-  const steps = useMemo(() => buildSteps(answers), [answers]);
-  const stepId = steps[Math.min(index, steps.length - 1)];
-  const total = steps.length;
+  const stepId: StepId = STEPS[Math.min(index, TOTAL - 1)];
 
-  const goNext = () => setIndex((i) => Math.min(i + 1, steps.length - 1));
+  const goNext = () => setIndex((i) => Math.min(i + 1, TOTAL - 1));
   const goBack = () => setIndex((i) => Math.max(i - 1, 0));
 
-  function setAudience(v: Audience) {
-    // Reset downstream answers when switching the top-level branch.
-    setAnswers({ audience: v, interests: [] });
-    setIndex(1);
-  }
-
-  function setSingle(key: keyof Answers, value: Single) {
+  function setSingle(key: keyof Answers, value: string) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
   }
-
   function toggleMulti(key: keyof Answers, value: string) {
     setAnswers((prev) => {
       const cur = (prev[key] as string[]) ?? [];
-      const next = cur.includes(value)
-        ? cur.filter((v) => v !== value)
-        : [...cur, value];
-      return { ...prev, [key]: next };
+      return {
+        ...prev,
+        [key]: cur.includes(value) ? cur.filter((v) => v !== value) : [...cur, value],
+      };
     });
   }
+  function setAudience(v: Audience) {
+    // Switching audience resets downstream answers but keeps the postcode.
+    setAnswers((prev) => ({
+      postcode: prev.postcode,
+      audience: v,
+      interests: [],
+    }));
+    goNext();
+  }
+
+  const interestOptions =
+    answers.audience === "business" ? businessInterestOptions : homeInterestOptions;
 
   const canAdvance = (() => {
-    if (stepId === "audience") return Boolean(answers.audience);
-    if (stepId === "result") return false;
-    const q = QUESTIONS[stepId];
-    if (!q) return false;
-    if (q.type === "multi") return (answers[q.key] as string[]).length > 0;
-    return Boolean(answers[q.key]);
+    switch (stepId) {
+      case "postcode":
+        return /^\d{4}$/.test(answers.postcode ?? "");
+      case "audience":
+        return Boolean(answers.audience);
+      case "details":
+        return Boolean(
+          (answers.audience === "business" ? answers.sector : answers.propertyType) &&
+            answers.tenure,
+        );
+      case "interests":
+        return answers.interests.length > 0;
+      case "timing":
+        return Boolean(answers.timing);
+      default:
+        return false;
+    }
   })();
 
   return (
@@ -219,31 +156,64 @@ export function EligibilityQuiz() {
       <div className="mb-8">
         <div className="flex items-center justify-between text-sm">
           <span className="font-medium text-text-muted">
-            {stepId === "result" ? "Your result" : `Step ${index + 1} of ${total}`}
+            {stepId === "result" ? "Your result" : `Step ${index + 1} of ${TOTAL}`}
           </span>
-          {stepId !== "result" && (
-            <span className="text-text-muted">No obligation</span>
-          )}
+          {stepId !== "result" && <span className="text-text-muted">No obligation</span>}
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-hairline">
           <div
             className="h-full rounded-full bg-brand transition-[width] duration-500 ease-out"
-            style={{ width: `${(index / (total - 1)) * 100}%` }}
+            style={{ width: `${(index / (TOTAL - 1)) * 100}%` }}
           />
         </div>
       </div>
 
       <div key={stepId} className="reveal">
-        {stepId === "audience" ? (
+        {stepId === "postcode" && (
+          <PostcodeStep
+            value={answers.postcode}
+            onChange={(v) => setSingle("postcode", v)}
+            onEnter={() => canAdvance && goNext()}
+          />
+        )}
+
+        {stepId === "audience" && (
           <AudienceStep value={answers.audience} onPick={setAudience} />
-        ) : stepId === "result" ? (
-          <ResultStep answers={answers} onRestart={() => { setAnswers({ interests: [] }); setIndex(0); }} />
-        ) : (
-          <QuestionStep
-            q={QUESTIONS[stepId]}
+        )}
+
+        {stepId === "details" && (
+          <DetailsStep answers={answers} onSingle={setSingle} />
+        )}
+
+        {stepId === "interests" && (
+          <ChoiceStep
+            title="Which upgrades are you interested in?"
+            hint="Pick everything that's on your mind — stacking several is where the value is."
+            type="multi"
+            options={interestOptions}
+            selected={answers.interests}
+            onToggle={(v) => toggleMulti("interests", v)}
+          />
+        )}
+
+        {stepId === "timing" && (
+          <ChoiceStep
+            title="When are you looking to go ahead?"
+            hint="A rough idea is fine — it just helps us prioritise."
+            type="single"
+            options={TIMING_OPTIONS}
+            selected={answers.timing}
+            onSingle={(v) => setSingle("timing", v)}
+          />
+        )}
+
+        {stepId === "result" && (
+          <ResultStep
             answers={answers}
-            onSingle={setSingle}
-            onToggle={toggleMulti}
+            onRestart={() => {
+              setAnswers({ interests: [] });
+              setIndex(0);
+            }}
           />
         )}
       </div>
@@ -261,7 +231,7 @@ export function EligibilityQuiz() {
           </button>
           {stepId !== "audience" && (
             <Button onClick={goNext} disabled={!canAdvance} size="lg">
-              Continue
+              {stepId === "timing" ? "See my result" : "Continue"}
             </Button>
           )}
         </div>
@@ -271,6 +241,56 @@ export function EligibilityQuiz() {
 }
 
 /* ------------------------------- steps ---------------------------------- */
+
+function PostcodeStep({
+  value,
+  onChange,
+  onEnter,
+}: {
+  value?: string;
+  onChange: (v: string) => void;
+  onEnter: () => void;
+}) {
+  const vic = isVictorianPostcode(value);
+  const filled = /^\d{4}$/.test(value ?? "");
+  return (
+    <div>
+      <StepHeading
+        title="First — what's your postcode?"
+        hint="The Victorian Energy Upgrades program is Victoria-only, so this is where we start."
+      />
+      <input
+        inputMode="numeric"
+        autoComplete="postal-code"
+        maxLength={4}
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value.replace(/\D/g, "").slice(0, 4))}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") onEnter();
+        }}
+        placeholder="e.g. 3000"
+        aria-label="Postcode"
+        className="figure w-full max-w-[12rem] rounded-2xl border border-hairline bg-surface px-5 py-4 text-2xl tracking-widest text-ink focus:outline-none focus:ring-2 focus:ring-brand/40"
+      />
+      {filled && (
+        <p
+          className={cn(
+            "mt-3 inline-flex items-center gap-1.5 text-sm",
+            vic ? "text-success" : "text-text-muted",
+          )}
+        >
+          {vic ? (
+            <>
+              <CheckIcon className="h-4 w-4" /> That's in Victoria — you're in the right place.
+            </>
+          ) : (
+            <>That postcode looks outside Victoria — we'll show you what that means.</>
+          )}
+        </p>
+      )}
+    </div>
+  );
+}
 
 function AudienceStep({
   value,
@@ -285,10 +305,7 @@ function AudienceStep({
   ];
   return (
     <div>
-      <StepHeading
-        title="Let's see what you qualify for."
-        hint="Two quick questions to start — this takes about a minute."
-      />
+      <StepHeading title="Is this for your home or a business?" />
       <div className="grid gap-3 sm:grid-cols-2">
         {opts.map((o) => (
           <button
@@ -312,30 +329,124 @@ function AudienceStep({
   );
 }
 
-function QuestionStep({
-  q,
+function DetailsStep({
   answers,
+  onSingle,
+}: {
+  answers: Answers;
+  onSingle: (key: keyof Answers, value: string) => void;
+}) {
+  const isBusiness = answers.audience === "business";
+  const typeQ = isBusiness
+    ? {
+        key: "sector" as const,
+        title: "What kind of site is it?",
+        options: [
+          { value: "office", label: "Office" },
+          { value: "retail", label: "Retail" },
+          { value: "warehouse", label: "Warehouse / industrial" },
+          { value: "hospitality", label: "Hospitality" },
+          { value: "other", label: "Something else" },
+        ],
+      }
+    : {
+        key: "propertyType" as const,
+        title: "What kind of property is it?",
+        options: [
+          { value: "house", label: "House" },
+          { value: "townhouse", label: "Townhouse" },
+          { value: "apartment", label: "Apartment / unit" },
+        ],
+      };
+  const tenureOptions = isBusiness
+    ? [
+        { value: "own", label: "We own it" },
+        { value: "lease", label: "We lease it" },
+      ]
+    : [
+        { value: "own", label: "I own it" },
+        { value: "rent", label: "I rent it" },
+      ];
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <StepHeading title={typeQ.title} />
+        <Pills
+          options={typeQ.options}
+          value={answers[typeQ.key]}
+          onPick={(v) => onSingle(typeQ.key, v)}
+        />
+      </div>
+      <div>
+        <h3 className="mb-3 font-semibold text-ink">
+          {isBusiness ? "Do you own or lease the premises?" : "Do you own or rent?"}
+        </h3>
+        <Pills
+          options={tenureOptions}
+          value={answers.tenure}
+          onPick={(v) => onSingle("tenure", v)}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Pills({
+  options,
+  value,
+  onPick,
+}: {
+  options: { value: string; label: string }[];
+  value?: string;
+  onPick: (v: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      {options.map((o) => (
+        <button
+          key={o.value}
+          type="button"
+          aria-pressed={value === o.value}
+          onClick={() => onPick(o.value)}
+          className={cn(
+            "rounded-full border px-4 py-2.5 text-sm font-medium transition-colors",
+            value === o.value
+              ? "border-brand bg-brand-tint text-ink"
+              : "border-hairline text-text-muted hover:border-text-muted/40 hover:text-ink",
+          )}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ChoiceStep({
+  title,
+  hint,
+  type,
+  options,
+  selected,
   onSingle,
   onToggle,
 }: {
-  q: Question;
-  answers: Answers;
-  onSingle: (key: keyof Answers, value: string) => void;
-  onToggle: (key: keyof Answers, value: string) => void;
+  title: string;
+  hint?: string;
+  type: "single" | "multi";
+  options: Option[];
+  selected?: string | string[];
+  onSingle?: (v: string) => void;
+  onToggle?: (v: string) => void;
 }) {
-  const selected = answers[q.key];
   return (
     <div>
-      <StepHeading title={q.title} hint={q.hint} />
-      <div
-        className={cn(
-          "grid gap-3",
-          q.options.some((o) => o.icon) ? "sm:grid-cols-2" : "sm:grid-cols-2",
-        )}
-      >
-        {q.options.map((o) => {
+      <StepHeading title={title} hint={hint} />
+      <div className="grid gap-3 sm:grid-cols-2">
+        {options.map((o) => {
           const isOn =
-            q.type === "multi"
+            type === "multi"
               ? (selected as string[]).includes(o.value)
               : selected === o.value;
           return (
@@ -343,16 +454,10 @@ function QuestionStep({
               key={o.value}
               type="button"
               aria-pressed={isOn}
-              onClick={() =>
-                q.type === "multi"
-                  ? onToggle(q.key, o.value)
-                  : onSingle(q.key, o.value)
-              }
+              onClick={() => (type === "multi" ? onToggle?.(o.value) : onSingle?.(o.value))}
               className={cn(
                 "flex items-center gap-3.5 rounded-2xl border p-4 text-left transition-colors",
-                isOn
-                  ? "border-brand bg-brand-tint"
-                  : "border-hairline hover:border-text-muted/40",
+                isOn ? "border-brand bg-brand-tint" : "border-hairline hover:border-text-muted/40",
               )}
             >
               {o.icon && (
@@ -368,12 +473,10 @@ function QuestionStep({
               <span className="min-w-0">
                 <span className="block font-semibold text-ink">{o.label}</span>
                 {o.description && (
-                  <span className="block text-sm text-text-muted">
-                    {o.description}
-                  </span>
+                  <span className="block text-sm text-text-muted">{o.description}</span>
                 )}
               </span>
-              {q.type === "multi" && (
+              {type === "multi" && (
                 <span
                   className={cn(
                     "ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full border",
@@ -398,133 +501,152 @@ function ResultStep({
   answers: Answers;
   onRestart: () => void;
 }) {
+  const state = resolveResult(answers);
   const isBusiness = answers.audience === "business";
-  const interests = answers.interests.length
-    ? answers.interests
-    : ["solar"];
-  const includeSV = !isBusiness && answers.sv !== "no";
+  const interests = answers.interests.length ? answers.interests : ["solar"];
+  const includeSV = !isBusiness && answers.tenure !== "rent";
   const stack = computeStack(interests, { includeSolarVictoria: includeSV });
-
   const recommended = interests
     .map((s) => getUpgrade(s))
     .filter((u): u is NonNullable<typeof u> => Boolean(u));
 
+  const timingLabel = TIMING_OPTIONS.find((t) => t.value === answers.timing)?.label;
   const summaryLines = [
+    `Postcode: ${answers.postcode ?? "—"}`,
     `Audience: ${isBusiness ? "Business / C&I" : "Home"}`,
-    answers.tenure && `Tenure: ${answers.tenure}`,
     answers.propertyType && `Property: ${answers.propertyType}`,
     answers.sector && `Sector: ${answers.sector}`,
-    answers.scale && `Scale: ${answers.scale}`,
-    answers.heating && `Heating: ${answers.heating}`,
+    answers.tenure && `Tenure: ${answers.tenure}`,
     `Interested in: ${recommended.map((u) => u.name).join(", ")}`,
+    timingLabel && `Timing: ${timingLabel}`,
+    `Result: ${state}`,
   ].filter(Boolean) as string[];
-
-  const leadDefaults = {
-    audience: answers.audience,
-    message: `Eligibility quiz result —\n${summaryLines.join("\n")}`,
-  };
 
   const layerOrder: LayerId[] = ["veu", "solarVictoria", "stc"];
 
   return (
     <div className="space-y-8">
-      {/* Verdict */}
       <div className="rounded-3xl border border-hairline bg-surface p-6 sm:p-8">
-        <span className="inline-flex items-center gap-2 rounded-full bg-success/10 px-3 py-1 text-sm font-semibold text-success">
-          <CheckIcon className="h-4 w-4" /> Good news — you look eligible
-        </span>
-
-        {isBusiness ? (
-          <>
-            <h2 className="mt-5 text-h2">
-              This looks like a strong commercial fit.
-            </h2>
-            <p className="mt-3 text-lead">
-              Based on your answers, your site is a good candidate for a managed
-              VEU project. Commercial value is modelled per project — and it can
-              reach six figures — so the next step is a site assessment, not a
-              calculator.
-            </p>
-          </>
+        {state === "outside-scope" ? (
+          <OutsideScope postcode={answers.postcode} />
         ) : (
           <>
-            <h2 className="mt-5 text-h2">
-              Here's what you could stack — indicatively.
-            </h2>
-            <div className="mt-5 flex flex-wrap items-end gap-x-3 gap-y-2">
-              <span className="text-sm text-text-muted">up to</span>
-              <span className="figure text-5xl font-semibold leading-none sm:text-6xl">
-                {formatAUD(stack.combined.max)}
-              </span>
-              <IndicativeChip />
-            </div>
-            <p className="mt-2 text-body">
-              combined indicative value across your selected upgrades
-              {answers.sv === "no" && " (excluding Solar Victoria — over the threshold)"}
-              {answers.sv === "unsure" && " (we'll confirm your Solar Victoria eligibility)"}
-              .
-            </p>
+            <span
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
+                state === "qualify"
+                  ? "bg-success/10 text-success"
+                  : "bg-brand-tint text-brand-ink",
+              )}
+            >
+              {state === "qualify" ? (
+                <>
+                  <CheckIcon className="h-4 w-4" /> Good news — you look eligible
+                </>
+              ) : (
+                <>Let's talk — your situation looks partial</>
+              )}
+            </span>
 
-            {/* Layer chips */}
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {layerOrder.map((id) => {
-                const on = stack.active.includes(id);
-                return (
-                  <li
-                    key={id}
-                    className={cn(
-                      "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm",
-                      on
-                        ? "border-brand/40 bg-brand-tint text-ink"
-                        : "border-hairline text-text-muted line-through opacity-60",
-                    )}
-                  >
-                    <LayersIcon className="h-3.5 w-3.5 text-brand-ink" />
-                    {INCENTIVE_LAYERS[id].short}
-                  </li>
-                );
-              })}
-            </ul>
+            {isBusiness ? (
+              <>
+                <h2 className="mt-5 text-h2">
+                  This looks like a strong commercial fit.
+                </h2>
+                <p className="mt-3 text-lead">
+                  Based on your answers, your site is a good candidate for a
+                  managed VEU project. Commercial value is modelled per project —
+                  and it can reach six figures — so the next step is a site
+                  assessment, not a calculator.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="mt-5 text-h2">
+                  {state === "qualify"
+                    ? "Here's what you could stack — indicatively."
+                    : "There's likely value here — let's confirm the detail."}
+                </h2>
+                {state === "partial" && (
+                  <p className="mt-3 text-body">
+                    {answers.tenure === "rent"
+                      ? "As a renter you can still benefit, but some upgrades need your landlord's sign-off — so we'll talk it through."
+                      : answers.timing === "researching"
+                        ? "You're still researching — no rush. Here's the indicative picture so you know what's possible."
+                        : "A couple of your answers mean we should confirm the detail with you — here's the indicative picture."}
+                  </p>
+                )}
+                <div className="mt-5 flex flex-wrap items-end gap-x-3 gap-y-2">
+                  <span className="text-sm text-text-muted">up to</span>
+                  <span className="figure text-5xl font-semibold leading-none sm:text-6xl">
+                    {formatAUD(stack.combined.max)}
+                  </span>
+                  <IndicativeChip />
+                </div>
+                <p className="mt-2 text-body">
+                  combined indicative value across your selected upgrades
+                  {answers.tenure === "rent" && " (excluding Solar Victoria — owner sign-off needed)"}
+                  .
+                </p>
 
-            {stack.loan && (
-              <p className="mt-4 rounded-xl bg-surface-muted px-4 py-3 text-sm text-text-muted">
-                Plus a Solar Victoria interest-free loan up to{" "}
-                <span className="figure font-semibold text-ink">
-                  {formatAUD(stack.loan.max)}
-                </span>{" "}
-                for storage — finance you repay, not a discount.
-              </p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {layerOrder.map((id) => {
+                    const on = stack.active.includes(id);
+                    return (
+                      <li
+                        key={id}
+                        className={cn(
+                          "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm",
+                          on
+                            ? "border-brand/40 bg-brand-tint text-ink"
+                            : "border-hairline text-text-muted line-through opacity-60",
+                        )}
+                      >
+                        <LayersIcon className="h-3.5 w-3.5 text-brand-ink" />
+                        {INCENTIVE_LAYERS[id].short}
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                {stack.loan && (
+                  <p className="mt-4 rounded-xl bg-surface-muted px-4 py-3 text-sm text-text-muted">
+                    Plus a Solar Victoria interest-free loan up to{" "}
+                    <span className="figure font-semibold text-ink">
+                      {formatAUD(stack.loan.max)}
+                    </span>{" "}
+                    for storage — finance you repay, not a discount.
+                  </p>
+                )}
+              </>
             )}
+
+            {recommended.length > 0 && (
+              <div className="mt-7">
+                <p className="text-sm font-semibold text-ink">
+                  {isBusiness ? "Worth scoping for your site" : "Recommended for you"}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {recommended.map((u) => (
+                    <a
+                      key={u.slug}
+                      href={`/upgrades/${u.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1.5 text-sm font-medium text-ink hover:border-text-muted/40"
+                    >
+                      <UpgradeGlyph icon={u.icon} className="text-brand-ink [&>svg]:h-4 [&>svg]:w-4" />
+                      {u.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-7">
+              <IndicativeDisclaimer variant="full" />
+            </div>
           </>
         )}
 
-        {/* Recommended upgrades */}
-        {recommended.length > 0 && (
-          <div className="mt-7">
-            <p className="text-sm font-semibold text-ink">
-              {isBusiness ? "Worth scoping for your site" : "Recommended for you"}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {recommended.map((u) => (
-                <a
-                  key={u.slug}
-                  href={`/upgrades/${u.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1.5 text-sm font-medium text-ink hover:border-text-muted/40"
-                >
-                  <UpgradeGlyph
-                    icon={u.icon}
-                    className="text-brand-ink [&>svg]:h-4 [&>svg]:w-4"
-                  />
-                  {u.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className="mt-7">
-          <IndicativeDisclaimer variant="full" />
-        </div>
         <button
           type="button"
           onClick={onRestart}
@@ -534,19 +656,34 @@ function ResultStep({
         </button>
       </div>
 
-      {/* Lead capture */}
+      {/* Lead capture — all three states capture the lead */}
       <div>
         <h3 className="text-h3">
-          {isBusiness ? "Book a site assessment" : "Confirm it with our team"}
+          {state === "outside-scope"
+            ? "Leave your details anyway"
+            : isBusiness
+              ? "Book a site assessment"
+              : "Confirm it with our team"}
         </h3>
         <p className="mt-2 text-body">
-          Leave your details and an accredited team member will confirm exactly
-          what you qualify for — and what you'd actually pay. No obligation.
+          {state === "outside-scope"
+            ? "We'll let you know if a program opens up in your area, or point you toward your state's scheme. No obligation."
+            : "Leave your details and an accredited team member will confirm exactly what you qualify for — and what you'd actually pay. No obligation."}
         </p>
         <LeadForm
-          context={`eligibility-quiz:${answers.audience ?? "unknown"}`}
-          defaults={leadDefaults}
-          submitLabel={isBusiness ? "Request a site assessment" : "Confirm my eligibility"}
+          context={`eligibility-quiz:${state}`}
+          defaults={{
+            audience: answers.audience,
+            postcode: answers.postcode,
+            message: `Eligibility checker —\n${summaryLines.join("\n")}`,
+          }}
+          submitLabel={
+            state === "outside-scope"
+              ? "Keep me posted"
+              : isBusiness
+                ? "Request a site assessment"
+                : "Confirm my eligibility"
+          }
           className="mt-5"
           summary={
             <div className="rounded-xl bg-surface-muted p-4">
@@ -559,6 +696,24 @@ function ResultStep({
         />
       </div>
     </div>
+  );
+}
+
+function OutsideScope({ postcode }: { postcode?: string }) {
+  return (
+    <>
+      <span className="inline-flex items-center gap-2 rounded-full bg-surface-muted px-3 py-1 text-sm font-semibold text-text-muted">
+        Outside our service area
+      </span>
+      <h2 className="mt-5 text-h2">
+        Postcode {postcode} looks outside Victoria.
+      </h2>
+      <p className="mt-3 text-lead">
+        The Victorian Energy Upgrades program is Victoria-only, so we can't run
+        an upgrade for that address today. Other states have their own schemes —
+        leave your details and we'll point you in the right direction.
+      </p>
+    </>
   );
 }
 

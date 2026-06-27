@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
@@ -13,6 +15,12 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
  * "you do nothing" card that assembles itself on load (PRD §4/§5: no stock
  * photography). All motion is reduced-motion aware.
  */
+
+// three.js accent — lazy, client-only so it never blocks initial load / LCP.
+const HeroEnergyField = dynamic(
+  () => import("@/components/three/hero-energy-field"),
+  { ssr: false },
+);
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -31,6 +39,17 @@ const TRUST = [
 
 export function HomeHero() {
   const reduce = useReducedMotion() ?? false;
+
+  // Only mount the WebGL field on desktop with motion allowed; otherwise the
+  // static amber gradient below is the fallback (protects mobile performance).
+  const [enable3d, setEnable3d] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setEnable3d(mq.matches && !reduce);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [reduce]);
 
   const container: Variants = {
     hidden: {},
@@ -60,12 +79,21 @@ export function HomeHero() {
 
   return (
     <section className="relative overflow-hidden bg-surface pt-28 pb-16 sm:pt-32 sm:pb-24">
-      {/* soft amber wash */}
+      {/* soft amber wash — also the static fallback when WebGL is off */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-gradient-to-b from-brand-tint to-transparent"
       />
-      <div className="container-page relative">
+      {/* three.js energy field — desktop + motion-allowed only, behind content */}
+      {enable3d && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[55%] opacity-90 [mask-image:radial-gradient(circle_at_60%_45%,black,transparent_72%)] md:block"
+        >
+          <HeroEnergyField />
+        </div>
+      )}
+      <div className="container-page relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Copy */}
           <motion.div variants={container} initial={initial} animate={animate}>

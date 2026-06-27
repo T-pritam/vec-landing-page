@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { CheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
@@ -10,7 +10,15 @@ import { cn } from "@/lib/cn";
  * Contact and inline CTAs). In the prototype it captures and shows a success
  * state — the real CRM/email/booking destination is a §9 "client to confirm"
  * item, so there's no live submit endpoint.
+ *
+ * Spam-proofed without a CAPTCHA (AEM handoff §5): a honeypot field bots tend
+ * to fill, and a timing gate that rejects near-instant submits. The third
+ * layer — a real rate limit — is server-side and is wired at the lead-
+ * destination integration (open item #2).
  */
+
+/** Submits faster than this (ms) after mount are treated as bots. */
+const MIN_FILL_MS = 2000;
 
 export interface LeadFormDefaults {
   name?: string;
@@ -48,11 +56,25 @@ export function LeadForm({
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const mountedAt = useRef(Date.now());
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    // Spam layer 1 — honeypot: a hidden field only bots fill. If set, pretend
+    // success and silently drop (don't tip off the bot).
+    if (String(data.get("company_website") ?? "").trim() !== "") {
+      setDone(true);
+      return;
+    }
+    // Spam layer 2 — timing gate: humans take longer than this to fill a form.
+    if (Date.now() - mountedAt.current < MIN_FILL_MS) {
+      setDone(true);
+      return;
+    }
+
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
