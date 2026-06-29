@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo, UpgradeGlyph } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { StateToggle } from "@/components/state-toggle";
 import { PRIMARY_NAV, PRIMARY_CTA } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
 import { cn } from "@/lib/cn";
@@ -75,7 +76,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
+          <StateToggle />
           <Button href={PRIMARY_CTA.href} size="sm">
             {PRIMARY_CTA.label}
           </Button>
@@ -160,9 +162,12 @@ export function SiteHeader() {
             ))}
           </div>
 
-          <Button href={PRIMARY_CTA.href} size="lg" className="mt-6 w-full">
-            {PRIMARY_CTA.label}
-          </Button>
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <StateToggle />
+            <Button href={PRIMARY_CTA.href} size="lg" className="flex-1">
+              {PRIMARY_CTA.label}
+            </Button>
+          </div>
         </div>
       </div>
     </header>

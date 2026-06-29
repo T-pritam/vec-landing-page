@@ -1,22 +1,19 @@
 import Link from "next/link";
-import { UpgradeGlyph, CheckIcon, LayersIcon } from "@/components/icons";
+import { UpgradeGlyph, CheckIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
-import { IndicativeChip, IndicativeDisclaimer } from "@/components/indicative";
 import { ProductGallery } from "@/components/brand/product-gallery";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/motion/reveal";
-import { CountUp } from "@/components/motion/count-up";
 import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
+import { getUpgradeRebate, maxHeadlineValue } from "@/lib/rebates";
+import { getNswUpgradeRebate } from "@/lib/nsw-rebates";
 import {
-  getUpgradeRebate,
-  maxHeadlineValue,
-  formatRange,
-  INCENTIVE_LAYERS,
-  type LayerId,
-  type LayerValue,
-} from "@/lib/rebates";
+  StateHeadlineCard,
+  StateRebatePanel,
+  StateStackingNote,
+} from "@/components/upgrade-state-rebates";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import type { FaqItem } from "@/lib/faq";
 
@@ -29,11 +26,7 @@ import type { FaqItem } from "@/lib/faq";
 export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
   const rebate = getUpgradeRebate(upgrade.slug);
   const headline = maxHeadlineValue(upgrade.slug);
-  const layerEntries = rebate
-    ? (Object.entries(rebate.layers) as [LayerId, LayerValue][])
-    : [];
-  const loanLayers = layerEntries.filter(([, v]) => v.kind === "loan");
-  const discountLayers = layerEntries.filter(([, v]) => v.kind !== "loan");
+  const nswRebate = getNswUpgradeRebate(upgrade.slug);
   const others = UPGRADES.filter((u) => u.slug !== upgrade.slug);
 
   return (
@@ -68,20 +61,11 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                 (full breakdown lives in section 2). */}
             <Reveal delay={0.12}>
               <ProductGallery slug={upgrade.slug} name={upgrade.name} />
-              <div className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface-muted px-5 py-4">
-                <div>
-                  <span className="block text-xs font-medium text-text-muted">
-                    {loanLayers.length && !discountLayers.length
-                      ? "Interest-free loan"
-                      : "Indicative value"}
-                  </span>
-                  <span className="figure text-2xl font-semibold text-ink">
-                    up to{" "}
-                    <CountUp value={headline || (loanLayers[0]?.[1].max ?? 0)} />
-                  </span>
-                </div>
-                <IndicativeChip />
-              </div>
+              <StateHeadlineCard
+                vicRebate={rebate}
+                vicHeadline={headline}
+                nswRebate={nswRebate}
+              />
             </Reveal>
           </div>
         </div>
@@ -106,35 +90,11 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </ul>
           </div>
 
-          <div>
-            <SectionHeader
-              eyebrow="How much you can get"
-              title="The indicative numbers."
-            />
-            <div className="mt-6 rounded-2xl border border-hairline bg-surface-muted p-6 sm:p-7">
-              <ul className="space-y-4">
-                {discountLayers.map(([id, v]) => (
-                  <LayerRow key={id} id={id} value={v} />
-                ))}
-                {loanLayers.map(([id, v]) => (
-                  <LayerRow key={id} id={id} value={v} />
-                ))}
-              </ul>
-              {discountLayers.length > 0 && (
-                <div className="mt-5 flex items-end justify-between border-t border-hairline pt-5">
-                  <span className="text-sm font-medium text-text-muted">
-                    Combined, up to
-                  </span>
-                  <span className="figure text-3xl font-semibold text-ink">
-                    <CountUp value={headline} />
-                  </span>
-                </div>
-              )}
-              <div className="mt-5">
-                <IndicativeDisclaimer variant="full" />
-              </div>
-            </div>
-          </div>
+          <StateRebatePanel
+            vicRebate={rebate}
+            vicHeadline={headline}
+            nswRebate={nswRebate}
+          />
         </div>
       </Section>
 
@@ -177,29 +137,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </div>
           </div>
 
-          <div className="lift rounded-2xl bg-brand-tint p-6 sm:p-8">
-            <div className="flex items-center gap-2">
-              <LayersIcon className="h-5 w-5 text-brand-ink" />
-              <Eyebrow>Stacking note</Eyebrow>
-            </div>
-            <p className="mt-4 text-body text-ink">{rebate?.stackingNote}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {layerEntries.map(([id]) => (
-                <span
-                  key={id}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-sm font-medium text-ink"
-                >
-                  <span className="h-2 w-2 rounded-full bg-brand" />
-                  {INCENTIVE_LAYERS[id].short}
-                </span>
-              ))}
-            </div>
-            <div className="mt-5">
-              <ArrowLink href="/how-it-works#stacking">
-                Try the stacking calculator
-              </ArrowLink>
-            </div>
-          </div>
+          <StateStackingNote vicRebate={rebate} nswRebate={nswRebate} />
         </div>
       </Section>
 
@@ -291,32 +229,5 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
         <CtaBand />
       </Section>
     </>
-  );
-}
-
-function LayerRow({ id, value }: { id: LayerId; value: LayerValue }) {
-  const meta = INCENTIVE_LAYERS[id];
-  return (
-    <li className="flex items-start justify-between gap-4">
-      <div>
-        <p className="flex items-center gap-2 font-semibold text-ink">
-          <span className="h-2.5 w-2.5 rounded-full bg-brand" />
-          {meta.name}
-          {value.kind === "loan" && (
-            <span className="rounded-full bg-surface px-2 py-0.5 text-xs font-medium text-text-muted">
-              loan, not a discount
-            </span>
-          )}
-        </p>
-        {value.note && (
-          <p className="mt-1 pl-[1.125rem] text-sm text-text-muted">
-            {value.note}
-          </p>
-        )}
-      </div>
-      <span className="figure shrink-0 whitespace-nowrap text-right font-semibold text-ink">
-        {formatRange(value.min, value.max)}
-      </span>
-    </li>
   );
 }
