@@ -4,7 +4,7 @@ import { HomeHero } from "@/components/sections/home-hero";
 import { AudienceSplit } from "@/components/sections/audience-split";
 import { MoneyFlow } from "@/components/sections/money-flow";
 import { FullChain } from "@/components/sections/full-chain";
-import { UpgradesGrid } from "@/components/sections/upgrades-grid";
+import { FeatureSplit } from "@/components/sections/feature-split";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CredibilityBand } from "@/components/sections/credibility-band";
@@ -68,18 +68,72 @@ export default function HomePage() {
         </Reveal>
       </Section>
 
-      {/* 5 — Upgrades */}
+      {/* 5 — Why AEM (image + copy; the products grid now lives on /products) */}
       <Section tone="surface">
-        <Reveal>
-          <SectionHeader
-            eyebrow="What we upgrade"
-            title="Pick an upgrade — or stack a few."
-            lead="Every figure here is indicative and shown as an “up to” amount. Solar is our flagship; each upgrade has its own page."
-          />
-        </Reveal>
-        <Reveal delay={0.08} className="mt-10">
-          <UpgradesGrid />
-        </Reveal>
+        <FeatureSplit
+          eyebrow="Why AEM Energy"
+          title="One team owns the whole upgrade — start to finish."
+          body={
+            <>
+              <p>
+                AEM Energy operates under our Accredited Person, Aussie Eco
+                Marks, in the Victorian Energy Upgrades program. That means the
+                assessment, the install and the certificate creation all sit
+                with one accountable team — you're not chasing a separate
+                installer, a rebate agent and a paperwork service.
+              </p>
+              <p>
+                The result is a large upfront discount — not a “free” gimmick —
+                and a process where you do almost nothing. We size the system to
+                how you actually use power, complete the work with our
+                accredited installers, and handle every certificate and
+                compliance step behind the scenes.
+              </p>
+            </>
+          }
+          points={[
+            "Solar, heat pumps, hot water, batteries, air conditioning and commercial LED.",
+            "Indicative “up to” figures shown honestly — never guaranteed.",
+            "Accredited Person re-tested every year — accreditation that means something.",
+          ]}
+          image="/images/home.jpg"
+          imageAlt="A modern home at dusk, the kind AEM Energy upgrades across Victoria"
+          cta={{ label: "Browse all products", href: "/products" }}
+          link={{ label: "How the money works", href: "/how-it-works" }}
+        />
+      </Section>
+
+      {/* 5b — Accreditation / install proof (image + copy) */}
+      <Section tone="muted">
+        <FeatureSplit
+          reverse
+          eyebrow="Done properly"
+          title="Accredited installers. Real, tidy work."
+          body={
+            <>
+              <p>
+                Our registered installers do the work to the program's standard
+                — and because we've operated in the VEU program since 2009,
+                we've seen the edge cases that catch other providers out.
+              </p>
+              <p>
+                Where a home qualifies, we keep the programs distinct: the VEU
+                discount is open to Victorian households and businesses, while a
+                Solar Victoria rebate — the one layer with income and property
+                thresholds — is applied separately for eligible homes. You'll
+                always see which applies to you.
+              </p>
+            </>
+          }
+          points={[
+            "VEU is not means-tested; only the Solar Victoria layer is.",
+            "Metro & regional Victoria — one accountable team end-to-end.",
+            "We explain exactly where the discount comes from before you commit.",
+          ]}
+          image="/images/installer.jpg"
+          imageAlt="An accredited installer fitting solar panels on a roof"
+          link={{ label: "More on our accreditation", href: "/about" }}
+        />
       </Section>
 
       {/* 6 — Stacking explainer (interactive calculator occupies this slot) */}

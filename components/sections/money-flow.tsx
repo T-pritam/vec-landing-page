@@ -1,4 +1,5 @@
 import { Eyebrow } from "@/components/ui/section";
+import { Stagger, StaggerItem } from "@/components/motion/reveal";
 import { cn } from "@/lib/cn";
 
 /**
@@ -34,11 +35,11 @@ const STEPS = [
 export function MoneyFlow({ detailed = false }: { detailed?: boolean }) {
   return (
     <div>
-      <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {STEPS.map((s, i) => (
-          <li
+          <StaggerItem
             key={s.n}
-            className="relative flex flex-col rounded-2xl border border-hairline bg-surface p-6"
+            className="relative flex h-full flex-col rounded-2xl border border-hairline bg-surface p-6"
           >
             <span className="figure text-sm font-semibold text-brand-ink">
               {s.n}
@@ -55,9 +56,9 @@ export function MoneyFlow({ detailed = false }: { detailed?: boolean }) {
                 <ArrowRight />
               </span>
             )}
-          </li>
+          </StaggerItem>
         ))}
-      </ol>
+      </Stagger>
 
       {detailed && (
         <div className="mt-6 rounded-2xl bg-business-tint p-6 sm:p-8">

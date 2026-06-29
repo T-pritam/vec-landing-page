@@ -41,6 +41,11 @@ export const PRIMARY_NAV: NavItem[] = [
     description: "Upgrades for your home",
   },
   {
+    label: "Products",
+    href: "/products",
+    description: "Everything we install",
+  },
+  {
     label: "Business / C&I",
     href: "/business",
     description: "Commercial & industrial projects",

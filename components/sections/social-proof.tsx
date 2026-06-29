@@ -1,3 +1,4 @@
+import { Stagger, StaggerItem } from "@/components/motion/reveal";
 import { cn } from "@/lib/cn";
 
 /**
@@ -64,12 +65,12 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
         </span>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <Stagger className="grid gap-4 md:grid-cols-3">
         {PLACEHOLDER_REVIEWS.map((r) => (
-          <figure
+          <StaggerItem
             key={r.name}
             className={cn(
-              "lift flex flex-col gap-5 rounded-2xl border p-6",
+              "lift flex h-full flex-col gap-5 rounded-2xl border p-6",
               onInk ? "border-white/10 bg-white/[0.04]" : "border-hairline bg-surface",
             )}
           >
@@ -86,17 +87,17 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
             >
               “{r.quote}”
             </blockquote>
-            <figcaption className="mt-auto">
+            <div className="mt-auto">
               <p className={cn("text-sm font-semibold", onInk ? "text-white" : "text-ink")}>
                 {r.name}
               </p>
               <p className={cn("text-sm", onInk ? "text-white/55" : "text-text-muted")}>
                 {r.detail}
               </p>
-            </figcaption>
-          </figure>
+            </div>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
       <p className={cn("mt-4 text-caption", onInk && "text-white/50")}>
         Placeholder testimonials — client to supply real reviews before launch.
       </p>

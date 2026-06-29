@@ -202,6 +202,20 @@ export function LayersIcon({ className }: { className?: string }) {
   );
 }
 
+export function MapPinIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
+      <path
+        d="M12 21s6.5-5.4 6.5-10.5A6.5 6.5 0 0 0 5.5 10.5C5.5 15.6 12 21 12 21Z"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="10.3" r="2.3" stroke="currentColor" strokeWidth={1.6} />
+    </svg>
+  );
+}
+
 /**
  * Water-filtration glyph — kept OUTSIDE the VEU `UpgradeIcon` set on purpose,
  * so the standalone Distillo product stays decoupled from the rebate system.

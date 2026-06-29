@@ -456,3 +456,19 @@ export function getProductVisuals(slug: string): CarouselSlide[] | null {
     ),
   }));
 }
+
+/**
+ * A single framed scene (the first panel) for a slug — used as an on-brand
+ * fallback in image-led cards where a faithful stock photo isn't available
+ * (e.g. home battery). Returns null if we have no visuals for the slug.
+ */
+export function getProductHeroVisual(slug: string): React.ReactNode | null {
+  const panels = GALLERIES[slug];
+  if (!panels || panels.length === 0) return null;
+  const p = panels[0];
+  return (
+    <Frame caption={p.label} tint={p.tint}>
+      {p.scene}
+    </Frame>
+  );
+}

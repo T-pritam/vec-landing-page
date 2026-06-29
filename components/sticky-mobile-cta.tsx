@@ -36,7 +36,7 @@ export function StickyMobileCTA() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/90 p-3 backdrop-blur-xl transition-transform duration-300 lg:hidden",
+        "fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/90 p-3 backdrop-blur-xl transition-transform duration-300 xl:hidden",
         "pb-[max(0.75rem,env(safe-area-inset-bottom))]",
         show ? "translate-y-0" : "translate-y-full",
       )}

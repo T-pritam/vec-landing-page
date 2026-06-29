@@ -58,14 +58,14 @@ export function SiteHeader() {
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-1 lg:flex"
+          className="hidden items-center gap-0.5 xl:flex"
         >
           {PRIMARY_NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-3.5 py-2 text-[0.9375rem] font-medium transition-colors",
+                "whitespace-nowrap rounded-full px-3 py-2 text-[0.9375rem] font-medium transition-colors",
                 isActive(item.href)
                   ? "text-ink"
                   : "text-text-muted hover:text-ink",
@@ -76,7 +76,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <StateToggle />
           <Button href={PRIMARY_CTA.href} size="sm">
             {PRIMARY_CTA.label}
@@ -86,7 +86,7 @@ export function SiteHeader() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-lg text-ink lg:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-lg text-ink xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -119,11 +119,14 @@ export function SiteHeader() {
       <div
         id="mobile-menu"
         className={cn(
-          "lg:hidden",
+          "xl:hidden",
           open ? "block" : "hidden",
         )}
       >
         <div className="container-page max-h-[calc(100dvh-4rem)] overflow-y-auto pb-8 pt-2">
+          <div className="mb-4 flex justify-center rounded-2xl border border-hairline bg-surface-muted py-3">
+            <StateToggle />
+          </div>
           <nav aria-label="Mobile" className="flex flex-col">
             {PRIMARY_NAV.map((item) => (
               <Link
@@ -162,12 +165,9 @@ export function SiteHeader() {
             ))}
           </div>
 
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <StateToggle />
-            <Button href={PRIMARY_CTA.href} size="lg" className="flex-1">
-              {PRIMARY_CTA.label}
-            </Button>
-          </div>
+          <Button href={PRIMARY_CTA.href} size="lg" className="mt-6 w-full">
+            {PRIMARY_CTA.label}
+          </Button>
         </div>
       </div>
     </header>
