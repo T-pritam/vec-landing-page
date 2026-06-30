@@ -6,6 +6,7 @@ import { SocialProof } from "@/components/sections/social-proof";
 import { CtaBand } from "@/components/sections/cta-band";
 import { CredibilityBand } from "@/components/sections/credibility-band";
 import { CheckIcon, ShieldCheckIcon } from "@/components/icons";
+import { PAGE_IMAGE } from "@/lib/images";
 import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,6 +42,8 @@ export default function AboutPage() {
         title="Accredited isn't a slogan here. It's the whole business."
         lead="AEM Energy operates under our Accredited Person, Aussie Eco Marks, in the Victorian Energy Upgrades program. That's a specific, verifiable status — and it's the reason we can do what most providers can't."
         tone="ink"
+        image={PAGE_IMAGE.about.src}
+        imageAlt={PAGE_IMAGE.about.alt}
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />

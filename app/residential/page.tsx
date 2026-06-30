@@ -8,6 +8,7 @@ import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Reveal } from "@/components/motion/reveal";
+import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -24,6 +25,8 @@ export default function ResidentialPage() {
         title="Upgrade your home. We'll handle the rest."
         lead="Fast, simple, and mostly upfront. Pick a single upgrade or stack a few — we assess, install and manage every certificate, so you do almost nothing."
         tone="muted"
+        image={PAGE_IMAGE.residential.src}
+        imageAlt={PAGE_IMAGE.residential.alt}
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />

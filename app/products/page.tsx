@@ -5,6 +5,7 @@ import { ProductCards } from "@/components/sections/product-cards";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Reveal } from "@/components/motion/reveal";
+import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,6 +22,8 @@ export default function ProductsPage() {
         title="Everything we install, in one place."
         lead="Browse our energy upgrades — each one handled end-to-end, from assessment to certificate. Pick a product to see how it works, what it qualifies for and what you'd actually pay."
         tone="muted"
+        image={PAGE_IMAGE.products.src}
+        imageAlt={PAGE_IMAGE.products.alt}
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />

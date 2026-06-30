@@ -5,6 +5,7 @@ import { MoneyFlow } from "@/components/sections/money-flow";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { CtaBand } from "@/components/sections/cta-band";
 import { CheckIcon } from "@/components/icons";
+import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -48,6 +49,8 @@ export default function HowItWorksPage() {
         }
         lead="Most providers won't explain this. We will — because once you understand the mechanism, the honest version is actually more reassuring than a “free” headline."
         tone="muted"
+        image={PAGE_IMAGE["how-it-works"].src}
+        imageAlt={PAGE_IMAGE["how-it-works"].alt}
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: "Talk to us", href: SECONDARY_CTA.href }}
       />

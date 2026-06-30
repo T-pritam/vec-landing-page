@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { CheckIcon, ShieldCheckIcon, UpgradeGlyph } from "@/components/icons";
 import { CtaBand } from "@/components/sections/cta-band";
+import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SITE } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
 
@@ -50,6 +52,8 @@ export default function BusinessPage() {
         title="Serious energy projects, managed by the accredited team."
         lead="For offices, warehouses, retail and industrial sites. Rational, ROI-driven and compliant — we own the whole project so your team doesn't have to."
         tone="business"
+        image={PAGE_IMAGE.business.src}
+        imageAlt={PAGE_IMAGE.business.alt}
         primary={{ label: "Book a site assessment", href: PRIMARY_CTA.href }}
         secondary={{ label: "Talk to our C&I team", href: "/contact" }}
       />
@@ -188,19 +192,30 @@ export default function BusinessPage() {
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            ["Warehouse lighting + solar", "Indicative six-figure value across a large logistics site."],
-            ["Hospitality hot water + HVAC", "Stacked upgrades cutting energy across multiple venues."],
-            ["Retail portfolio LED", "High-volume lighting upgrade rolled out across stores."],
-          ].map(([t, b]) => (
+            ["Warehouse lighting + solar", "Indicative six-figure value across a large logistics site.", "/images/solar.jpg"],
+            ["Hospitality hot water + HVAC", "Stacked upgrades cutting energy across multiple venues.", "/images/air-con.jpg"],
+            ["Retail portfolio LED", "High-volume lighting upgrade rolled out across stores.", "/images/led.jpg"],
+          ].map(([t, b, img]) => (
             <article
               key={t}
-              className="rounded-2xl border border-hairline bg-surface-muted p-6 sm:p-7"
+              className="lift overflow-hidden rounded-2xl border border-hairline bg-surface-muted"
             >
-              <span className="rounded-full bg-business-tint px-3 py-1 text-xs font-semibold text-business">
-                Case study · placeholder
-              </span>
-              <h3 className="mt-4 text-h3 text-[1.125rem]">{t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">{b}</p>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface">
+                <Image
+                  src={img}
+                  alt={t}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 sm:p-7">
+                <span className="rounded-full bg-business-tint px-3 py-1 text-xs font-semibold text-business">
+                  Case study · placeholder
+                </span>
+                <h3 className="mt-4 text-h3 text-[1.125rem]">{t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-muted">{b}</p>
+              </div>
             </article>
           ))}
         </div>

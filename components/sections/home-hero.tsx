@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
 import { CheckIcon } from "@/components/icons";
+import { SITE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 /**
@@ -79,10 +81,30 @@ export function HomeHero() {
 
   return (
     <section className="relative overflow-hidden bg-surface pt-28 pb-16 sm:pt-32 sm:pb-24">
+      {/* Large background photo (client request — match the image-led reference
+          sites). Sits behind everything; a strong surface gradient keeps the
+          left-hand copy legible while the warm photo reads through on the right. */}
+      <Image
+        src={SITE_IMAGE.heroHome}
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface via-surface/92 to-surface/45"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent"
+      />
       {/* soft amber wash — also the static fallback when WebGL is off */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-gradient-to-b from-brand-tint to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-gradient-to-b from-brand-tint/90 to-transparent"
       />
       {/* three.js energy field — desktop + motion-allowed only, behind content */}
       {enable3d && (

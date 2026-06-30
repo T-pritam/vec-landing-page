@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/section";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBand } from "@/components/sections/cta-band";
 import { FAQ_CATEGORIES, faqsByCategory } from "@/lib/faq";
+import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -20,6 +21,8 @@ export default function FaqPage() {
         title="Every question, answered honestly."
         lead="No spin and no “free” gimmicks. If your question isn't here, ask us — we'll add it."
         tone="muted"
+        image={PAGE_IMAGE.faq.src}
+        imageAlt={PAGE_IMAGE.faq.alt}
         primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: "Ask a question", href: "/contact" }}
       />

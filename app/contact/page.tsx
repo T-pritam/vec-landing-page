@@ -3,6 +3,7 @@ import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/ui/section";
 import { LeadForm } from "@/components/lead-form";
 import { PhoneIcon, CheckIcon } from "@/components/icons";
+import { PAGE_IMAGE } from "@/lib/images";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,6 +20,8 @@ export default function ContactPage() {
         title="Talk to the accredited team."
         lead="Tell us a little about your place and what you're considering. We'll come back with a clear, honest next step — no obligation."
         tone="muted"
+        image={PAGE_IMAGE.contact.src}
+        imageAlt={PAGE_IMAGE.contact.alt}
       />
 
       <Section tone="surface">
