@@ -1,16 +1,16 @@
 /**
  * Stock-photo paths (client decision: licensed stock photography on the
  * homepage + products page, overriding the earlier SVG-only guideline).
- * Files live in /public/images. Keyed by upgrade slug where a faithful photo
- * exists; `battery` has no faithful stock photo, so it falls back to the
- * on-brand SVG scene (see components/sections/product-cards.tsx).
+ * Files live in /public/images. Keyed by upgrade slug. Every upgrade now has a
+ * faithful lifestyle photo — including `battery`, which previously fell back to
+ * the on-brand SVG scene (client supplied a battery photo, 2026-07-03).
  */
 export const UPGRADE_IMAGE: Record<string, string> = {
   solar: "/images/solar.jpg",
   "heat-pumps": "/images/heat-pump.jpg",
   "air-con": "/images/air-con.jpg",
   led: "/images/led.jpg",
-  // battery: intentionally omitted -> SVG fallback
+  battery: "/images/battery.jpg",
 };
 
 /** General-purpose lifestyle / brand photos. */
