@@ -34,8 +34,7 @@ export type NavItem = {
 
 /**
  * Primary navigation. The header renders the "Your state" selector first (on the
- * left), then these links. The Products page stays reachable via the footer and
- * the homepage link, so it is intentionally not in the top nav.
+ * left), then these links.
  */
 export const PRIMARY_NAV: NavItem[] = [
   {
@@ -47,6 +46,11 @@ export const PRIMARY_NAV: NavItem[] = [
     label: "Commercial",
     href: "/business",
     description: "Commercial and industrial projects",
+  },
+  {
+    label: "Products",
+    href: "/products",
+    description: "Everything we install",
   },
   {
     label: "How It Works",
