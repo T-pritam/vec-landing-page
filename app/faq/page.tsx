@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/ui/section";
 import { FaqAccordion } from "@/components/faq-accordion";
-import { CtaBand } from "@/components/sections/cta-band";
 import { FAQ_CATEGORIES, faqsByCategory } from "@/lib/faq";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA } from "@/lib/site";
@@ -38,10 +37,6 @@ export default function FaqPage() {
             </div>
           ))}
         </div>
-      </Section>
-
-      <Section tone="muted">
-        <CtaBand />
       </Section>
     </>
   );

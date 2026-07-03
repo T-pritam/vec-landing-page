@@ -2,10 +2,9 @@ import { WaterFilterIcon, CheckIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { ProductGallery } from "@/components/brand/product-gallery";
-import { CtaBand } from "@/components/sections/cta-band";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/motion/reveal";
-import { SECONDARY_CTA, SITE } from "@/lib/site";
+import { SECONDARY_CTA } from "@/lib/site";
 import type { StandaloneProduct } from "@/lib/products";
 import type { FaqItem } from "@/lib/faq";
 
@@ -154,16 +153,6 @@ export function StandaloneProductTemplate({
           </div>
         </Section>
       )}
-
-      {/* 6 — CTA (non-VEU: get a quote, not check eligibility) */}
-      <Section tone="surface" spacing="sm">
-        <CtaBand
-          title={`Interested in ${product.name}?`}
-          body={`Get a clear product-and-install quote, or talk it through with our team on ${SITE.phone}.`}
-          primaryHref={SECONDARY_CTA.href}
-          primaryLabel={SECONDARY_CTA.label}
-        />
-      </Section>
     </>
   );
 }

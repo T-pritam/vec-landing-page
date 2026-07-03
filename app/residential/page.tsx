@@ -7,7 +7,6 @@ import { StandaloneProducts } from "@/components/sections/standalone-products";
 import { FullChain } from "@/components/sections/full-chain";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
-import { CtaBand } from "@/components/sections/cta-band";
 import { Reveal } from "@/components/motion/reveal";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
@@ -86,10 +85,6 @@ export default function ResidentialPage() {
         <Reveal delay={0.08} className="mt-10">
           <SocialProof />
         </Reveal>
-      </Section>
-
-      <Section tone="surface">
-        <CtaBand />
       </Section>
     </>
   );

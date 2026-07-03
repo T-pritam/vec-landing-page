@@ -3,7 +3,6 @@ import Link from "next/link";
 import { UpgradeGlyph, CheckIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
-import { CtaBand } from "@/components/sections/cta-band";
 import { StateGate } from "@/components/state-gate";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/motion/reveal";
@@ -237,10 +236,6 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </Link>
           ))}
         </div>
-      </Section>
-
-      <Section tone="surface" spacing="sm">
-        <CtaBand />
       </Section>
     </>
   );

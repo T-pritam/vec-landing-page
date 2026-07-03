@@ -29,7 +29,6 @@ export function StateToggle({
       {showLabel && (
         <span className="flex shrink-0 items-center gap-1 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
           <MapPinIcon className="h-4 w-4 shrink-0 text-brand-ink" />
-          <span className="hidden sm:inline">Your state</span>
         </span>
       )}
       <div

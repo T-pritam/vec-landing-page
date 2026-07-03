@@ -34,18 +34,13 @@ export type NavItem = {
 
 /**
  * Primary navigation. The header renders the "Your state" selector first (on the
- * left), then these links.
+ * left), then these links (homepage change request order).
  */
 export const PRIMARY_NAV: NavItem[] = [
   {
-    label: "Residential",
-    href: "/residential",
-    description: "Upgrades for your home",
-  },
-  {
-    label: "Commercial",
-    href: "/business",
-    description: "Commercial and industrial projects",
+    label: "Home",
+    href: "/",
+    description: "Back to the homepage",
   },
   {
     label: "Products",
@@ -53,14 +48,19 @@ export const PRIMARY_NAV: NavItem[] = [
     description: "Everything we install",
   },
   {
+    label: "About Us",
+    href: "/about",
+    description: "Accreditation and the full-chain story",
+  },
+  {
+    label: "FAQ's",
+    href: "/faq",
+    description: "Questions, answered honestly",
+  },
+  {
     label: "How It Works",
     href: "/how-it-works",
     description: "How the discount works, explained plainly",
-  },
-  {
-    label: "About us",
-    href: "/about",
-    description: "Accreditation and the full-chain story",
   },
 ];
 

@@ -4,7 +4,6 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { HonestPricing } from "@/components/sections/honest-pricing";
 import { FullChain } from "@/components/sections/full-chain";
 import { StackingSection } from "@/components/sections/stacking-section";
-import { CtaBand } from "@/components/sections/cta-band";
 import { CheckIcon } from "@/components/icons";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
@@ -102,14 +101,6 @@ export default function HowItWorksPage() {
         <StackingSection
           eyebrow="Stacking, in full"
           title="The full stacking story."
-        />
-      </Section>
-
-      {/* 5 — CTA into eligibility */}
-      <Section tone="surface">
-        <CtaBand
-          title="See what you qualify for in about a minute."
-          body="No obligation. We'll show you the upgrades that fit and an indicative idea of the combined value, never a guarantee, always honest."
         />
       </Section>
     </>

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Logo, UpgradeGlyph } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { StateToggle } from "@/components/state-toggle";
-import { PRIMARY_NAV, PRIMARY_CTA } from "@/lib/site";
+import { PRIMARY_NAV, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
 import { cn } from "@/lib/cn";
 
@@ -47,9 +47,9 @@ export function SiteHeader() {
           : "border-transparent bg-surface/0",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-4 sm:h-18">
+      <div className="container-page flex h-16 items-center justify-between gap-2 sm:h-18">
         {/* Left cluster: logo, then the "Your state" selector, then the links. */}
-        <div className="flex items-center gap-4 xl:gap-5">
+        <div className="flex min-w-0 items-center gap-2">
           <Link
             href="/"
             aria-label="AEM Energy — home"
@@ -58,7 +58,7 @@ export function SiteHeader() {
             <Logo />
           </Link>
 
-          <div className="hidden items-center gap-4 xl:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <StateToggle />
             <nav
               aria-label="Primary"
@@ -69,7 +69,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "whitespace-nowrap rounded-full px-3 py-2 text-[0.9375rem] font-medium transition-colors",
+                    "whitespace-nowrap rounded-full px-2 py-2 text-sm font-medium transition-colors",
                     isActive(item.href)
                       ? "text-ink"
                       : "text-text-muted hover:text-ink",
@@ -82,9 +82,12 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="hidden items-center gap-3 xl:flex">
+        <div className="hidden shrink-0 items-center gap-2 xl:flex">
           <Button href={PRIMARY_CTA.href} size="sm">
-            {PRIMARY_CTA.label}
+            {PRIMARY_CTA.shortLabel}
+          </Button>
+          <Button href={SECONDARY_CTA.href} size="sm" variant="secondary">
+            {SECONDARY_CTA.label}
           </Button>
         </div>
 
@@ -172,6 +175,14 @@ export function SiteHeader() {
 
           <Button href={PRIMARY_CTA.href} size="lg" className="mt-6 w-full">
             {PRIMARY_CTA.label}
+          </Button>
+          <Button
+            href={SECONDARY_CTA.href}
+            size="lg"
+            variant="secondary"
+            className="mt-3 w-full"
+          >
+            {SECONDARY_CTA.label}
           </Button>
         </div>
       </div>

@@ -25,8 +25,6 @@ const columns = [
     title: "Explore",
     links: [
       { label: "How It Works", href: "/how-it-works" },
-      { label: "Residential", href: "/residential" },
-      { label: "Commercial", href: "/business" },
       { label: "Products", href: "/products" },
       { label: "Check eligibility", href: "/check-eligibility" },
       { label: "About / Why us", href: "/about" },

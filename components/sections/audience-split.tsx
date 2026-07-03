@@ -1,26 +1,22 @@
-import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 /**
- * Audience self-select (PRD §7.1 block 2) — "the single most important block on
- * the page." Two clear paths so each visitor self-identifies in the first
- * screen and routes to content tuned to them (PRD §2.4).
+ * Residential & Business info (homepage change request, Home 2). Previously the
+ * "First, who are you?" path-picker; now a purely informative block — the cards
+ * no longer link anywhere and the "Explore" CTAs are removed. Copy is TBC by the
+ * client; the existing informative copy is kept as a placeholder.
  */
 const PATHS = [
   {
-    href: "/residential",
-    tag: "I'm a homeowner",
+    tag: "For your home",
     title: "Upgrades for your home",
     body: "Quick, mostly sorted upfront. Solar, heat pumps, hot water and more, with a discount you can see on the quote.",
-    cta: "Explore residential",
     tone: "brand" as const,
   },
   {
-    href: "/business",
-    tag: "I'm a business",
+    tag: "For your business",
     title: "Commercial and industrial",
     body: "Bigger projects that stack up on the numbers. We manage the measurement, the certificates and the compliance, start to finish.",
-    cta: "Explore business",
     tone: "business" as const,
   },
 ];
@@ -29,14 +25,11 @@ export function AudienceSplit() {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {PATHS.map((p) => (
-        <Link
-          key={p.href}
-          href={p.href}
+        <div
+          key={p.title}
           className={cn(
-            "group relative flex flex-col justify-between gap-8 overflow-hidden rounded-3xl p-8 transition-transform sm:p-10",
-            p.tone === "brand"
-              ? "bg-brand-tint"
-              : "on-ink bg-business text-white",
+            "relative flex flex-col gap-8 overflow-hidden rounded-3xl p-8 sm:p-10",
+            p.tone === "brand" ? "bg-brand-tint" : "on-ink bg-business text-white",
           )}
         >
           <div>
@@ -65,21 +58,7 @@ export function AudienceSplit() {
               {p.body}
             </p>
           </div>
-          <span
-            className={cn(
-              "inline-flex items-center gap-2 font-semibold",
-              p.tone === "brand" ? "text-ink" : "text-white",
-            )}
-          >
-            {p.cta}
-            <span
-              aria-hidden
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            >
-              →
-            </span>
-          </span>
-        </Link>
+        </div>
       ))}
     </div>
   );

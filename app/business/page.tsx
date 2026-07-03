@@ -6,7 +6,6 @@ import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { CheckIcon, ShieldCheckIcon, UpgradeGlyph } from "@/components/icons";
-import { CtaBand } from "@/components/sections/cta-band";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SITE } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
@@ -231,15 +230,6 @@ export default function BusinessPage() {
             </div>
           ))}
         </div>
-      </Section>
-
-      <Section tone="surface" spacing="sm">
-        <CtaBand
-          tone="ink"
-          title="Scope your commercial project."
-          body="Book a site assessment with our C&I team. We'll model the indicative value and ROI — and own the delivery, certificates and compliance."
-          primaryLabel="Book a site assessment"
-        />
       </Section>
     </>
   );

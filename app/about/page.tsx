@@ -3,7 +3,6 @@ import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { TrustStrip } from "@/components/trust-strip";
 import { SocialProof } from "@/components/sections/social-proof";
-import { CtaBand } from "@/components/sections/cta-band";
 import { CredibilityBand } from "@/components/sections/credibility-band";
 import { CheckIcon, ShieldCheckIcon } from "@/components/icons";
 import { PAGE_IMAGE } from "@/lib/images";
@@ -149,10 +148,6 @@ export default function AboutPage() {
         <div className="mt-12">
           <SocialProof onInk />
         </div>
-      </Section>
-
-      <Section tone="surface">
-        <CtaBand />
       </Section>
     </>
   );

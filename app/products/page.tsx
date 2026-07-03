@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { ProductCards } from "@/components/sections/product-cards";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
-import { CtaBand } from "@/components/sections/cta-band";
+import { StackingSection } from "@/components/sections/stacking-section";
 import { Reveal } from "@/components/motion/reveal";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <>
+      {/* Single Products page for both residential & business — prompt for a
+          state before showing rebate figures. */}
+      <StateGate />
       <PageHero
         eyebrow="Our products"
         title="Everything we install, in one place."
@@ -52,8 +56,15 @@ export default function ProductsPage() {
         </Reveal>
       </Section>
 
-      <Section tone="surface" spacing="sm">
-        <CtaBand />
+      {/* Stacking calculator (moved off the homepage; below the listing, never
+          on an individual product page). */}
+      <Section tone="muted">
+        <Reveal>
+          <StackingSection
+            eyebrow="The stacking story"
+            title="See how the incentives stack."
+          />
+        </Reveal>
       </Section>
     </>
   );

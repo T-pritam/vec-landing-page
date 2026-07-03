@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "motion/react";
-import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section";
 import { CheckIcon } from "@/components/icons";
 import { SITE_IMAGE } from "@/lib/images";
-import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 /**
  * Home hero (PRD §7.1 block 1) — owns a POSITION, not a discount %. Balanced
@@ -93,9 +91,11 @@ export function HomeHero() {
         sizes="100vw"
         className="object-cover object-center"
       />
+      {/* Left-side cutout: the copy column stays on solid surface so the photo
+          never sits behind the headline text (homepage change request). */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface via-surface/92 to-surface/45"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface from-40% via-surface/85 to-surface/20"
       />
       <div
         aria-hidden
@@ -123,8 +123,10 @@ export function HomeHero() {
               <Eyebrow>Energy upgrades, made straightforward</Eyebrow>
             </motion.div>
 
+            {/* Headline on two lines (homepage change request). */}
             <motion.h1 variants={up} className="text-display font-display mt-5">
-              The accredited team that handles your{" "}
+              The accredited team that handles your
+              <br />
               <span className="relative inline-block whitespace-nowrap text-brand-ink">
                 entire upgrade.
                 {!reduce && (
@@ -139,24 +141,11 @@ export function HomeHero() {
               </span>
             </motion.h1>
 
-            <motion.p variants={up} className="text-lead mt-6 max-w-xl">
-              From the first assessment to the final certificate, one team does
-              the lot. You get a real upfront discount, and you do almost none of
-              the work.
-            </motion.p>
-
-            <motion.div variants={up} className="mt-8 flex flex-wrap gap-3">
-              <Button href={PRIMARY_CTA.href} size="lg">
-                {PRIMARY_CTA.label}
-              </Button>
-              <Button href={SECONDARY_CTA.href} size="lg" variant="secondary">
-                {SECONDARY_CTA.label}
-              </Button>
-            </motion.div>
-
+            {/* Trust ticks sit directly below the headline; the CTAs now live
+                only in the header nav. */}
             <motion.ul
               variants={up}
-              className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-muted"
+              className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-muted"
             >
               {TRUST.map((t) => (
                 <li key={t} className="inline-flex items-center gap-1.5">
