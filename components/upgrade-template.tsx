@@ -1,16 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 import { UpgradeGlyph, CheckIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
-import { ProductGallery } from "@/components/brand/product-gallery";
 import { CtaBand } from "@/components/sections/cta-band";
+import { StateGate } from "@/components/state-gate";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/motion/reveal";
 import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
+import { UPGRADE_IMAGE } from "@/lib/images";
 import { getUpgradeRebate, maxHeadlineValue } from "@/lib/rebates";
 import { getNswUpgradeRebate } from "@/lib/nsw-rebates";
 import {
-  StateHeadlineCard,
   StateRebatePanel,
   StateStackingNote,
 } from "@/components/upgrade-state-rebates";
@@ -28,46 +29,59 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
   const headline = maxHeadlineValue(upgrade.slug);
   const nswRebate = getNswUpgradeRebate(upgrade.slug);
   const others = UPGRADES.filter((u) => u.slug !== upgrade.slug);
+  const heroImage = UPGRADE_IMAGE[upgrade.slug];
 
   return (
     <>
-      {/* 1 — Upgrade hero */}
-      <section className="bg-surface-muted pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="container-page">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <Reveal>
-              <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-ink [&>span>svg]:h-7 [&>span>svg]:w-7">
-                  <UpgradeGlyph icon={upgrade.icon} />
-                </span>
-                <Eyebrow>{upgrade.eyebrow}</Eyebrow>
-              </div>
-              <h1 className="text-display mt-5 text-[clamp(2.25rem,5vw,3.75rem)]">
-                {upgrade.heroHeadline}
-              </h1>
-              <p className="text-lead mt-6 max-w-xl">{upgrade.heroSub}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button href={PRIMARY_CTA.href} size="lg">
-                  {PRIMARY_CTA.label}
-                </Button>
-                <Button href={SECONDARY_CTA.href} size="lg" variant="secondary">
-                  {SECONDARY_CTA.label}
-                </Button>
-              </div>
-            </Reveal>
+      {/* Force a VIC/NSW choice before showing state-specific rebate figures. */}
+      <StateGate />
 
-            {/* Product carousel (Change #1) — one carousel per product, with a
-                compact indicative-value line beneath so the figure stays visible
-                (full breakdown lives in section 2). */}
-            <Reveal delay={0.12}>
-              <ProductGallery slug={upgrade.slug} name={upgrade.name} />
-              <StateHeadlineCard
-                vicRebate={rebate}
-                vicHeadline={headline}
-                nswRebate={nswRebate}
-              />
-            </Reveal>
-          </div>
+      {/* 1 — Upgrade hero: full-bleed product photo behind the copy (Change #1). */}
+      <section className="relative overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-24">
+        {heroImage && (
+          <>
+            <Image
+              src={heroImage}
+              alt={upgrade.name}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/55"
+            />
+          </>
+        )}
+
+        <div className="container-page relative z-10">
+          <Reveal className="max-w-2xl">
+            <div className="flex items-center gap-3">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-ink [&>span>svg]:h-7 [&>span>svg]:w-7">
+                <UpgradeGlyph icon={upgrade.icon} />
+              </span>
+              <Eyebrow onInk>{upgrade.eyebrow}</Eyebrow>
+            </div>
+            <h1 className="text-display mt-5 text-[clamp(2.25rem,5vw,3.75rem)] text-white">
+              {upgrade.heroHeadline}
+            </h1>
+            <p className="text-lead mt-6 max-w-xl text-white/75">
+              {upgrade.heroSub}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={PRIMARY_CTA.href} size="lg">
+                {PRIMARY_CTA.label}
+              </Button>
+              <Button
+                href={SECONDARY_CTA.href}
+                size="lg"
+                variant="secondary-on-ink"
+              >
+                {SECONDARY_CTA.label}
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -102,8 +116,8 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
       <Section tone="muted">
         <SectionHeader
           eyebrow="How it works"
-          title="Four steps — and we do most of them."
-          lead="The short version for this upgrade. The full mechanism (where the money comes from) lives on How It Works."
+          title="Four steps, and we do most of them."
+          lead="The short version for this upgrade. One accredited team handles the assessment, the install and every certificate."
         />
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {upgrade.howItWorks.map((step, i) => (
@@ -120,7 +134,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
         </ol>
         <div className="mt-8">
           <ArrowLink href="/how-it-works">
-            See where the money actually comes from
+            See how the whole process works
           </ArrowLink>
         </div>
       </Section>

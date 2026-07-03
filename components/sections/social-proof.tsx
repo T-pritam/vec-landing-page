@@ -8,21 +8,21 @@ import { cn } from "@/lib/cn";
 const PLACEHOLDER_REVIEWS = [
   {
     quote:
-      "They explained exactly where the discount came from and what we'd actually pay. No “free” nonsense — just a straight answer.",
+      "They told us exactly where the discount came from and what we would actually pay. No free nonsense, just a straight answer.",
     name: "Placeholder, Bendigo",
-    detail: "Heat pump + hot water",
+    detail: "Heat pump and hot water",
   },
   {
     quote:
-      "One team handled the assessment, the install and all the paperwork. We genuinely did almost nothing.",
+      "One team did the assessment, the install and all the paperwork. We really did almost nothing.",
     name: "Placeholder, Geelong",
     detail: "Rooftop solar",
   },
   {
     quote:
-      "Having their own Accredited Person actually meant something — the certificates were created in-house, not outsourced.",
+      "They were upfront that a battery would take a while to pay off for our usage. We went ahead anyway, and trusted them more for saying it.",
     name: "Placeholder, Melbourne",
-    detail: "Solar + battery",
+    detail: "Solar and battery",
   },
 ];
 

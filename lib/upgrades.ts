@@ -63,25 +63,25 @@ export const UPGRADES: UpgradeContent[] = [
     eyebrow: "Flagship upgrade",
     heroHeadline: "Own your power bill, not just lower it.",
     heroSub:
-      "Rooftop solar is where the incentives stack hardest — federal STCs come off the price upfront, and eligible homes can add a Solar Victoria rebate. We design, install and handle the paperwork end-to-end.",
+      "Rooftop solar is where the incentives stack hardest. Federal STCs come off the price upfront, sized to your system and your postcode. We design it, install it and handle the paperwork start to finish.",
     whatItIs: {
       heading: "What you actually get",
       body: "A correctly-sized PV system for your roof and usage, installed by our accredited team, with the upfront certificate value already taken off the price.",
       points: [
-        "A system sized to how and when you actually use power — not an off-the-shelf number.",
-        "Federal STC value deducted from your price at point of sale.",
-        "A Solar Victoria rebate applied on top for eligible homes.",
-        "Pairs with a battery and with eligible heat-pump (incl. hot water) upgrades to stack further.",
+        "A system sized to how and when you actually use power, not an off-the-shelf number.",
+        "Federal STC value deducted from your price at the point of sale.",
+        "Eligible state-scheme value applied on top, shown for your state in the panel opposite.",
+        "Pairs with a battery and eligible heat-pump upgrades, including hot water, to stack further.",
       ],
     },
     howItWorks: [
       "We assess your roof, shading and usage and size the system.",
       "Our accredited installers complete the job.",
-      "STCs are created and discounted off your price; any Solar Victoria rebate is applied.",
-      "You pay the reduced price — we handle the certificate paperwork.",
+      "STCs are created and discounted off your price, and any eligible state-scheme value is applied.",
+      "You pay the reduced price, and we handle the certificate paperwork.",
     ],
     fullChain:
-      "Because we operate under our Accredited Person, Aussie Eco Marks, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
+      "Because we're accredited in our own right and do the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
     flagship: true,
     commercialAngle:
       "Commercial rooftop and ground-mount solar can run into six figures of combined value, with a longer measurement & verification path. We run that as a managed project — see the Business journey.",

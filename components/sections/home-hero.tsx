@@ -36,7 +36,7 @@ const CHAIN = [
 const TRUST = [
   "Accredited to create certificates",
   "Re-tested every year",
-  "Running since 2009",
+  "Operating since 2009",
 ];
 
 export function HomeHero() {
@@ -120,7 +120,7 @@ export function HomeHero() {
           {/* Copy */}
           <motion.div variants={container} initial={initial} animate={animate}>
             <motion.div variants={up}>
-              <Eyebrow>Victorian Energy Upgrades · Accredited Person</Eyebrow>
+              <Eyebrow>Energy upgrades, made straightforward</Eyebrow>
             </motion.div>
 
             <motion.h1 variants={up} className="text-display font-display mt-5">
@@ -140,9 +140,9 @@ export function HomeHero() {
             </motion.h1>
 
             <motion.p variants={up} className="text-lead mt-6 max-w-xl">
-              From the first assessment to the final certificate, we own the
-              whole chain. A large upfront discount — not a “free” gimmick — and
-              you do almost nothing.
+              From the first assessment to the final certificate, one team does
+              the lot. You get a real upfront discount, and you do almost none of
+              the work.
             </motion.p>
 
             <motion.div variants={up} className="mt-8 flex flex-wrap gap-3">
@@ -237,9 +237,9 @@ export function HomeHero() {
                     })}
                   </ul>
                   <p className="mt-5 text-center text-sm text-white/55">
-                    That's the whole point —{" "}
+                    That is the whole point.{" "}
                     <span className="font-semibold text-white">
-                      you do nothing.
+                      You do nothing.
                     </span>
                   </p>
                 </div>

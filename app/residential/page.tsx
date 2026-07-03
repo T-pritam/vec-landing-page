@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { UpgradesGrid } from "@/components/sections/upgrades-grid";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
@@ -14,16 +15,17 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Residential upgrades for your home",
   description:
-    "Solar, heat pumps (incl. hot water), batteries and air conditioning — household energy upgrades with a large upfront discount, handled end-to-end by AEM Energy, operating under our Accredited Person, Aussie Eco Marks.",
+    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a genuine upfront discount, handled end-to-end by AEM Energy, an Accredited Person under the Victorian Energy Upgrades (VEU) program.",
 };
 
 export default function ResidentialPage() {
   return (
     <>
+      <StateGate />
       <PageHero
         eyebrow="For your home"
         title="Upgrade your home. We'll handle the rest."
-        lead="Fast, simple, and mostly upfront. Pick a single upgrade or stack a few — we assess, install and manage every certificate, so you do almost nothing."
+        lead="Quick, simple and mostly sorted upfront. Pick a single upgrade or stack a few. We assess, install and manage every certificate, so you do almost nothing."
         tone="muted"
         image={PAGE_IMAGE.residential.src}
         imageAlt={PAGE_IMAGE.residential.alt}
@@ -36,7 +38,7 @@ export default function ResidentialPage() {
           <SectionHeader
             eyebrow="Household upgrades"
             title="Choose your upgrade."
-            lead="Every figure is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail."
+            lead="Every figure here is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail and the eligibility."
           />
         </Reveal>
         <Reveal delay={0.08} className="mt-10">

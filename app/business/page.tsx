@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
+import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { CheckIcon, ShieldCheckIcon, UpgradeGlyph } from "@/components/icons";
@@ -13,7 +14,7 @@ import { UPGRADES } from "@/lib/upgrades";
 export const metadata: Metadata = {
   title: "Business & Commercial energy upgrades (C&I)",
   description:
-    "Commercial solar, lighting (Commercial LED – NBB) and HVAC upgrades managed end-to-end by AEM Energy, operating under our Accredited Person, Aussie Eco Marks. ROI-driven, compliant and credible — with combined value that can reach six figures.",
+    "Commercial solar, lighting (Commercial LED – NBB) and HVAC upgrades managed end-to-end by AEM Energy, accredited in its own right under the VEU program in Victoria and the ESS and PDRS in New South Wales. ROI-driven, compliant and credible, with combined value that can reach six figures.",
 };
 
 // Commercial-relevant upgrades (everything except residential-only items).
@@ -28,7 +29,7 @@ const OPPORTUNITY = [
   {
     stat: "One partner",
     label: "for the whole project",
-    body: "Assessment, install, certificate creation and compliance — managed by AEM Energy with our Accredited Person, Aussie Eco Marks, so your team isn't running the scheme.",
+    body: "Assessment, install, certificate creation and compliance, all managed by AEM Energy, accredited in its own right, so your team isn't running the scheme.",
   },
   {
     stat: "M&V",
@@ -47,6 +48,7 @@ const PROCESS = [
 export default function BusinessPage() {
   return (
     <>
+      <StateGate />
       <PageHero
         eyebrow="Commercial & industrial"
         title="Serious energy projects, managed by the accredited team."
@@ -149,10 +151,10 @@ export default function BusinessPage() {
               The compliance burden sits with us — not your business.
             </h2>
             <p className="mt-5 text-white/75">
-              As a full-chain operation under our Accredited Person, Aussie Eco
-              Marks, we create the certificates and carry the program
-              obligations. Your finance and facilities teams get a clean,
-              ROI-driven project — not a scheme to administer.
+              As a full-chain operation accredited in our own right, we create
+              the certificates and carry the program obligations. Your finance
+              and facilities teams get a clean, ROI-driven project, not a scheme
+              to administer.
             </p>
             <ul className="mt-6 space-y-3">
               {[

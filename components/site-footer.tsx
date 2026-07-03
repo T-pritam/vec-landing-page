@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo, PhoneIcon } from "@/components/icons";
 import { TrustStrip } from "@/components/trust-strip";
+import { FooterProofStrip } from "@/components/footer-proof-strip";
 import { Button } from "@/components/ui/button";
 import { SITE, PRIMARY_CTA } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
@@ -25,7 +26,8 @@ const columns = [
     links: [
       { label: "How It Works", href: "/how-it-works" },
       { label: "Residential", href: "/residential" },
-      { label: "Business / C&I", href: "/business" },
+      { label: "Commercial", href: "/business" },
+      { label: "Products", href: "/products" },
       { label: "Check eligibility", href: "/check-eligibility" },
       { label: "About / Why us", href: "/about" },
       { label: "FAQ", href: "/faq" },
@@ -120,13 +122,18 @@ export function SiteFooter() {
         ))}
       </div>
 
+      {/* State-aware accreditation proof line */}
+      <div className="container-page pb-6">
+        <FooterProofStrip />
+      </div>
+
       {/* Legal line */}
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {SITE.legalName}. Operating under our
-            Accredited Person, {SITE.accreditedPerson} ({SITE.accreditationNo}) ·
-            ABN {SITE.abn}.
+            © {new Date().getFullYear()} {SITE.legalName}. Accredited Person
+            under VEU (VIC) and Accredited Certificate Provider under the ESS and
+            PDRS (NSW) · Accreditation {SITE.accreditationNo} · ABN {SITE.abn}.
           </p>
           <p className="max-w-2xl sm:text-right">
             Indicative figures only — not a quote or guarantee. VEU and Solar

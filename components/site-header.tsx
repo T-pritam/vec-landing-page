@@ -48,36 +48,41 @@ export function SiteHeader() {
       )}
     >
       <div className="container-page flex h-16 items-center justify-between gap-4 sm:h-18">
-        <Link
-          href="/"
-          aria-label="AEM Energy — home"
-          className="shrink-0 rounded-lg py-1"
-        >
-          <Logo />
-        </Link>
+        {/* Left cluster: logo, then the "Your state" selector, then the links. */}
+        <div className="flex items-center gap-4 xl:gap-5">
+          <Link
+            href="/"
+            aria-label="AEM Energy — home"
+            className="shrink-0 rounded-lg py-1"
+          >
+            <Logo />
+          </Link>
 
-        <nav
-          aria-label="Primary"
-          className="hidden items-center gap-0.5 xl:flex"
-        >
-          {PRIMARY_NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-full px-3 py-2 text-[0.9375rem] font-medium transition-colors",
-                isActive(item.href)
-                  ? "text-ink"
-                  : "text-text-muted hover:text-ink",
-              )}
+          <div className="hidden items-center gap-4 xl:flex">
+            <StateToggle />
+            <nav
+              aria-label="Primary"
+              className="flex items-center gap-0.5"
             >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+              {PRIMARY_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "whitespace-nowrap rounded-full px-3 py-2 text-[0.9375rem] font-medium transition-colors",
+                    isActive(item.href)
+                      ? "text-ink"
+                      : "text-text-muted hover:text-ink",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
 
         <div className="hidden items-center gap-3 xl:flex">
-          <StateToggle />
           <Button href={PRIMARY_CTA.href} size="sm">
             {PRIMARY_CTA.label}
           </Button>

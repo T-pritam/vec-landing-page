@@ -12,7 +12,7 @@ import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About & Why Us — accreditation, proven",
   description:
-    "AEM Energy operates under our Accredited Person, Aussie Eco Marks — a full-chain operation re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
+    "AEM Energy is accredited in its own right, an Accredited Person under VEU in Victoria and an Accredited Certificate Provider under the ESS and PDRS in New South Wales, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
@@ -26,7 +26,7 @@ const FULL_CHAIN_POINTS = [
   },
   {
     t: "We own the certificates",
-    b: "Only an Accredited Person can create VEECs — that's our AP, Aussie Eco Marks, so the value isn't outsourced.",
+    b: "Only an Accredited Person can create VEECs, and that's us, so the value isn't outsourced.",
   },
   {
     t: "We own the outcome",
@@ -40,7 +40,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Accredited isn't a slogan here. It's the whole business."
-        lead="AEM Energy operates under our Accredited Person, Aussie Eco Marks, in the Victorian Energy Upgrades program. That's a specific, verifiable status — and it's the reason we can do what most providers can't."
+        lead="AEM Energy is an Accredited Person under the Victorian Energy Upgrades program in Victoria, and an Accredited Certificate Provider under the ESS and PDRS in New South Wales. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
         tone="ink"
         image={PAGE_IMAGE.about.src}
         imageAlt={PAGE_IMAGE.about.alt}
@@ -58,10 +58,10 @@ export default function AboutPage() {
             />
             <p className="mt-5 text-body">
               Under the VEU program, only an Accredited Person can create the
-              tradable certificates (VEECs) that fund the rebates. AEM Energy
-              operates under our Accredited Person, Aussie Eco Marks, and owns
-              the entire chain — the lead, the assessment, the install (via our
-              registered installers), the certificate creation, and the sale.
+              tradable certificates (VEECs) that fund the rebates. AEM Energy is
+              that Accredited Person, and owns the entire chain: the lead, the
+              assessment, the install (via our registered installers), the
+              certificate creation, and the sale.
             </p>
             <p className="mt-4 text-body">
               For you, that means a single accountable team and an honest number.
@@ -77,7 +77,7 @@ export default function AboutPage() {
             <dl className="mt-4 space-y-4">
               {[
                 ["Trading as", SITE.name],
-                ["Accredited Person", `${SITE.accreditedPerson} (VEU)`],
+                ["Accreditation", "Accredited Person (VEU, VIC); ACP (ESS & PDRS, NSW)"],
                 ["Accreditation no.", SITE.accreditationNo],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],

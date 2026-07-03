@@ -36,13 +36,8 @@ export const FAQS: FaqItem[] = [
   },
   {
     category: "Money & eligibility",
-    q: "Where does the money actually come from?",
-    a: "Energy retailers are legally required to buy energy-efficiency certificates each year. We create those certificates from the energy your upgrade saves and sell them to retailers; that value is passed back to you as an upfront discount.",
-  },
-  {
-    category: "Money & eligibility",
     q: "Do I need a special provider?",
-    a: "Yes — only an Accredited Person can create the certificates that fund the discount. We operate under our Accredited Person, Aussie Eco Marks, so it's handled in-house. It's the single most important thing to check when comparing providers.",
+    a: "Yes — only an accredited business can create the certificates that fund the discount. AEM Energy is accredited in its own right, so it's handled in-house. It's the single most important thing to check when comparing providers.",
   },
   {
     category: "Money & eligibility",
@@ -77,7 +72,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "Do you handle compliance and paperwork?",
-    a: "Yes. Through our Accredited Person, Aussie Eco Marks, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
+    a: "Yes. Accredited in our own right, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
   },
 ];
 

@@ -24,25 +24,15 @@ export function Logo({
     );
 
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <BrandMark />
-      <span className="flex flex-col leading-none">
-        <span
-          className={cn(
-            "text-[1.15rem] font-bold tracking-tight",
-            onInk ? "text-white" : "text-ink",
-          )}
-        >
-          AEM Energy
-        </span>
-        <span
-          className={cn(
-            "mt-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em]",
-            onInk ? "text-white/55" : "text-text-muted",
-          )}
-        >
-          Renewable Energy Company
-        </span>
+    <span className={cn("inline-flex items-center gap-3", className)}>
+      <BrandMark className="h-11 w-11" />
+      <span
+        className={cn(
+          "text-[1.5rem] font-bold leading-none tracking-tight",
+          onInk ? "text-white" : "text-ink",
+        )}
+      >
+        AEM Energy
       </span>
     </span>
   );

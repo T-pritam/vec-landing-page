@@ -177,7 +177,7 @@ export function StateRebatePanel({
     <div>
       <SectionHeader
         eyebrow="How much you can get"
-        title="The indicative numbers."
+        title="Victorian incentives."
       />
       <div className="mt-6 rounded-2xl border border-hairline bg-surface-muted p-6 sm:p-7">
         <ul className="space-y-4">
