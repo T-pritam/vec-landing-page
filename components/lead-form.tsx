@@ -3,6 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { CheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { BookingDateTime } from "@/components/booking-datetime";
 import { cn } from "@/lib/cn";
 
 /**
@@ -36,6 +37,8 @@ interface LeadFormProps {
   defaults?: LeadFormDefaults;
   /** Optional summary block shown above the fields (e.g. quiz result). */
   summary?: React.ReactNode;
+  /** Booking mode — adds the preferred date + time-slot picker. */
+  booking?: boolean;
   submitLabel?: string;
   compact?: boolean;
   className?: string;
@@ -49,11 +52,14 @@ export function LeadForm({
   context,
   defaults,
   summary,
+  booking = false,
   submitLabel = "Request my callback",
   compact = false,
   className,
 }: LeadFormProps) {
   const [errors, setErrors] = useState<Errors>({});
+  const [bookingError, setBookingError] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const mountedAt = useRef(Date.now());
@@ -87,19 +93,38 @@ export function LeadForm({
       next.email = "That email doesn't look right.";
     }
     setErrors(next);
-    if (Object.keys(next).length > 0) {
+
+    // Booking mode requires a preferred date + time slot.
+    const missingBooking =
+      booking &&
+      (!String(data.get("preferred_date") ?? "").trim() ||
+        !String(data.get("preferred_time") ?? "").trim());
+    setBookingError(missingBooking);
+
+    if (Object.keys(next).length > 0 || missingBooking) {
       form.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
       return;
     }
 
+    setSubmitError(null);
     setSubmitting(true);
-    // Prototype: no live endpoint. Simulate a network round-trip, then succeed.
-    await new Promise((r) => setTimeout(r, 650));
-    // eslint-disable-next-line no-console
-    console.info("[lead-form] captured (prototype, not sent)", {
-      context,
-      ...Object.fromEntries(data.entries()),
-    });
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          context,
+          ...Object.fromEntries(data.entries()),
+        }),
+      });
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+    } catch {
+      setSubmitting(false);
+      setSubmitError(
+        "Sorry — something went wrong sending that. Please try again, or call us.",
+      );
+      return;
+    }
     setSubmitting(false);
     setDone(true);
   }
@@ -116,14 +141,13 @@ export function LeadForm({
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-success/12 text-success">
           <CheckIcon className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 text-h3">You're all set.</h3>
+        <h3 className="mt-5 text-h3">
+          {booking ? "Your assessment is requested." : "You're all set."}
+        </h3>
         <p className="mx-auto mt-2 max-w-sm text-body">
-          Thanks — we've got your details. One of our accredited team will be in
-          touch shortly to confirm what you qualify for. No obligation.
-        </p>
-        <p className="mt-4 text-caption">
-          Prototype note: this is a demo success state — no message was actually
-          sent.
+          {booking
+            ? "Thanks — we've got your preferred date and time. One of our accredited team will confirm the appointment shortly. No obligation."
+            : "Thanks — we've got your details. One of our accredited team will be in touch shortly to confirm what you qualify for. No obligation."}
         </p>
       </div>
     );
@@ -142,6 +166,12 @@ export function LeadForm({
       )}
     >
       {summary && <div className="mb-6">{summary}</div>}
+
+      {booking && (
+        <div className="mb-6 border-b border-hairline pb-6">
+          <BookingDateTime invalid={bookingError} />
+        </div>
+      )}
 
       <div className={cn("grid gap-4", !compact && "sm:grid-cols-2")}>
         <Field
@@ -208,6 +238,11 @@ export function LeadForm({
       )}
 
       <div className="mt-6 flex flex-col gap-4">
+        {submitError && (
+          <p role="alert" className="text-sm text-danger">
+            {submitError}
+          </p>
+        )}
         <Button type="submit" size="lg" disabled={submitting} className="w-full sm:w-auto">
           {submitting ? "Sending…" : submitLabel}
         </Button>

@@ -44,21 +44,34 @@ type ButtonAsButton = CommonProps &
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
 export function Button(props: ButtonAsLink | ButtonAsButton) {
-  const { variant = "primary", size = "md", className, children } = props;
+  // Pull the presentational props OUT of `rest` so the later `{...rest}` spread
+  // can't override the computed `className` (or leak `variant`/`size` to the
+  // DOM). This is why link-buttons that passed a `className` previously lost
+  // all their base styling.
+  const { variant = "primary", size = "md", className, children, ...rest } =
+    props;
   const classes = cn(base, variants[variant], sizes[size], className);
 
-  if ("href" in props && props.href) {
-    const { href, ...rest } = props as ButtonAsLink;
+  if ("href" in rest && rest.href) {
+    const { href, ...linkRest } = rest as Omit<
+      ButtonAsLink,
+      "variant" | "size" | "className" | "children"
+    >;
     return (
-      <Link href={href} className={classes} {...rest}>
+      <Link href={href} className={classes} {...linkRest}>
         {children}
       </Link>
     );
   }
 
-  const { ...rest } = props as ButtonAsButton;
   return (
-    <button className={classes} {...rest}>
+    <button
+      className={classes}
+      {...(rest as Omit<
+        ButtonAsButton,
+        "variant" | "size" | "className" | "children"
+      >)}
+    >
       {children}
     </button>
   );

@@ -72,6 +72,6 @@ export const PRIMARY_CTA = {
 } as const;
 
 export const SECONDARY_CTA = {
-  label: "Get a quote",
-  href: "/contact",
+  label: "Book an assessment",
+  href: "/book-an-assessment",
 } as const;
