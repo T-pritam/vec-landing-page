@@ -40,8 +40,8 @@ export default function HomePage() {
           "Indicative “up to” figures shown honestly, never guaranteed.",
           "Our accreditation is re-tested every year, so it actually means something.",
         ]}
-        image="/images/home.jpg"
-        imageAlt="A modern home at dusk, the kind AEM Energy upgrades across Australia"
+        image="/images/solar.jpg"
+        imageAlt="A modern Australian home with a full rooftop solar array — the kind of end-to-end upgrade AEM Energy owns start to finish"
         copySide="right"
         reveal="ltr"
         cta={{ label: "Browse all products", href: "/products" }}

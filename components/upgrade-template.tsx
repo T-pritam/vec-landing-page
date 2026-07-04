@@ -5,8 +5,10 @@ import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { StateGate } from "@/components/state-gate";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { BrandMarquee } from "@/components/sections/brand-marquee";
 import { Reveal } from "@/components/motion/reveal";
 import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
+import { getUpgradeBrands } from "@/lib/brands";
 import { UPGRADE_IMAGE } from "@/lib/images";
 import { getUpgradeRebate, maxHeadlineValue } from "@/lib/rebates";
 import { getNswUpgradeRebate } from "@/lib/nsw-rebates";
@@ -29,6 +31,16 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
   const nswRebate = getNswUpgradeRebate(upgrade.slug);
   const others = UPGRADES.filter((u) => u.slug !== upgrade.slug);
   const heroImage = UPGRADE_IMAGE[upgrade.slug];
+  const brands = getUpgradeBrands(upgrade.slug);
+
+  // Optional product-type note shown under the brands heading (only where the
+  // upgrade has a meaningful hardware nuance to call out).
+  const brandsLead =
+    upgrade.slug === "air-con"
+      ? "Ducted and split reverse-cycle systems, including multi-head setups."
+      : upgrade.slug === "heat-pumps"
+        ? "Modern integrated heat-pump hot water systems with an inbuilt compressor."
+        : undefined;
 
   return (
     <>
@@ -137,6 +149,26 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
           </ArrowLink>
         </div>
       </Section>
+
+      {/* 3b — Brands we install (auto-scrolling logo marquee). Hidden for
+          upgrades with no brand list (e.g. Commercial LED). */}
+      {brands.length > 0 && (
+        <Section tone="surface" spacing="sm">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Brands we install"
+              title={`The brands behind your ${upgrade.name} upgrade.`}
+              lead={brandsLead}
+            />
+          </Reveal>
+          <Reveal delay={0.08} className="mt-10">
+            <BrandMarquee
+              brands={brands}
+              ariaLabel={`Brands we install for ${upgrade.name}`}
+            />
+          </Reveal>
+        </Section>
+      )}
 
       {/* 4 — Why us / full-chain + 5 — Stacking note */}
       <Section tone="surface">

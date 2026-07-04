@@ -240,9 +240,52 @@
   }
 }
 
+/* Brand logo marquee (product pages). The track holds two copies of the list;
+   translating it -50% scrolls exactly one copy for a seamless loop. Edges are
+   softened with a mask; hover pauses. */
+.brand-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+.brand-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: brand-marquee var(--marquee-duration, 40s) linear infinite;
+}
+.brand-marquee:hover .brand-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes brand-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* Fall back to a plain scrollable strip. */
+  .brand-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .brand-marquee-track {
+    animation: none;
   }
   .reveal {
     animation: none;
