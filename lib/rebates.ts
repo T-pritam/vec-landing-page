@@ -168,19 +168,6 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
     stackingNote:
       "Upgrading to a high-efficiency reverse-cycle system is a VEU activity, applied as an upfront discount.",
   },
-  led: {
-    slug: "led",
-    layers: {
-      veu: {
-        min: 200,
-        max: 5000,
-        kind: "discount",
-        note: "Per site — non-building-based lighting scales with fixture count",
-      },
-    },
-    stackingNote:
-      "Commercial LED – NBB is a high-volume VEU activity for eligible non-building-based lighting — the discount scales with the size of the roll-out.",
-  },
 };
 
 /** Metadata for honest framing (PRD §3.4 note, §9). */

@@ -13,8 +13,8 @@ import { SITE_IMAGE } from "@/lib/images";
  * Cinematic, image-led treatment (client reference): the hero photo runs
  * full-bleed behind a dark scrim, with a single left-aligned copy column on
  * top — pill badge, headline, short lead, both CTAs and a slim trust line.
- * Primary CTA stays amber per the locked palette (amber primary + green
- * secondary). All motion is reduced-motion aware.
+ * Primary CTA uses the brand green (green primary + lime secondary).
+ * All motion is reduced-motion aware.
  */
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -22,7 +22,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const TRUST = [
   "Accredited to create certificates",
   "Re-tested every year",
-  "Operating since 2009",
+  "Operating since 2021",
 ];
 
 export function HomeHero() {

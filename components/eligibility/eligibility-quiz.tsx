@@ -46,7 +46,7 @@ interface Option {
   icon?: UpgradeIcon;
 }
 
-// Home options exclude commercial-only upgrades (e.g. Commercial LED – NBB).
+// Home options exclude commercial-only upgrades.
 const homeInterestOptions: Option[] = UPGRADES.filter(
   (u) => u.available !== "commercial",
 ).map((u) => ({
@@ -58,7 +58,6 @@ const homeInterestOptions: Option[] = UPGRADES.filter(
 
 const businessInterestOptions: Option[] = [
   { value: "solar", label: "Commercial solar", icon: "solar", description: "Rooftop / ground-mount PV" },
-  { value: "led", label: "Commercial LED – NBB", icon: "led", description: "Non-building-based lighting" },
   { value: "heat-pumps", label: "Heating, cooling & hot water", icon: "heat-pump", description: "Efficient HVAC & hot water" },
   { value: "air-con", label: "Air conditioning", icon: "air-con", description: "Reverse-cycle systems" },
   { value: "battery", label: "Battery storage", icon: "battery", description: "Store generated power" },
@@ -558,7 +557,7 @@ function ResultStep({
                 <p className="mt-3 text-lead">
                   Based on your answers, your site is a good candidate for a
                   managed VEU project. Commercial value is modelled per project —
-                  and it can reach six figures — so the next step is a site
+                  and it can reach five figures — so the next step is a site
                   assessment, not a calculator.
                 </p>
               </>

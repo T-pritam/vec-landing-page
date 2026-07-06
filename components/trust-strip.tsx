@@ -9,8 +9,7 @@ import { ShieldCheckIcon } from "@/components/icons";
 const TRUST_POINTS = [
   {
     label: "Accredited in our own name",
-    detail:
-      "Accredited Person under VEU in Victoria, and an Accredited Certificate Provider under the ESS and PDRS in New South Wales",
+    detail: "Accredited Person under VEU in Victoria",
   },
   {
     label: "Re-tested every year",
@@ -21,7 +20,7 @@ const TRUST_POINTS = [
     detail: "Assessment → install → certificates → paperwork",
   },
   {
-    label: "Running since 2009",
+    label: "Running since 2021",
     detail: "A long-standing program, extended well into the future",
   },
 ];

@@ -11,7 +11,7 @@ import { cn } from "@/lib/cn";
  * indicative. The flagship (Solar) gets a wider, emphasised tile.
  *
  * `audience` scopes which upgrades show: residential contexts (home, hub) hide
- * commercial-only upgrades like Commercial LED – NBB; "all" shows everything.
+ * commercial-only upgrades; "all" shows everything.
  */
 export function UpgradesGrid({
   className,

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { HonestPricing } from "@/components/sections/honest-pricing";
 import { FullChain } from "@/components/sections/full-chain";
 import { StackingSection } from "@/components/sections/stacking-section";
 import { CheckIcon } from "@/components/icons";
@@ -79,11 +78,6 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      {/* 2 — Why it isn't "free" (state-aware honest pricing) */}
-      <Section tone="ink">
-        <HonestPricing />
-      </Section>
-
       {/* 3 — Full chain, in house */}
       <Section tone="muted">
         <SectionHeader
@@ -96,7 +90,7 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      {/* 4 — Stacking explainer (VIC/NSW aware) */}
+      {/* 4 — Stacking explainer */}
       <Section tone="surface">
         <StackingSection
           eyebrow="Stacking, in full"

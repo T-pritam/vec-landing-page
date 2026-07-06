@@ -7,20 +7,17 @@ export const SITE = {
   // PRD §9 item 7 — trading name & accreditation details (placeholder).
   legalName: "AEM Energy Pty Ltd (placeholder)",
   // AEM Energy is accredited in its own right: an Accredited Person under the
-  // Victorian Energy Upgrades (VEU) program in Victoria, and an Accredited
-  // Certificate Provider under the ESS and PDRS in New South Wales.
-  accreditationVic: "Accredited Person under the Victorian Energy Upgrades (VEU) program",
-  accreditationNsw:
-    "Accredited Certificate Provider under the Energy Savings Scheme and Peak Demand Reduction Scheme",
+  // Victorian Energy Upgrades (VEU) program.
+  accreditation: "Accredited Person under the Victorian Energy Upgrades (VEU) program",
   tagline: "The accredited team that handles your entire energy upgrade.",
   description:
-    "AEM Energy is the accredited team that handles your entire energy upgrade. We are an Accredited Person under the Victorian Energy Upgrades (VEU) program in Victoria, and an Accredited Certificate Provider under the Energy Savings Scheme and Peak Demand Reduction Scheme in New South Wales. We own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
+    "AEM Energy is the accredited team that handles your entire energy upgrade. We are an Accredited Person under the Victorian Energy Upgrades (VEU) program. We own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
   url: "https://aem-energy.example",
   // PRD §9 item 3 — contact details (placeholder).
   phone: "1300 000 000",
   phoneHref: "tel:1300000000",
   email: "hello@aem-energy.example",
-  serviceArea: "Victoria and New South Wales, metro and regional",
+  serviceArea: "Victoria, metro and regional",
   // PRD §9 item 7 — accreditation number (placeholder).
   accreditationNo: "AP-0000 (placeholder)",
   abn: "00 000 000 000 (placeholder)",

@@ -67,7 +67,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "How large can commercial value get?",
-    a: "Commercial solar and major efficiency projects can reach six figures of combined incentive value. The exact figure depends on the project — we'll model it with you.",
+    a: "Commercial solar and major efficiency projects can reach five figures of combined incentive value. The exact figure depends on the project — we'll model it with you.",
   },
   {
     category: "Business",

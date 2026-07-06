@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 /**
  * Lightweight WebGL hero accent (per AEM handoff: tasteful, not gimmicky).
- * A slowly-rotating amber particle field — reads as "energy", on-brand, and
+ * A slowly-rotating green particle field — reads as "energy", on-brand, and
  * subtle behind the hero content. Raw three.js (no R3F) to stay lean; this
  * component is dynamically imported with `ssr:false` and only mounted on
  * desktop + when reduced-motion is off (see home-hero.tsx), so it never blocks
@@ -53,16 +53,16 @@ export default function HeroEnergyField() {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-    // Round, soft amber sprite for each point.
+    // Round, soft green sprite for each point.
     const sprite = makeDotTexture();
     // Normal blending (not additive): the hero background is light, so additive
-    // amber would wash out to white. Soft amber dots read cleanly on white.
+    // green would wash out to white. Soft green dots read cleanly on white.
     const material = new THREE.PointsMaterial({
       size: 0.17,
       map: sprite,
       transparent: true,
       depthWrite: false,
-      color: new THREE.Color(0xf4a300),
+      color: new THREE.Color(0x1a7f4b),
       opacity: 0.75,
     });
 
@@ -86,7 +86,7 @@ export default function HeroEnergyField() {
       map: sprite,
       transparent: true,
       depthWrite: false,
-      color: new THREE.Color(0xd98c00),
+      color: new THREE.Color(0x6fae3a),
       opacity: 0.55,
     });
     const innerPoints = new THREE.Points(innerGeo, innerMat);

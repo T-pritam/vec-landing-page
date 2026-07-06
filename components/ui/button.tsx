@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 type Variant =
-  | "primary" // amber bg + ink text (PRD: CTA = amber bg + ink text)
+  | "primary" // brand-green bg + ink text (CTA)
   | "secondary" // light outline
   | "secondary-on-ink" // outline for dark sections
   | "ghost"
@@ -77,7 +77,7 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
   );
 }
 
-/** Inline text link with the amber underline treatment. */
+/** Inline text link with the brand-green underline treatment. */
 export function ArrowLink({
   href,
   children,

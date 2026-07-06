@@ -3,7 +3,6 @@ import Link from "next/link";
 import { UpgradeGlyph, CheckIcon } from "@/components/icons";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
-import { StateGate } from "@/components/state-gate";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { BrandMarquee } from "@/components/sections/brand-marquee";
 import { Reveal } from "@/components/motion/reveal";
@@ -11,10 +10,9 @@ import { UPGRADES, type UpgradeContent } from "@/lib/upgrades";
 import { getUpgradeBrands } from "@/lib/brands";
 import { UPGRADE_IMAGE } from "@/lib/images";
 import { getUpgradeRebate, maxHeadlineValue } from "@/lib/rebates";
-import { getNswUpgradeRebate } from "@/lib/nsw-rebates";
 import {
-  StateRebatePanel,
-  StateStackingNote,
+  RebatePanel,
+  StackingNote,
 } from "@/components/upgrade-state-rebates";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import type { FaqItem } from "@/lib/faq";
@@ -28,7 +26,6 @@ import type { FaqItem } from "@/lib/faq";
 export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
   const rebate = getUpgradeRebate(upgrade.slug);
   const headline = maxHeadlineValue(upgrade.slug);
-  const nswRebate = getNswUpgradeRebate(upgrade.slug);
   const others = UPGRADES.filter((u) => u.slug !== upgrade.slug);
   const heroImage = UPGRADE_IMAGE[upgrade.slug];
   const brands = getUpgradeBrands(upgrade.slug);
@@ -44,9 +41,6 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
 
   return (
     <>
-      {/* Force a VIC/NSW choice before showing state-specific rebate figures. */}
-      <StateGate />
-
       {/* 1 — Upgrade hero: full-bleed product photo behind the copy (Change #1). */}
       <section className="relative overflow-hidden pt-28 pb-16 text-white sm:pt-32 sm:pb-24">
         {heroImage && (
@@ -115,11 +109,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </ul>
           </div>
 
-          <StateRebatePanel
-            vicRebate={rebate}
-            vicHeadline={headline}
-            nswRebate={nswRebate}
-          />
+          <RebatePanel rebate={rebate} headline={headline} />
         </div>
       </Section>
 
@@ -151,7 +141,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
       </Section>
 
       {/* 3b — Brands we install (auto-scrolling logo marquee). Hidden for
-          upgrades with no brand list (e.g. Commercial LED). */}
+          upgrades with no brand list. */}
       {brands.length > 0 && (
         <Section tone="surface" spacing="sm">
           <Reveal>
@@ -182,7 +172,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
             </div>
           </div>
 
-          <StateStackingNote vicRebate={rebate} nswRebate={nswRebate} />
+          <StackingNote rebate={rebate} />
         </div>
       </Section>
 

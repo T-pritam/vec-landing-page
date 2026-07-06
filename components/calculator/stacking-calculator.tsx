@@ -61,7 +61,7 @@ export function StackingCalculator() {
               Commercial value is project-specific — and usually much larger.
             </p>
             <p className="mt-2 text-body">
-              For C&amp;I projects the combined value can reach six figures and
+              For C&amp;I projects the combined value can reach five figures and
               runs through a measurement &amp; verification path. A quick
               calculator can't do it justice.
             </p>
@@ -143,7 +143,7 @@ export function StackingCalculator() {
           {audience === "business" ? (
             <div className="flex flex-1 flex-col justify-center py-10 text-center">
               <p className="figure text-5xl font-semibold text-white">
-                Six figures
+                Five figures
               </p>
               <p className="mt-3 text-white/65">
                 possible on larger commercial projects — modelled per project,

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
-import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { UpgradesGrid } from "@/components/sections/upgrades-grid";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
@@ -20,7 +19,6 @@ export const metadata: Metadata = {
 export default function ResidentialPage() {
   return (
     <>
-      <StateGate />
       <PageHero
         eyebrow="For your home"
         title="Upgrade your home. We'll handle the rest."

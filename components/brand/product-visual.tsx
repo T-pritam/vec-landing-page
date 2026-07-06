@@ -3,7 +3,7 @@ import type { CarouselSlide } from "@/components/ui/carousel";
 /**
  * On-brand SVG product visuals (Change #1 + user decision: vector, not stock
  * photos — honours PRD §4/§5). A small library of premium geometric "scenes"
- * in the amber / ink / leaf-green palette, composed into per-product panels
+ * in the green / ink / lime palette, composed into per-product panels
  * that feed the product carousels. Each scene is self-contained SVG with soft
  * gradients, depth and grounding shadows so it reads as polished illustration,
  * not line-art. Swap for real photography later by replacing a slide's `node`
@@ -13,8 +13,8 @@ import type { CarouselSlide } from "@/components/ui/carousel";
  * most once per page, so there are no id collisions across slides.
  */
 
-const AMBER = "#F4A300";
-const AMBER_DEEP = "#D98C00";
+const BRAND = "#1A7F4B";
+const BRAND_DEEP = "#156A3E";
 const SUN_LIGHT = "#FFD24D";
 const INK = "#0B0E14";
 const LEAF = "#1A7F4B";
@@ -25,11 +25,11 @@ const LEAF_LIGHT = "#3F9E54";
 function Frame({
   children,
   caption,
-  tint = "amber",
+  tint = "brand",
 }: {
   children: React.ReactNode;
   caption: string;
-  tint?: "amber" | "leaf" | "ink";
+  tint?: "brand" | "leaf" | "ink";
 }) {
   const bg =
     tint === "leaf"
@@ -77,8 +77,8 @@ function Sun({ x = 322, y = 64, r = 24 }: { x?: number; y?: number; r?: number }
   });
   return (
     <g>
-      <circle cx={x} cy={y} r={r * 1.9} fill={AMBER} opacity={0.1} />
-      <circle cx={x} cy={y} r={r * 1.35} fill={AMBER} opacity={0.12} />
+      <circle cx={x} cy={y} r={r * 1.9} fill={BRAND} opacity={0.1} />
+      <circle cx={x} cy={y} r={r * 1.35} fill={BRAND} opacity={0.12} />
       {rays.map((l, i) => (
         <line
           key={i}
@@ -86,13 +86,13 @@ function Sun({ x = 322, y = 64, r = 24 }: { x?: number; y?: number; r?: number }
           y1={l.y1}
           x2={l.x2}
           y2={l.y2}
-          stroke={AMBER}
+          stroke={BRAND}
           strokeWidth={3}
           strokeLinecap="round"
         />
       ))}
       <circle cx={x} cy={y} r={r} fill={SUN_LIGHT} />
-      <circle cx={x} cy={y} r={r} fill={AMBER} opacity={0.35} />
+      <circle cx={x} cy={y} r={r} fill={BRAND} opacity={0.35} />
       <circle cx={x - r * 0.3} cy={y - r * 0.3} r={r * 0.4} fill="#fff" opacity={0.35} />
     </g>
   );
@@ -147,7 +147,7 @@ function SceneStack() {
       <defs>
         <linearGradient id="stk-a" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#FFC04D" />
-          <stop offset="100%" stopColor={AMBER} />
+          <stop offset="100%" stopColor={BRAND} />
         </linearGradient>
         <linearGradient id="stk-b" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#52b06a" />
@@ -196,8 +196,8 @@ function SceneHeatPump() {
       <rect x="64" y="116" width="172" height="20" rx="14" fill="#fff" opacity={0.6} />
       {/* fan */}
       <circle cx="150" cy="178" r="44" fill="#f1f4f8" stroke={INK} strokeWidth={2.5} />
-      <circle cx="150" cy="178" r="44" fill={AMBER} opacity={0.06} />
-      <g stroke={AMBER} strokeWidth={5} strokeLinecap="round">
+      <circle cx="150" cy="178" r="44" fill={BRAND} opacity={0.06} />
+      <g stroke={BRAND} strokeWidth={5} strokeLinecap="round">
         <path d="M150 178 l30 -12" />
         <path d="M150 178 l-12 30" />
         <path d="M150 178 l-28 -16" />
@@ -225,7 +225,7 @@ function SceneHotWaterTank() {
         </linearGradient>
         <linearGradient id="hw-drop" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#FFC04D" />
-          <stop offset="100%" stopColor={AMBER_DEEP} />
+          <stop offset="100%" stopColor={BRAND_DEEP} />
         </linearGradient>
       </defs>
       <Ground rx={120} />
@@ -233,7 +233,7 @@ function SceneHotWaterTank() {
       {/* tank */}
       <rect x="150" y="66" width="104" height="172" rx="22" fill="url(#hw-tank)" stroke={INK} strokeWidth={2.5} />
       {/* warm lower water */}
-      <path d="M150 152 h104 v64 a22 22 0 0 1 -22 22 h-60 a22 22 0 0 1 -22 -22 Z" fill={AMBER} opacity={0.14} />
+      <path d="M150 152 h104 v64 a22 22 0 0 1 -22 22 h-60 a22 22 0 0 1 -22 -22 Z" fill={BRAND} opacity={0.14} />
       <line x1="150" y1="152" x2="254" y2="152" stroke={INK} strokeWidth={1.5} opacity={0.4} />
       <rect x="160" y="78" width="14" height="150" rx="7" fill="#fff" opacity={0.5} />
       {/* heat-pump cap */}
@@ -256,7 +256,7 @@ function SceneBattery() {
         </linearGradient>
         <linearGradient id="bat-bolt" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#FFD24D" />
-          <stop offset="100%" stopColor={AMBER_DEEP} />
+          <stop offset="100%" stopColor={BRAND_DEEP} />
         </linearGradient>
       </defs>
       <Ground rx={120} />
@@ -268,7 +268,7 @@ function SceneBattery() {
       <rect x="140" y="196" width="120" height="12" rx="6" fill="#e3e8ef" />
       <rect x="140" y="196" width="78" height="12" rx="6" fill={LEAF} />
       {/* bolt */}
-      <path d="M206 104 l-28 46 h23 l-9 42 l36 -54 h-23 z" fill="url(#bat-bolt)" stroke={AMBER_DEEP} strokeWidth={1.5} strokeLinejoin="round" />
+      <path d="M206 104 l-28 46 h23 l-9 42 l36 -54 h-23 z" fill="url(#bat-bolt)" stroke={BRAND_DEEP} strokeWidth={1.5} strokeLinejoin="round" />
     </>
   );
 }
@@ -291,42 +291,12 @@ function SceneAirCon() {
       <path d="M90 148 h220" stroke={INK} strokeWidth={2} opacity={0.3} />
       <circle cx="300" cy="112" r="5" fill={LEAF} />
       {/* cool airflow */}
-      <g stroke={AMBER} strokeWidth={3.5} strokeLinecap="round" fill="none" opacity={0.9}>
+      <g stroke={BRAND} strokeWidth={3.5} strokeLinecap="round" fill="none" opacity={0.9}>
         <path d="M118 172 q10 28 0 58" />
         <path d="M170 174 q12 32 0 64" />
         <path d="M222 174 q-12 32 0 64" />
         <path d="M274 172 q-10 28 0 58" />
       </g>
-    </>
-  );
-}
-
-function SceneLedWarehouse() {
-  return (
-    <>
-      <defs>
-        <linearGradient id="led-shed" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#e9edf2" />
-        </linearGradient>
-        <linearGradient id="led-cone" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={SUN_LIGHT} stopOpacity={0.55} />
-          <stop offset="100%" stopColor={AMBER} stopOpacity={0} />
-        </linearGradient>
-      </defs>
-      <Ground rx={150} />
-      {/* warehouse shell */}
-      <path d="M44 248 V150 L200 86 L356 150 V248 Z" fill="url(#led-shed)" stroke={INK} strokeWidth={2.5} strokeLinejoin="round" />
-      <path d="M44 150 L200 86 L356 150" fill="none" stroke={INK} strokeWidth={2.5} />
-      {/* high-bay LED fixtures + light cones */}
-      {[112, 200, 288].map((x) => (
-        <g key={x}>
-          <path d={`M${x - 30} 168 L${x + 30} 168 L${x + 52} 248 L${x - 52} 248 Z`} fill="url(#led-cone)" />
-          <rect x={x - 18} y={156} width={36} height={12} rx={3} fill={INK} />
-          <circle cx={x} cy={172} r={4.5} fill={SUN_LIGHT} />
-        </g>
-      ))}
-      <rect x="60" y="150" width="22" height="22" rx="4" fill={LEAF} opacity={0.85} />
     </>
   );
 }
@@ -378,7 +348,7 @@ function SceneFullChain() {
         </linearGradient>
         <linearGradient id="fc-last" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#FFD24D" />
-          <stop offset="100%" stopColor={AMBER} />
+          <stop offset="100%" stopColor={BRAND} />
         </linearGradient>
       </defs>
       {steps.map((s, i) => {
@@ -390,7 +360,7 @@ function SceneFullChain() {
               <line x1={x + 27} y1={138} x2={x + 55} y2={138} stroke={LEAF} strokeWidth={3.5} strokeLinecap="round" />
             )}
             <ellipse cx={x} cy={170} rx={22} ry={6} fill={INK} opacity={0.06} />
-            <circle cx={x} cy={138} r={26} fill={last ? "url(#fc-last)" : "url(#fc-node)"} stroke={last ? AMBER_DEEP : INK} strokeWidth={2.5} />
+            <circle cx={x} cy={138} r={26} fill={last ? "url(#fc-last)" : "url(#fc-node)"} stroke={last ? BRAND_DEEP : INK} strokeWidth={2.5} />
             <circle cx={x - 8} cy={130} r={8} fill="#fff" opacity={0.4} />
             {last ? (
               <path d={`M${x - 11} 138 l8 9 l15 -18`} stroke={INK} strokeWidth={3.5} fill="none" strokeLinecap="round" strokeLinejoin="round" />
@@ -411,7 +381,7 @@ function SceneFullChain() {
 
 /* ----------------------------- per-product map ---------------------------- */
 
-type Panel = { id: string; label: string; scene: React.ReactNode; tint?: "amber" | "leaf" | "ink" };
+type Panel = { id: string; label: string; scene: React.ReactNode; tint?: "brand" | "leaf" | "ink" };
 
 const GALLERIES: Record<string, Panel[]> = {
   solar: [
@@ -431,10 +401,6 @@ const GALLERIES: Record<string, Panel[]> = {
   "air-con": [
     { id: "unit", label: "Reverse-cycle split", scene: <SceneAirCon /> },
     { id: "chain", label: "Discounted upfront", scene: <SceneFullChain />, tint: "leaf" },
-  ],
-  led: [
-    { id: "warehouse", label: "High-bay LED", scene: <SceneLedWarehouse /> },
-    { id: "scale", label: "Commercial scale", scene: <SceneFullChain />, tint: "leaf" },
   ],
   "distillo-water-filtration": [
     { id: "unit", label: "Filtration system", scene: <SceneWaterFilter />, tint: "leaf" },

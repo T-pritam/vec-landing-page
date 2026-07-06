@@ -5,7 +5,7 @@ type Tone = "surface" | "muted" | "ink" | "business" | "brand-tint";
 const toneStyles: Record<Tone, string> = {
   surface: "bg-surface text-ink",
   muted: "bg-surface-muted text-ink",
-  // Dark premium sections: ink bg + white text + amber accents (PRD palette rule).
+  // Dark premium sections: ink bg + white text + brand-green accents.
   ink: "bg-ink text-white on-ink",
   business: "bg-business text-white on-ink",
   "brand-tint": "bg-brand-tint text-ink",

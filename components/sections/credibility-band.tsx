@@ -4,11 +4,11 @@ import { cn } from "@/lib/cn";
 /**
  * Credibility band — the "established / credible" cue borrowed from the Aussie
  * Greenmarks reference (design blend). A compact stat strip plus an
- * accreditation/partner badge row, carrying the leaf-green secondary accent so
- * the blend reads without displacing the amber primary identity.
+ * accreditation/partner badge row, carrying the lime secondary accent so
+ * the blend reads without displacing the brand-green primary identity.
  */
 const STATS: { stat: string; label: string }[] = [
-  { stat: "2009", label: "VEU program running since" },
+  { stat: "2021", label: "VEU program running since" },
   { stat: "Every year", label: "Accredited Person re-tested" },
   { stat: "End-to-end", label: "One accountable team" },
   { stat: "Victoria-wide", label: "Metro & regional" },

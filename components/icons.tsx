@@ -3,9 +3,8 @@ import { cn } from "@/lib/cn";
 import { BrandMark } from "@/components/brand/brand-mark";
 
 /* ---------------------------------------------------------------------------
- * Brand logo — the AEM Energy rising-sun mark (components/brand/brand-mark)
+ * Brand logo — the AEM Energy green badge mark (components/brand/brand-mark)
  * plus an inline wordmark so the type themes (ink on light, white on dark).
- * Mirrors /public/logo-horizontal.svg.
  * ------------------------------------------------------------------------- */
 export function Logo({
   variant = "horizontal",
@@ -95,21 +94,11 @@ function AirCon() {
   );
 }
 
-function Led() {
-  return (
-    <svg {...iconProps}>
-      <path d="M8.5 14.5a5.5 5.5 0 1 1 7 0c-.7.6-1 1.2-1 2.2h-5c0-1-.3-1.6-1-2.2Z" />
-      <path d="M9.5 19h5M10.5 21h3" />
-    </svg>
-  );
-}
-
 const ICONS: Record<UpgradeIcon, () => React.ReactElement> = {
   solar: Solar,
   "heat-pump": HeatPump,
   battery: Battery,
   "air-con": AirCon,
-  led: Led,
 };
 
 export function UpgradeGlyph({

@@ -53,7 +53,7 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
             onInk ? "bg-leaf/20 text-leaf-tint" : "bg-leaf-tint text-leaf-ink",
           )}
         >
-          Operating since 2009
+          Operating since 2021
         </span>
         <span
           className={cn(

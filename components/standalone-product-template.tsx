@@ -16,8 +16,8 @@ import type { FaqItem } from "@/lib/faq";
  *   • no VEU / Solar Victoria / certificate language
  *   • no "Check eligibility" CTA (that's the VEU funnel)
  * Instead it carries a clear, positive "this is a standalone product, no rebate"
- * note and a plain "Get a quote" CTA. Green (leaf) is the accent here to set it
- * apart from the amber VEU products.
+ * note and a plain "Get a quote" CTA. The lighter lime (leaf) is the accent
+ * here to set it apart from the brand-green VEU products.
  */
 export function StandaloneProductTemplate({
   product,

@@ -13,16 +13,16 @@
   --surface-muted: #f6f7f9;
   --hairline: #e7e9ee;
   --text-muted: #5a6472;
-  --brand: #f4a300; /* solar amber — primary CTA/accent */
-  --brand-hover: #d98c00;
-  --brand-tint: #fff4e0; /* soft amber wash backgrounds */
-  --brand-ink: #9a6a00; /* amber-800 — eyebrows/labels on light */
-  /* AEM leaf-green — SECONDARY accent only (renewable/eco + accreditation
-     cues, credibility band, standalone products). Amber stays primary. */
-  --leaf: #1a7f4b;
-  --leaf-hover: #156a3e;
-  --leaf-tint: #eaf5ee; /* soft green wash backgrounds */
-  --leaf-ink: #126b3e; /* green eyebrows/labels on light */
+  --brand: #1a7f4b; /* AEM green — primary CTA/accent (matches new logo) */
+  --brand-hover: #156a3e;
+  --brand-tint: #eaf5ee; /* soft green wash backgrounds */
+  --brand-ink: #126b3e; /* green-800 — eyebrows/labels on light */
+  /* Lighter secondary green — accreditation cues, credibility band, standalone
+     products. Mirrors the light end of the new logo's ring gradient. */
+  --leaf: #6fae3a;
+  --leaf-hover: #5b9530;
+  --leaf-tint: #f2f8ea; /* soft lime wash backgrounds */
+  --leaf-ink: #4f8a2a; /* lime-800 — eyebrows/labels on light */
   --lime: #9bc53d; /* logo highlight — sparing use */
   --business: #16315a; /* deep navy — C&I/credibility only */
   --business-tint: #eef2f8;
@@ -88,7 +88,7 @@
     border-radius: 2px;
   }
 
-  /* On dark (ink) surfaces, the amber focus ring carries the accent. */
+  /* On dark (ink) surfaces, the brand-green focus ring carries the accent. */
   .on-ink :focus-visible {
     outline-color: var(--brand);
   }

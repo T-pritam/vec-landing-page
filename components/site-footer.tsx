@@ -129,9 +129,8 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {SITE.legalName}. Accredited Person
-            under VEU (VIC) and Accredited Certificate Provider under the ESS and
-            PDRS (NSW) · Accreditation {SITE.accreditationNo} · ABN {SITE.abn}.
+            © {new Date().getFullYear()} {SITE.legalName}. {SITE.accreditation}
+            {" "}· Accreditation {SITE.accreditationNo} · ABN {SITE.abn}.
           </p>
           <p className="max-w-2xl sm:text-right">
             Indicative figures only — not a quote or guarantee. VEU and Solar

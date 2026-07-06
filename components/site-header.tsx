@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo, UpgradeGlyph } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { StateToggle } from "@/components/state-toggle";
 import { PRIMARY_NAV, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import { UPGRADES } from "@/lib/upgrades";
 import { cn } from "@/lib/cn";
@@ -48,7 +47,7 @@ export function SiteHeader() {
       )}
     >
       <div className="container-page flex h-16 items-center justify-between gap-2 sm:h-18">
-        {/* Left cluster: logo, then the "Your state" selector, then the links. */}
+        {/* Left cluster: logo, then the links. */}
         <div className="flex min-w-0 items-center gap-2">
           <Link
             href="/"
@@ -59,7 +58,6 @@ export function SiteHeader() {
           </Link>
 
           <div className="hidden items-center gap-2 xl:flex">
-            <StateToggle />
             <nav
               aria-label="Primary"
               className="flex items-center gap-0.5"
@@ -132,9 +130,6 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page max-h-[calc(100dvh-4rem)] overflow-y-auto pb-8 pt-2">
-          <div className="mb-4 flex justify-center rounded-2xl border border-hairline bg-surface-muted py-3">
-            <StateToggle />
-          </div>
           <nav aria-label="Mobile" className="flex flex-col">
             {PRIMARY_NAV.map((item) => (
               <Link

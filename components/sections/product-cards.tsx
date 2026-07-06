@@ -13,7 +13,7 @@ import { cn } from "@/lib/cn";
  * here, to keep this page clean. Cards use a licensed stock photo where one
  * exists, otherwise the on-brand SVG scene (battery).
  *
- * `audience="all"` includes commercial-only upgrades (e.g. Commercial LED).
+ * `audience="all"` includes commercial-only upgrades.
  */
 export function ProductCards({
   className,

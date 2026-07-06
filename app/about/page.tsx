@@ -11,7 +11,7 @@ import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About & Why Us — accreditation, proven",
   description:
-    "AEM Energy is accredited in its own right, an Accredited Person under VEU in Victoria and an Accredited Certificate Provider under the ESS and PDRS in New South Wales, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
+    "AEM Energy is accredited in its own right, an Accredited Person under VEU in Victoria, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
@@ -39,7 +39,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Accredited isn't a slogan here. It's the whole business."
-        lead="AEM Energy is an Accredited Person under the Victorian Energy Upgrades program in Victoria, and an Accredited Certificate Provider under the ESS and PDRS in New South Wales. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
+        lead="AEM Energy is an Accredited Person under the Victorian Energy Upgrades program in Victoria. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
         tone="ink"
         image={PAGE_IMAGE.about.src}
         imageAlt={PAGE_IMAGE.about.alt}
@@ -76,11 +76,11 @@ export default function AboutPage() {
             <dl className="mt-4 space-y-4">
               {[
                 ["Trading as", SITE.name],
-                ["Accreditation", "Accredited Person (VEU, VIC); ACP (ESS & PDRS, NSW)"],
+                ["Accreditation", "Accredited Person (VEU, VIC)"],
                 ["Accreditation no.", SITE.accreditationNo],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],
-                ["Program running since", "2009"],
+                ["Program running since", "2021"],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 border-t border-hairline pt-4 first:border-0 first:pt-0">
                   <dt className="text-sm text-text-muted">{k}</dt>

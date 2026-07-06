@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
-import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { ProductCards } from "@/components/sections/product-cards";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
@@ -12,15 +11,12 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Products & upgrades",
   description:
-    "Browse the energy upgrades AEM Energy installs — solar, heat pumps, batteries, air conditioning and commercial LED — plus our standalone Distillo water filtration. Each comes with a large upfront discount, handled end-to-end.",
+    "Browse the energy upgrades AEM Energy installs — solar, heat pumps, batteries and air conditioning — plus our standalone Distillo water filtration. Each comes with a large upfront discount, handled end-to-end.",
 };
 
 export default function ProductsPage() {
   return (
     <>
-      {/* Single Products page for both residential & business — prompt for a
-          state before showing rebate figures. */}
-      <StateGate />
       <PageHero
         eyebrow="Our products"
         title="Everything we install, in one place."

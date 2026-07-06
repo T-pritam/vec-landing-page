@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
-import { StateGate } from "@/components/state-gate";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { Button, ArrowLink } from "@/components/ui/button";
 import { CheckIcon, ShieldCheckIcon, UpgradeGlyph } from "@/components/icons";
@@ -13,7 +12,7 @@ import { UPGRADES } from "@/lib/upgrades";
 export const metadata: Metadata = {
   title: "Business & Commercial energy upgrades (C&I)",
   description:
-    "Commercial solar, lighting (Commercial LED – NBB) and HVAC upgrades managed end-to-end by AEM Energy, accredited in its own right under the VEU program in Victoria and the ESS and PDRS in New South Wales. ROI-driven, compliant and credible, with combined value that can reach six figures.",
+    "Commercial solar and HVAC upgrades managed end-to-end by AEM Energy, accredited in its own right under the VEU program in Victoria. ROI-driven, compliant and credible, with combined value that can reach five figures.",
 };
 
 // Commercial-relevant upgrades (everything except residential-only items).
@@ -21,7 +20,7 @@ const COMMERCIAL_UPGRADES = UPGRADES.filter((u) => u.available !== "residential"
 
 const OPPORTUNITY = [
   {
-    stat: "Six figures",
+    stat: "Five figures",
     label: "possible combined value",
     body: "Large commercial solar and major efficiency projects can reach six-figure combined value. Modelled per project — indicative, never guaranteed.",
   },
@@ -47,7 +46,6 @@ const PROCESS = [
 export default function BusinessPage() {
   return (
     <>
-      <StateGate />
       <PageHero
         eyebrow="Commercial & industrial"
         title="Serious energy projects, managed by the accredited team."
@@ -90,12 +88,12 @@ export default function BusinessPage() {
         </p>
       </Section>
 
-      {/* Commercial upgrades we deliver (incl. Commercial LED – NBB) */}
+      {/* Commercial upgrades we deliver */}
       <Section tone="surface" spacing="sm">
         <SectionHeader
           eyebrow="Commercial upgrades"
           title="What we deliver for C&I sites."
-          lead="The activities that scale for business — including Commercial LED – NBB for eligible non-building-based lighting."
+          lead="The activities that scale for business, from rooftop solar to fleet HVAC upgrades."
         />
         <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {COMMERCIAL_UPGRADES.map((u) => (
@@ -195,7 +193,7 @@ export default function BusinessPage() {
           {[
             ["Warehouse lighting + solar", "Indicative six-figure value across a large logistics site.", "/images/solar.jpg"],
             ["Hospitality hot water + HVAC", "Stacked upgrades cutting energy across multiple venues.", "/images/air-con.jpg"],
-            ["Retail portfolio LED", "High-volume lighting upgrade rolled out across stores.", "/images/led.jpg"],
+            ["Retail portfolio battery storage", "Battery rollout smoothing peak demand across stores.", "/images/battery.jpg"],
           ].map(([t, b, img]) => (
             <article
               key={t}

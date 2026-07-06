@@ -9,7 +9,6 @@ export const UPGRADE_IMAGE: Record<string, string> = {
   solar: "/images/solar.jpg",
   "heat-pumps": "/images/heat-pump.jpg",
   "air-con": "/images/air-con.jpg",
-  led: "/images/led.jpg",
   battery: "/images/battery.jpg",
 };
 

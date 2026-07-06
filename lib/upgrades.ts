@@ -10,8 +10,7 @@ export type UpgradeIcon =
   | "solar"
   | "heat-pump"
   | "battery"
-  | "air-con"
-  | "led";
+  | "air-con";
 
 export interface UpgradeFaq {
   q: string;
@@ -48,7 +47,7 @@ export interface UpgradeContent {
   /**
    * Audience scope. `residential`/`both` show in the home & residential grids;
    * `commercial` is filtered OUT of those and surfaced in the Business journey
-   * (e.g. Commercial LED – NBB, which no longer fits homes).
+   * (upgrades that no longer fit homes).
    */
   available: "residential" | "both" | "commercial";
 }
@@ -84,7 +83,7 @@ export const UPGRADES: UpgradeContent[] = [
       "Because we're accredited in our own right and do the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
     flagship: true,
     commercialAngle:
-      "Commercial rooftop and ground-mount solar can run into six figures of combined value, with a longer measurement & verification path. We run that as a managed project — see the Business journey.",
+      "Commercial rooftop and ground-mount solar can run into five figures of combined value, with a longer measurement & verification path. We run that as a managed project — see the Business journey.",
     faqs: [
       {
         q: "Is rooftop solar means-tested?",
@@ -225,49 +224,6 @@ export const UPGRADES: UpgradeContent[] = [
       },
     ],
     available: "both",
-  },
-  {
-    slug: "led",
-    name: "Commercial LED – NBB",
-    longName: "Commercial LED – NBB (Non-Building Based)",
-    icon: "led",
-    tagline:
-      "High-efficiency LED for eligible non-building-based commercial lighting.",
-    eyebrow: "Commercial lighting",
-    heroHeadline: "Cut the running cost of your outdoor & non-building lighting.",
-    heroSub:
-      "Commercial LED – NBB covers eligible non-building-based lighting only — outdoor and area lighting such as car parks, yards, sports and public-realm sites. A high-volume VEU activity, with the certificate value discounted upfront. (This is a commercial upgrade, not a residential one.)",
-    whatItIs: {
-      heading: "What you actually get",
-      body: "High-efficiency LED upgrades for eligible non-building-based (NBB) commercial lighting, installed under the VEU program with the certificate value discounted.",
-      points: [
-        "Scoped to eligible non-building-based lighting — car parks, yards, outdoor and public-realm areas.",
-        "Sharply lower lighting energy use across large sites.",
-        "VEU discount applied upfront on a high-volume activity.",
-        "Strong, fast-payback project for commercial and industrial operators.",
-      ],
-    },
-    howItWorks: [
-      "We audit your non-building-based lighting and confirm NBB eligibility.",
-      "Our accredited team completes the LED upgrade.",
-      "VEECs are created from the energy saved and discounted off your price.",
-      "You pay the reduced price — paperwork handled.",
-    ],
-    fullChain:
-      "On a high-volume NBB lighting roll-out, full-chain handling matters — one accountable team for the audit, the install and the certificates, with no hand-offs across a large site.",
-    commercialAngle:
-      "Non-building-based lighting (car parks, yards, sports and public-realm sites) is one of the highest-volume VEU activities — a strong, fast-payback commercial project.",
-    faqs: [
-      {
-        q: "What does “non-building-based” mean?",
-        a: "It's the VEU category for lighting that isn't inside a building — outdoor and area lighting such as car parks, yards, sports facilities and public spaces. We confirm eligibility against the NBB activity before any work.",
-      },
-      {
-        q: "Is this available for homes?",
-        a: "No — Commercial LED – NBB is a commercial activity for eligible non-building-based lighting only. It isn't a residential upgrade.",
-      },
-    ],
-    available: "commercial",
   },
 ];
 

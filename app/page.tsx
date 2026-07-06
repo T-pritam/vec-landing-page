@@ -2,7 +2,9 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { HomeHero } from "@/components/sections/home-hero";
 import { BgSlideFeature } from "@/components/sections/bg-slide-feature";
 import { AudienceSplit } from "@/components/sections/audience-split";
+import { HomeProductsGrid } from "@/components/sections/home-products-grid";
 import { FullChain } from "@/components/sections/full-chain";
+import { StackingSection } from "@/components/sections/stacking-section";
 import { TrustStrip } from "@/components/trust-strip";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -21,10 +23,9 @@ export default function HomePage() {
           <>
             <p>
               AEM Energy is accredited in its own right: an Accredited Person
-              under the VEU program in Victoria, and an Accredited Certificate
-              Provider under the ESS and PDRS in New South Wales. That means the
-              assessment, the install and the certificate creation all sit with
-              one accountable team. You're not chasing a separate installer, a
+              under the VEU program in Victoria. That means the assessment,
+              the install and the certificate creation all sit with one
+              accountable team. You're not chasing a separate installer, a
               rebate agent and a paperwork service.
             </p>
             <p>
@@ -36,7 +37,7 @@ export default function HomePage() {
           </>
         }
         points={[
-          "Solar, heat pumps, hot water, batteries, air conditioning and commercial LED.",
+          "Solar, heat pumps, hot water, batteries and air conditioning.",
           "Indicative “up to” figures shown honestly, never guaranteed.",
           "Our accreditation is re-tested every year, so it actually means something.",
         ]}
@@ -57,23 +58,22 @@ export default function HomePage() {
           <>
             <p>
               Our registered installers do the work to the program standard.
-              We've been operating since 2009, so we've seen the edge cases that
+              We've been operating since 2021, so we've seen the edge cases that
               trip newer providers up, and we quote around them before they
               become your problem.
             </p>
             <p>
               Where a program is income tested, we keep it separate and clear.
-              In Victoria the VEU discount is open to households and businesses
-              with no income test, while a Solar Victoria rebate is the one
-              layer with income and property limits. In New South Wales the ESS
-              and PDRS are not income tested. You'll always see which applies to
+              The VEU discount is open to households and businesses with no
+              income test, while a Solar Victoria rebate is the one layer with
+              income and property limits. You'll always see which applies to
               you.
             </p>
           </>
         }
         points={[
-          "Not income tested in either state, apart from the Solar Victoria layer in VIC.",
-          "Metro and regional, in both states, with one accountable team end-to-end.",
+          "Not income tested, apart from the Solar Victoria layer.",
+          "Metro and regional, with one accountable team end-to-end.",
           "We explain exactly where the discount comes from before you commit.",
         ]}
         image="/images/installer.jpg"
@@ -89,7 +89,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Who we help"
             title="Residential and commercial, both handled."
-            lead="We serve homes and businesses across Victoria and New South Wales. The upgrades, the paperwork and the timelines differ, but one accountable team owns the whole job either way."
+            lead="We serve homes and businesses across Victoria. The upgrades, the paperwork and the timelines differ, but one accountable team owns the whole job either way."
           />
         </Reveal>
         <Reveal delay={0.08} className="mt-10">
@@ -97,8 +97,23 @@ export default function HomePage() {
         </Reveal>
       </Section>
 
+      {/* Home 3 — Our products: Solar hero card + Heat Pumps / Battery /
+          Air Con stacked alongside it. */}
+      <Section tone="surface" spacing="sm">
+        <Reveal>
+          <SectionHeader
+            eyebrow="Our products"
+            title="Pick an upgrade — or stack a few."
+            lead="Every figure is indicative and shown as an “up to” amount. Solar is our flagship; each upgrade has its own page."
+          />
+        </Reveal>
+        <Reveal delay={0.08} className="mt-10">
+          <HomeProductsGrid />
+        </Reveal>
+      </Section>
+
       {/* Home 4a — We assess / install / paperwork / you save (scroll reveal) */}
-      <Section tone="surface">
+      <Section tone="muted">
         <Reveal>
           <SectionHeader
             eyebrow="Full-chain, in-house"
@@ -108,6 +123,13 @@ export default function HomePage() {
         </Reveal>
         <Reveal delay={0.08} className="mt-12">
           <FullChain />
+        </Reveal>
+      </Section>
+
+      {/* Home 7 — Stacking explainer (interactive calculator) */}
+      <Section tone="surface">
+        <Reveal>
+          <StackingSection />
         </Reveal>
       </Section>
 

@@ -6,8 +6,9 @@ import { cn } from "@/lib/cn";
 /**
  * "Also from AEM Energy" — standalone (NON-VEU) products (Change #5). A clean
  * card that deliberately does NOT reuse the VEU UpgradesGrid: no indicative
- * "up to $X", no rebate badge, no scheme language. Green (leaf) accent sets it
- * apart from the amber VEU upgrades, and a quiet tag states it's standalone.
+ * "up to $X", no rebate badge, no scheme language. The lighter lime (leaf)
+ * accent sets it apart from the brand-green VEU upgrades, and a quiet tag
+ * states it's standalone.
  */
 export function StandaloneProducts({ className }: { className?: string }) {
   return (
