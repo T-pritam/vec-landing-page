@@ -26,7 +26,7 @@ const columns = [
     links: [
       { label: "How It Works", href: "/how-it-works" },
       { label: "Products", href: "/products" },
-      { label: "Check eligibility", href: "/check-eligibility" },
+      // { label: "Check eligibility", href: "/check-eligibility" },
       { label: "About / Why us", href: "/about" },
       { label: "FAQ", href: "/faq" },
     ],
@@ -57,9 +57,11 @@ export function SiteFooter() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
+            {/* Check-eligibility CTA commented out per client request (2026-07-30).
             <Button href={PRIMARY_CTA.href} size="lg">
               {PRIMARY_CTA.label}
             </Button>
+            */}
             <Button href={SITE.phoneHref} size="lg" variant="secondary-on-ink">
               <PhoneIcon className="h-4 w-4" />
               {SITE.phone}
@@ -81,6 +83,8 @@ export function SiteFooter() {
             {SITE.tagline}
           </p>
           <p className="mt-4 text-sm text-white/55">
+            {SITE.address}
+            <br />
             {SITE.serviceArea}
             <br />
             <a
@@ -130,12 +134,12 @@ export function SiteFooter() {
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {SITE.legalName}. {SITE.accreditation}
-            {" "}· Accreditation {SITE.accreditationNo} · ABN {SITE.abn}.
+            {" "}· ABN {SITE.abn}.
           </p>
           <p className="max-w-2xl sm:text-right">
             Indicative figures only — not a quote or guarantee. VEU and Solar
             Victoria are distinct programs; income thresholds apply only to Solar
-            Victoria. Placeholder content for prototype.
+            Victoria.
           </p>
         </div>
       </div>
