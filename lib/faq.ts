@@ -37,7 +37,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Money & eligibility",
     q: "Do I need a special provider?",
-    a: "Yes — only an accredited business can create the certificates that fund the discount. AEM Energy is accredited in its own right, so it's handled in-house. It's the single most important thing to check when comparing providers.",
+    a: "Yes — only a registered Accredited Provider can create the certificates that fund the discount. AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme, so it's handled in-house. It's the single most important thing to check when comparing providers.",
   },
   {
     category: "Money & eligibility",
@@ -57,7 +57,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Residential",
     q: "Can I combine VEU with Solar Victoria and STCs?",
-    a: "Often yes. Depending on the upgrade, the VEU discount, a Solar Victoria rebate and federal STCs can stack into one combined value. The eligibility check and the stacking calculator both show how this works for your situation.",
+    a: "Often yes. Depending on the upgrade, the VEU discount, a Solar Victoria rebate and federal STCs can stack into one combined value. The eligibility check shows how this works for your situation.",
   },
   {
     category: "Business",
@@ -72,7 +72,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "Do you handle compliance and paperwork?",
-    a: "Yes. Accredited in our own right, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
+    a: "Yes. Backed by our sister concern Aussie Ecomarks, a registered Accredited Provider, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
   },
 ];
 

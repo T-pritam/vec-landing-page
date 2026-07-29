@@ -1,26 +1,25 @@
 /**
- * Site-wide constants. Contact / trading details are PRD §9 "client to confirm"
- * items — these are clearly-labelled placeholders, swap on client confirm.
+ * Site-wide constants. Contact / trading details confirmed by the client
+ * (2026-07-30). Accreditation is held by Aussie Ecomarks — AEM Energy is a
+ * sister concern that delivers upgrades under that accreditation.
  */
 export const SITE = {
   name: "AEM Energy",
-  // PRD §9 item 7 — trading name & accreditation details (placeholder).
-  legalName: "AEM Energy Pty Ltd (placeholder)",
-  // AEM Energy is accredited in its own right: an Accredited Person under the
-  // Victorian Energy Upgrades (VEU) program.
-  accreditation: "Accredited Person under the Victorian Energy Upgrades (VEU) program",
-  tagline: "The accredited team that handles your entire energy upgrade.",
+  legalName: "AEM Energy Pty Ltd",
+  // AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited
+  // Provider under the Victorian Energy Upgrades (VEU) scheme.
+  accreditation:
+    "A sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme",
+  tagline: "Solar, batteries, heat pumps and hot water — upgraded properly.",
   description:
-    "AEM Energy is the accredited team that handles your entire energy upgrade. We are an Accredited Person under the Victorian Energy Upgrades (VEU) program. We own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
-  url: "https://aem-energy.example",
-  // PRD §9 item 3 — contact details (placeholder).
-  phone: "1300 000 000",
-  phoneHref: "tel:1300000000",
-  email: "hello@aem-energy.example",
+    "AEM Energy handles your entire energy upgrade, end to end. As a sister concern of Aussie Ecomarks — a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme — we own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
+  url: "https://aemenergy.com.au",
+  phone: "+61 431 682 748",
+  phoneHref: "tel:+61431682748",
+  email: "contact@aemenergy.com.au",
   serviceArea: "Victoria, metro and regional",
-  // PRD §9 item 7 — accreditation number (placeholder).
-  accreditationNo: "AP-0000 (placeholder)",
-  abn: "00 000 000 000 (placeholder)",
+  address: "3 Envision Close, Pakenham VIC 3810",
+  abn: "36 696 217 651",
 } as const;
 
 export type NavItem = {

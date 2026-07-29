@@ -4,7 +4,6 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { UpgradesGrid } from "@/components/sections/upgrades-grid";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
 import { FullChain } from "@/components/sections/full-chain";
-import { StackingSection } from "@/components/sections/stacking-section";
 import { SocialProof } from "@/components/sections/social-proof";
 import { Reveal } from "@/components/motion/reveal";
 import { PAGE_IMAGE } from "@/lib/images";
@@ -13,7 +12,7 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Residential upgrades for your home",
   description:
-    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a genuine upfront discount, handled end-to-end by AEM Energy, an Accredited Person under the Victorian Energy Upgrades (VEU) program.",
+    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a genuine upfront discount, handled end-to-end by AEM Energy, a sister concern of Aussie Ecomarks — a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme.",
 };
 
 export default function ResidentialPage() {
@@ -26,7 +25,8 @@ export default function ResidentialPage() {
         tone="muted"
         image={PAGE_IMAGE.residential.src}
         imageAlt={PAGE_IMAGE.residential.alt}
-        primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
+        // Check-eligibility CTA commented out per client request (2026-07-30):
+        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />
 
@@ -68,15 +68,6 @@ export default function ResidentialPage() {
       </Section>
 
       <Section tone="surface">
-        <Reveal>
-          <StackingSection
-            eyebrow="Stack your savings"
-            title="See how the incentives stack for your home."
-          />
-        </Reveal>
-      </Section>
-
-      <Section tone="muted">
         <Reveal>
           <SectionHeader eyebrow="From our customers" title="Done properly, explained honestly." />
         </Reveal>

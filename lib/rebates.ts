@@ -2,11 +2,10 @@
  * ============================================================================
  * REBATE CONFIG — SINGLE SOURCE OF TRUTH
  * ============================================================================
- * Every dollar figure on the site (upgrade pages, the stacking calculator, the
- * home/how-it-works teasers) is read from this one module. Nothing is hardcoded
- * in markup. PRD §8.1 requires this so the calculator can consume the same
- * numbers, and §3.4 / §9 require every figure to be framed "up to / indicative,"
- * never guaranteed.
+ * Every dollar figure on the site (upgrade pages, the home/how-it-works
+ * teasers, the eligibility quiz) is read from this one module. Nothing is
+ * hardcoded in markup. §3.4 / §9 require every figure to be framed
+ * "up to / indicative," never guaranteed.
  *
  * COMPLIANCE NOTES (PRD §3.2):
  *  - These are INDICATIVE placeholders. Real values move with policy & market
@@ -24,7 +23,7 @@ export interface IncentiveLayerMeta {
   id: LayerId;
   /** Full program name. */
   name: string;
-  /** Short label used in compact UI (chips, calculator legend). */
+  /** Short label used in compact UI (chips, legends). */
   short: string;
   /** One-line plain-English description. */
   blurb: string;
@@ -182,7 +181,7 @@ export const REBATE_META = {
 } as const;
 
 /* ----------------------------------------------------------------------------
- * Derived helpers (used by the calculator and upgrade pages)
+ * Derived helpers (used by the eligibility quiz and upgrade pages)
  * ------------------------------------------------------------------------- */
 
 export function getUpgradeRebate(slug: string): UpgradeRebate | undefined {
@@ -191,9 +190,9 @@ export function getUpgradeRebate(slug: string): UpgradeRebate | undefined {
 
 /**
  * Aggregate the stacked, indicative value across a set of upgrades.
- * Shared by the stacking calculator AND the eligibility quiz so both read the
- * same single source of truth. Solar Victoria is income-tested, so callers pass
- * whether to include it.
+ * Shared by the eligibility quiz and upgrade pages so they read the same single
+ * source of truth. Solar Victoria is income-tested, so callers pass whether to
+ * include it.
  */
 export interface StackResult {
   layerTotals: Partial<Record<LayerId, { min: number; max: number }>>;

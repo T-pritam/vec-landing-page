@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 
 export interface CarouselSlide {
@@ -22,25 +23,32 @@ export function Carousel({
   slides,
   ariaLabel,
   className,
+  autoPlay = false,
+  intervalMs = 5000,
 }: {
   slides: CarouselSlide[];
   ariaLabel: string;
   className?: string;
+  /** Auto-advance through the slides, looping back to the start. */
+  autoPlay?: boolean;
+  /** Milliseconds between auto-advances. */
+  intervalMs?: number;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const activeRef = useRef(0);
+  const reduce = useReducedMotion() ?? false;
   const single = slides.length <= 1;
 
   const scrollToIndex = useCallback((i: number) => {
     const track = trackRef.current;
     if (!track) return;
     const clamped = Math.max(0, Math.min(i, track.children.length - 1));
-    const child = track.children[clamped] as HTMLElement | undefined;
-    child?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
-    });
+    // Scroll ONLY the track horizontally. `scrollIntoView` would bubble up and
+    // pull the whole page down to the carousel on every auto-advance — each
+    // slide is full-width, so `index * clientWidth` is the target offset.
+    track.scrollTo({ left: clamped * track.clientWidth, behavior: "smooth" });
   }, []);
 
   // Keep the active dot in sync with the scroll position.
@@ -62,6 +70,21 @@ export function Carousel({
     };
   }, [single]);
 
+  // Mirror `active` into a ref so the autoplay timer reads the latest index
+  // without re-subscribing on every scroll.
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  // Auto-advance — looping, and paused on hover/focus or reduced motion.
+  useEffect(() => {
+    if (!autoPlay || single || paused || reduce) return;
+    const id = window.setInterval(() => {
+      scrollToIndex((activeRef.current + 1) % slides.length);
+    }, intervalMs);
+    return () => window.clearInterval(id);
+  }, [autoPlay, single, paused, reduce, intervalMs, slides.length, scrollToIndex]);
+
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (single) return;
     if (e.key === "ArrowRight") {
@@ -79,6 +102,10 @@ export function Carousel({
       role="group"
       aria-roledescription="carousel"
       aria-label={ariaLabel}
+      onMouseEnter={autoPlay ? () => setPaused(true) : undefined}
+      onMouseLeave={autoPlay ? () => setPaused(false) : undefined}
+      onFocusCapture={autoPlay ? () => setPaused(true) : undefined}
+      onBlurCapture={autoPlay ? () => setPaused(false) : undefined}
     >
       <div
         ref={trackRef}

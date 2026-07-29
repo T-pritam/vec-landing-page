@@ -12,7 +12,7 @@ import { UPGRADES } from "@/lib/upgrades";
 export const metadata: Metadata = {
   title: "Business & Commercial energy upgrades (C&I)",
   description:
-    "Commercial solar and HVAC upgrades managed end-to-end by AEM Energy, accredited in its own right under the VEU program in Victoria. ROI-driven, compliant and credible, with combined value that can reach five figures.",
+    "Commercial solar and HVAC upgrades managed end-to-end by AEM Energy, a sister concern of Aussie Ecomarks — a registered Accredited Provider under the VEU scheme. ROI-driven, compliant and credible, with combined value that can reach five figures.",
 };
 
 // Commercial-relevant upgrades (everything except residential-only items).
@@ -27,7 +27,7 @@ const OPPORTUNITY = [
   {
     stat: "One partner",
     label: "for the whole project",
-    body: "Assessment, install, certificate creation and compliance, all managed by AEM Energy, accredited in its own right, so your team isn't running the scheme.",
+    body: "Assessment, install, certificate creation and compliance, all managed by AEM Energy and backed by our sister concern Aussie Ecomarks, so your team isn't running the scheme.",
   },
   {
     stat: "M&V",
@@ -148,14 +148,15 @@ export default function BusinessPage() {
               The compliance burden sits with us — not your business.
             </h2>
             <p className="mt-5 text-white/75">
-              As a full-chain operation accredited in our own right, we create
-              the certificates and carry the program obligations. Your finance
-              and facilities teams get a clean, ROI-driven project, not a scheme
-              to administer.
+              As a full-chain operation backed by our sister concern Aussie
+              Ecomarks — a registered Accredited Provider — we create the
+              certificates and carry the program obligations. Your finance and
+              facilities teams get a clean, ROI-driven project, not a scheme to
+              administer.
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Our Accredited Person creates VEECs — re-tested every year",
+                "Aussie Ecomarks creates the VEECs — re-tested every year",
                 "Measurement & verification handled to method",
                 "Audit-ready documentation across the project",
                 "One accountable partner, start to finish",

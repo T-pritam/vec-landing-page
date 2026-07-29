@@ -22,7 +22,8 @@ export default function FaqPage() {
         tone="muted"
         image={PAGE_IMAGE.faq.src}
         imageAlt={PAGE_IMAGE.faq.alt}
-        primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
+        // Check-eligibility CTA commented out per client request (2026-07-30):
+        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: "Ask a question", href: "/contact" }}
       />
 
