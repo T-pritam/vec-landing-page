@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PhoneIcon } from "@/components/icons";
-import { SITE, PRIMARY_CTA } from "@/lib/site";
+import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
 /**
@@ -31,7 +31,7 @@ export function StickyMobileCTA() {
     };
   }, []);
 
-  if (pathname.startsWith(PRIMARY_CTA.href)) return null;
+  if (pathname.startsWith(SECONDARY_CTA.href)) return null;
 
   return (
     <div
@@ -49,11 +49,19 @@ export function StickyMobileCTA() {
         >
           <PhoneIcon className="h-5 w-5" />
         </a>
+        {/* Check-eligibility CTA commented out per client request (2026-07-30).
         <Link
           href={PRIMARY_CTA.href}
           className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-brand font-semibold text-ink"
         >
           {PRIMARY_CTA.label}
+        </Link>
+        */}
+        <Link
+          href={SECONDARY_CTA.href}
+          className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-brand font-semibold text-ink"
+        >
+          {SECONDARY_CTA.label}
         </Link>
       </div>
     </div>

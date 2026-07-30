@@ -20,7 +20,7 @@ const PRIVACY = [
   },
   {
     h: "Who sees it",
-    p: "Your details are handled by our team. As a full-chain operation accredited in our own right, we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
+    p: "Your details are handled by our team. As a full-chain operation — a sister concern of Aussie Ecomarks, a registered Accredited Provider — we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
   },
   {
     h: "Your choices",
@@ -43,7 +43,7 @@ const TERMS = [
   },
   {
     h: "Eligibility & accreditation",
-    p: "Only an Accredited Person can create the certificates (VEECs) that fund the discount. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
+    p: "Only a registered Accredited Provider can create the certificates (VEECs) that fund the discount — for us, that's our sister concern, Aussie Ecomarks. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
   },
 ];
 

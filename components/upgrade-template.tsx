@@ -75,9 +75,11 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
               {upgrade.heroSub}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
+              {/* Check-eligibility CTA commented out per client request (2026-07-30).
               <Button href={PRIMARY_CTA.href} size="lg">
                 {PRIMARY_CTA.label}
               </Button>
+              */}
               <Button
                 href={SECONDARY_CTA.href}
                 size="lg"
@@ -196,9 +198,11 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
                 applied to your price. Pair it with hot water or a heat pump to
                 stack the VEU layer too.
               </p>
+              {/* Check-eligibility CTA commented out per client request (2026-07-30).
               <Button href={PRIMARY_CTA.href} className="mt-6">
                 {PRIMARY_CTA.label}
               </Button>
+              */}
             </div>
             <div className="lift rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
               <span className="eyebrow text-brand">For your business</span>

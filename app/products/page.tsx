@@ -3,7 +3,6 @@ import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { ProductCards } from "@/components/sections/product-cards";
 import { StandaloneProducts } from "@/components/sections/standalone-products";
-import { StackingSection } from "@/components/sections/stacking-section";
 import { Reveal } from "@/components/motion/reveal";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
@@ -24,7 +23,8 @@ export default function ProductsPage() {
         tone="muted"
         image={PAGE_IMAGE.products.src}
         imageAlt={PAGE_IMAGE.products.alt}
-        primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
+        // Check-eligibility CTA commented out per client request (2026-07-30):
+        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />
 
@@ -49,17 +49,6 @@ export default function ProductsPage() {
           <div className="mt-8">
             <StandaloneProducts />
           </div>
-        </Reveal>
-      </Section>
-
-      {/* Stacking calculator (moved off the homepage; below the listing, never
-          on an individual product page). */}
-      <Section tone="muted">
-        <Reveal>
-          <StackingSection
-            eyebrow="The stacking story"
-            title="See how the incentives stack."
-          />
         </Reveal>
       </Section>
     </>

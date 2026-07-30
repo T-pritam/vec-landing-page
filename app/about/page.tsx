@@ -11,7 +11,7 @@ import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About & Why Us — accreditation, proven",
   description:
-    "AEM Energy is accredited in its own right, an Accredited Person under VEU in Victoria, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole chain is how we protect customers.",
+    "AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole delivery chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
@@ -25,7 +25,7 @@ const FULL_CHAIN_POINTS = [
   },
   {
     t: "We own the certificates",
-    b: "Only an Accredited Person can create VEECs, and that's us, so the value isn't outsourced.",
+    b: "Only a registered Accredited Provider can create VEECs — that's our sister concern, Aussie Ecomarks — so the value stays in the group, not outsourced.",
   },
   {
     t: "We own the outcome",
@@ -39,11 +39,12 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="Accredited isn't a slogan here. It's the whole business."
-        lead="AEM Energy is an Accredited Person under the Victorian Energy Upgrades program in Victoria. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
+        lead="AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades program. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
         tone="ink"
         image={PAGE_IMAGE.about.src}
         imageAlt={PAGE_IMAGE.about.alt}
-        primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
+        // Check-eligibility CTA commented out per client request (2026-07-30):
+        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
       />
 
@@ -53,12 +54,13 @@ export default function AboutPage() {
           <div>
             <SectionHeader
               eyebrow="Who we are"
-              title="The accredited team that handles your entire upgrade."
+              title="The team that handles your entire upgrade, end to end."
             />
             <p className="mt-5 text-body">
-              Under the VEU program, only an Accredited Person can create the
-              tradable certificates (VEECs) that fund the rebates. AEM Energy is
-              that Accredited Person, and owns the entire chain: the lead, the
+              Under the VEU program, only a registered Accredited Provider can
+              create the tradable certificates (VEECs) that fund the rebates.
+              That accreditation is held by Aussie Ecomarks, our sister concern —
+              and AEM Energy owns the entire delivery chain: the lead, the
               assessment, the install (via our registered installers), the
               certificate creation, and the sale.
             </p>
@@ -76,8 +78,7 @@ export default function AboutPage() {
             <dl className="mt-4 space-y-4">
               {[
                 ["Trading as", SITE.name],
-                ["Accreditation", "Accredited Person (VEU, VIC)"],
-                ["Accreditation no.", SITE.accreditationNo],
+                ["Accreditation", "Aussie Ecomarks — Accredited Provider (VEU)"],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],
                 ["Program running since", "2021"],
@@ -89,8 +90,7 @@ export default function AboutPage() {
               ))}
             </dl>
             <p className="mt-5 text-caption">
-              Placeholder details — client to confirm trading name &amp;
-              accreditation specifics before launch.
+              Accreditation is held by our sister concern, Aussie Ecomarks.
             </p>
           </aside>
         </div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
         <SectionHeader
           eyebrow="Proof, not a promise"
           title="Re-tested every single year."
-          lead="Accredited Persons must pass a “fit and proper persons” test and a “competent and capable” test — and renew accreditation annually. It's a strong, specific credibility signal that almost no competitor surfaces."
+          lead="Accredited Providers must pass a “fit and proper persons” test and a “competent and capable” test — and renew accreditation annually. Aussie Ecomarks, our sister concern, holds that accreditation — a strong, specific credibility signal that almost no competitor surfaces."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[

@@ -9,12 +9,12 @@ import { cn } from "@/lib/cn";
  */
 const STATS: { stat: string; label: string }[] = [
   { stat: "2021", label: "VEU program running since" },
-  { stat: "Every year", label: "Accredited Person re-tested" },
+  { stat: "Every year", label: "Accredited Provider re-tested" },
   { stat: "End-to-end", label: "One accountable team" },
   { stat: "Victoria-wide", label: "Metro & regional" },
 ];
 
-const BADGES = ["VEU program", "Accredited Person", "Solar Victoria", "Clean Energy"];
+const BADGES = ["VEU program", "Accredited Provider", "Solar Victoria", "Clean Energy"];
 
 export function CredibilityBand({ className }: { className?: string }) {
   return (

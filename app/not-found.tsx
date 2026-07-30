@@ -17,9 +17,11 @@ export default function NotFound() {
           <Button href="/" size="lg">
             Back to home
           </Button>
+          {/* Check-eligibility CTA commented out per client request (2026-07-30).
           <Button href={PRIMARY_CTA.href} size="lg" variant="secondary">
             {PRIMARY_CTA.label}
           </Button>
+          */}
         </div>
       </div>
     </section>

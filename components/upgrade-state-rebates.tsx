@@ -127,8 +127,8 @@ export function StackingNote({
         ))}
       </div>
       <div className="mt-5">
-        <ArrowLink href="/how-it-works#stacking">
-          Try the stacking calculator
+        <ArrowLink href="/how-it-works">
+          See how the incentives stack
         </ArrowLink>
       </div>
     </div>

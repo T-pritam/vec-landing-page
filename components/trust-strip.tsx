@@ -8,12 +8,12 @@ import { ShieldCheckIcon } from "@/components/icons";
  */
 const TRUST_POINTS = [
   {
-    label: "Accredited in our own name",
-    detail: "Accredited Person under VEU in Victoria",
+    label: "Backed by an Accredited Provider",
+    detail: "A sister concern of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme",
   },
   {
     label: "Re-tested every year",
-    detail: "We pass the fit and proper and competent and capable checks annually",
+    detail: "Aussie Ecomarks passes the fit and proper and competent and capable checks annually",
   },
   {
     label: "Full-chain, in-house",

@@ -81,9 +81,11 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 xl:flex">
+          {/* Check-eligibility CTA commented out per client request (2026-07-30).
           <Button href={PRIMARY_CTA.href} size="sm">
             {PRIMARY_CTA.shortLabel}
           </Button>
+          */}
           <Button href={SECONDARY_CTA.href} size="sm" variant="secondary">
             {SECONDARY_CTA.label}
           </Button>
@@ -168,14 +170,16 @@ export function SiteHeader() {
             ))}
           </div>
 
+          {/* Check-eligibility CTA commented out per client request (2026-07-30).
           <Button href={PRIMARY_CTA.href} size="lg" className="mt-6 w-full">
             {PRIMARY_CTA.label}
           </Button>
+          */}
           <Button
             href={SECONDARY_CTA.href}
             size="lg"
             variant="secondary"
-            className="mt-3 w-full"
+            className="mt-6 w-full"
           >
             {SECONDARY_CTA.label}
           </Button>

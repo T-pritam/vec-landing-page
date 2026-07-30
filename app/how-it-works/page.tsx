@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { FullChain } from "@/components/sections/full-chain";
-import { StackingSection } from "@/components/sections/stacking-section";
 import { CheckIcon } from "@/components/icons";
 import { PAGE_IMAGE } from "@/lib/images";
 import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "How It Works — one accredited team, the whole upgrade",
+  title: "How It Works — one accountable team, the whole upgrade",
   description:
-    "How your upgrade actually gets done: one accredited team handles the assessment, the install and every certificate, so you get a genuine upfront discount and do almost nothing.",
+    "How your upgrade actually gets done: one accountable team handles the assessment, the install and every certificate — backed by an Accredited Provider — so you get a genuine upfront discount and do almost nothing.",
 };
 
 const TIMELINES = [
@@ -41,12 +40,13 @@ export default function HowItWorksPage() {
     <>
       <PageHero
         eyebrow="How it works"
-        title={<>One accredited team. The whole upgrade, handled.</>}
-        lead="One accredited team handles the assessment, the install and every certificate. Here is what to expect, and why we quote a genuine upfront discount instead of a “free” headline."
+        title={<>One accountable team. The whole upgrade, handled.</>}
+        lead="One accountable team handles the assessment, the install and every certificate. Here is what to expect, and why we quote a genuine upfront discount instead of a “free” headline."
         tone="muted"
         image={PAGE_IMAGE["how-it-works"].src}
         imageAlt={PAGE_IMAGE["how-it-works"].alt}
-        primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
+        // Check-eligibility CTA commented out per client request (2026-07-30):
+        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
         secondary={{ label: "Talk to us", href: SECONDARY_CTA.href }}
       />
 
@@ -83,19 +83,11 @@ export default function HowItWorksPage() {
         <SectionHeader
           eyebrow="Full chain, in house"
           title="We assess. We install. We handle the paperwork. You save."
-          lead="Because we're accredited and do the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
+          lead="Because our sister concern Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
         />
         <div className="mt-10">
           <FullChain />
         </div>
-      </Section>
-
-      {/* 4 — Stacking explainer */}
-      <Section tone="surface">
-        <StackingSection
-          eyebrow="Stacking, in full"
-          title="The full stacking story."
-        />
       </Section>
     </>
   );

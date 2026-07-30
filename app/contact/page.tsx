@@ -63,6 +63,14 @@ export default function ContactPage() {
               </div>
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
+                  Address
+                </dt>
+                <dd className="mt-1 text-[1.0625rem] text-ink">
+                  {SITE.address}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
                   Service area
                 </dt>
                 <dd className="mt-1 text-[1.0625rem] text-ink">
@@ -75,7 +83,7 @@ export default function ContactPage() {
               {[
                 "No obligation, ever",
                 "A straight answer on what you'd pay",
-                "Backed by our own accreditation, in our own name",
+                "Backed by Aussie Ecomarks, a registered Accredited Provider",
               ].map((t) => (
                 <li key={t} className="flex items-center gap-2.5 text-body">
                   <CheckIcon className="h-4 w-4 text-success" />
@@ -83,10 +91,6 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-
-            <p className="mt-8 text-caption">
-              Contact details are placeholders — client to confirm before launch.
-            </p>
           </div>
 
           {/* Shared lead form */}
