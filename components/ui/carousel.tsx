@@ -80,10 +80,19 @@ export function Carousel({
   useEffect(() => {
     if (!autoPlay || single || paused || reduce) return;
     const id = window.setInterval(() => {
-      scrollToIndex((activeRef.current + 1) % slides.length);
+      const track = trackRef.current;
+      if (!track) return;
+      const next = (activeRef.current + 1) % slides.length;
+      // Wrapping back to the first slide jumps instantly: a long smooth scroll
+      // across mandatory snap points can get snap-cancelled and leave the
+      // carousel stuck on the last slide. Forward steps stay smooth.
+      track.scrollTo({
+        left: next * track.clientWidth,
+        behavior: next === 0 ? "auto" : "smooth",
+      });
     }, intervalMs);
     return () => window.clearInterval(id);
-  }, [autoPlay, single, paused, reduce, intervalMs, slides.length, scrollToIndex]);
+  }, [autoPlay, single, paused, reduce, intervalMs, slides.length]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (single) return;

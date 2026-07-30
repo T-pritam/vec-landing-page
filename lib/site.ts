@@ -10,7 +10,7 @@ export const SITE = {
   // Provider under the Victorian Energy Upgrades (VEU) scheme.
   accreditation:
     "A sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme",
-  tagline: "Solar, batteries, heat pumps and hot water — upgraded properly.",
+  tagline: "Solar, batteries and heat pumps — upgraded properly.",
   description:
     "AEM Energy handles your entire energy upgrade, end to end. As a sister concern of Aussie Ecomarks — a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme — we own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
   url: "https://aemenergy.com.au",

@@ -3,26 +3,26 @@
 import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { Carousel, type CarouselSlide } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
 import { CheckIcon } from "@/components/icons";
+import { SECONDARY_CTA } from "@/lib/site";
 
 /**
  * Home hero (redesign 2026-07-30) — light, product-led and crisp.
  *
  * Client change request: shift the hero from the dark, team-led treatment to a
- * bright, product-focused one. Just a short eyebrow + headline (no lead
- * paragraph, no trust ticks, no CTA buttons — those live in the header and the
- * section below), followed by a single auto-rotating image carousel of the
- * upgrades we install. Motion is reduced-motion aware; the carousel pauses on
+ * bright, product-focused one. Just a short eyebrow + headline, an auto-rotating
+ * image carousel of the upgrades we install, and a single "book an assessment"
+ * CTA beneath it. Motion is reduced-motion aware; the carousel pauses on
  * hover/focus and doesn't auto-advance under reduced motion.
  */
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const IMAGES: { src: string; alt: string }[] = [
-  { src: "/images/solar.jpg", alt: "A full rooftop solar array on an Australian home" },
-  { src: "/images/heat-pump.jpg", alt: "A modern heat-pump hot water system" },
-  { src: "/images/battery.jpg", alt: "A home battery storage unit" },
   { src: "/images/air-con.jpg", alt: "An efficient split-system air conditioner" },
+  { src: "/images/solar.jpg", alt: "A full rooftop solar array on an Australian home" },
+  { src: "/images/battery.jpg", alt: "A home battery storage unit" },
   { src: "/images/installer.jpg", alt: "An accredited installer fitting solar panels" },
   { src: "/images/home.jpg", alt: "A modern Victorian home at dusk" },
 ];
@@ -81,7 +81,7 @@ export function HomeHero() {
             variants={up}
             className="text-display font-display mt-6 text-ink"
           >
-            Solar, batteries, heat pumps &amp; hot water —{" "}
+            Solar, batteries &amp; heat pumps{" "}
             <span className="text-brand">upgraded properly.</span>
           </motion.h1>
         </motion.div>
@@ -97,8 +97,20 @@ export function HomeHero() {
             slides={SLIDES}
             ariaLabel="Energy upgrades AEM Energy installs"
             autoPlay
-            intervalMs={4500}
+            intervalMs={2000}
           />
+        </motion.div>
+
+        {/* Primary CTA — get people booked in. */}
+        <motion.div
+          variants={up}
+          initial={initial}
+          animate={animate}
+          className="mt-8 flex justify-center"
+        >
+          <Button href={SECONDARY_CTA.href} size="lg">
+            Book a free assessment today
+          </Button>
         </motion.div>
       </div>
     </section>

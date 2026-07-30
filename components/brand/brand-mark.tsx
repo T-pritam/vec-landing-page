@@ -1,9 +1,9 @@
 import { cn } from "@/lib/cn";
 
 /**
- * AEM Energy brand mark — the client-supplied circular green badge
- * ("Green Energy Experts" / leaf / "Brighter Energy Future Here"), trimmed to
- * a transparent PNG so it drops onto any background.
+ * AEM Energy brand mark — the client-supplied "AEM" green badge (rounded square
+ * with the leaf), cropped from the full "AEM Energy — Smarter Homes" logo and
+ * trimmed to a transparent PNG so it drops onto any background.
  *
  *  - tone="color"  → full-colour badge (header, footer, cards)
  *  - tone="mono"   → desaturated, low-opacity silhouette (watermark, anywhere

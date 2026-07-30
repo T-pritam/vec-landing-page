@@ -22,18 +22,26 @@ export function Logo({
       </span>
     );
 
-  return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
-      <BrandMark className="h-11 w-11" />
-      <span
-        className={cn(
-          "text-[1.5rem] font-bold leading-none tracking-tight",
-          onInk ? "text-white" : "text-ink",
-        )}
-      >
-        AEM Energy
+  // Dark backgrounds (footer): the full-colour lockup's darker greens don't
+  // read on ink, so pair the badge mark with a white wordmark there.
+  if (onInk)
+    return (
+      <span className={cn("inline-flex items-center gap-3", className)}>
+        <BrandMark className="h-11 w-11" />
+        <span className="text-[1.5rem] font-bold leading-none tracking-tight text-white">
+          AEM Energy
+        </span>
       </span>
-    </span>
+    );
+
+  // Light backgrounds (header): the full horizontal lockup.
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/logo-aem-energy.png"
+      alt="AEM Energy — Smarter Homes"
+      className={cn("h-10 w-auto", className)}
+    />
   );
 }
 

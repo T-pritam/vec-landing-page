@@ -10,7 +10,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { PRIMARY_CTA } from "@/lib/site";
 
 const WHY_POINTS = [
-  "Solar, batteries, heat pumps, hot water and air conditioning.",
+  "Solar, batteries, heat pumps and air conditioning.",
   "Backed by Aussie Ecomarks, a registered Accredited Provider under the VEU scheme.",
   "Indicative “up to” figures, shown honestly and never guaranteed.",
 ];
@@ -29,7 +29,7 @@ export default function HomePage() {
             <SectionHeader
               eyebrow="Why AEM Energy"
               title="One team owns your whole upgrade, start to finish."
-              lead="From solar and batteries to heat pumps, hot water and air conditioning, AEM Energy assesses your place, installs the upgrade and handles every certificate. As a sister concern of Aussie Ecomarks — a registered Accredited Provider under the VEU scheme — the whole chain sits with one accountable team, so a real upfront discount reaches you with almost nothing to do."
+              lead="From solar and batteries to heat pumps and air conditioning, AEM Energy assesses your place, installs the upgrade and handles every certificate. As a sister concern of Aussie Ecomarks — a registered Accredited Provider under the VEU scheme — the whole chain sits with one accountable team, so a real upfront discount reaches you with almost nothing to do."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               {/* Check-eligibility CTA commented out per client request (2026-07-30).
