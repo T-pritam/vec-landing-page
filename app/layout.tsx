@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyMobileCTA } from "@/components/sticky-mobile-cta";
 import { WhatsAppFAB } from "@/components/whatsapp-fab";
 import { Watermark } from "@/components/brand/watermark";
+import { UtmCapture } from "@/components/utm-capture";
 import { SITE } from "@/lib/site";
 
 // Optional Fraunces — hero display only (PRD §5 fonts). Variable font: omit
@@ -58,6 +59,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        {/* Snapshots ad campaign params on landing; renders nothing. */}
+        <UtmCapture />
         <Watermark />
         <SiteHeader />
         <main id="main">{children}</main>

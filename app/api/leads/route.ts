@@ -1,117 +1,246 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { validateLead } from "@/lib/leads/validation";
+import { sendTelegramNotification } from "@/lib/leads/telegram";
+import { SITE } from "@/lib/site";
 
 /**
- * Lead intake for both flows that must be captured to Google Sheets:
+ * Lead intake for both capture flows on the site:
  *   1. "Book an assessment"  (context = "book-an-assessment")
  *   2. Eligibility check     (context = "eligibility-quiz:<state>")
  *
- * The lead is POSTed to a Google Apps Script Web App, which appends a row to a
- * Google Sheet. Point the app at it with one env var — no code changes:
- *   LEADS_WEBHOOK_URL = https://script.google.com/macros/s/…/exec
- * If it's unset, the lead is logged and still accepted so the UI keeps working.
+ * Implements the Lead Backend Dev Handoff §5. The processing order in POST()
+ * below is load-bearing: the Supabase insert is the point of no return. Once it
+ * succeeds the lead is safe, and everything after it (Telegram now, WhatsApp in
+ * Phase 2) is best-effort — those failures are recorded on the row and never
+ * surface to the customer, who has already been told the booking went through.
  *
- * Setup steps: see docs/LEADS-TO-GOOGLE-SHEETS.md
+ * Required env (see .env.example):
+ *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
  */
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Duplicate window: the same phone or email inside this many minutes is a re-submit. */
+const DEDUPE_MINUTES = 5;
 
-// The exact field set sent to the sheet (Apps Script maps these to columns).
-const FIELDS = [
-  "submittedAt",
-  "type",
-  "qualified",
-  "name",
-  "email",
-  "phone",
-  "postcode",
-  "preferred_date",
-  "preferred_time",
-  "audience",
-  "message",
-  "context",
-] as const;
+const SERVER_ERROR_MESSAGE = `Something went wrong on our end. Please try again or call us on ${SITE.phone}.`;
 
-type Lead = Record<(typeof FIELDS)[number], string>;
+function json(body: unknown, status: number) {
+  return NextResponse.json(body, { status });
+}
 
 /**
- * Readable, sortable local timestamp in the business's timezone (Victoria),
- * e.g. "2026-07-04 19:30:00" — not a raw UTC "…Z" string. The sv-SE locale
- * conveniently formats as ISO-like `YYYY-MM-DD HH:mm:ss`.
+ * The service role key bypasses RLS, which is the only way into this table —
+ * `leads` has RLS on with no policies. It must never reach the browser, so it
+ * is read here (server-only module) and the client is built per request rather
+ * than at module scope, so a missing env var is a handled 500 and not a crash
+ * at import time.
  */
-function nowLocal(): string {
-  return new Date().toLocaleString("sv-SE", {
-    timeZone: "Australia/Melbourne",
+function supabaseAdmin() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
   });
 }
 
-function buildLead(body: Record<string, unknown>): Lead {
-  const get = (k: string) => String(body[k] ?? "").trim();
-  const context = get("context");
-  const type = context.startsWith("eligibility")
-    ? "eligibility"
-    : context.startsWith("book-an-assessment")
-      ? "booking"
-      : "enquiry";
-  // For eligibility leads, flag whether they passed all checks ("qualify").
-  const qualified =
-    type === "eligibility" ? String(context.endsWith("qualify")) : "";
+/** Bare IPv4/IPv6 literals. Anything else is dropped rather than risked. */
+const IP_RE = /^(?:\d{1,3}(?:\.\d{1,3}){3}|[0-9a-f:]+)$/i;
 
-  return {
-    submittedAt: nowLocal(),
-    type,
-    qualified,
-    name: get("name"),
-    email: get("email"),
-    phone: get("phone"),
-    postcode: get("postcode"),
-    preferred_date: get("preferred_date"),
-    preferred_time: get("preferred_time"),
-    audience: get("audience"),
-    message: get("message"),
-    context,
-  };
+/**
+ * Vercel puts the real client IP first in a comma-separated forwarding chain.
+ * `ip_address` is INET, so a malformed header would make Postgres reject the
+ * whole insert and lose the lead — a header we can't parse is simply omitted.
+ */
+function clientIp(request: Request): string | null {
+  const forwarded = request.headers.get("x-forwarded-for");
+  const candidate =
+    forwarded?.split(",")[0]?.trim() || request.headers.get("x-real-ip")?.trim();
+  if (!candidate) return null;
+  return IP_RE.test(candidate) ? candidate : null;
 }
 
 export async function POST(request: Request) {
+  // 2 — Parse the body.
   let body: Record<string, unknown>;
   try {
-    body = await request.json();
+    const parsed = await request.json();
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error("body is not an object");
+    }
+    body = parsed as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
-  }
-
-  const lead = buildLead(body);
-
-  // Minimal server-side validation (mirrors the client).
-  if (!lead.name || (!lead.email && !lead.phone)) {
-    return NextResponse.json(
-      { ok: false, error: "Missing name or contact" },
-      { status: 422 },
+    return json(
+      {
+        success: false,
+        error: "validation_error",
+        message: "Please fix the following issues",
+        fields: {},
+      },
+      400,
     );
   }
-  if (lead.email && !EMAIL_RE.test(lead.email)) {
-    return NextResponse.json({ ok: false, error: "Invalid email" }, { status: 422 });
+
+  // 3, 4 — Validate and normalise. Note that `source` and `status` are never
+  // read from the body; they are hardcoded server-side at insert.
+  const { values, errors } = validateLead(body);
+  if (Object.keys(errors).length > 0) {
+    return json(
+      {
+        success: false,
+        error: "validation_error",
+        message: "Please fix the following issues",
+        fields: errors,
+      },
+      400,
+    );
   }
 
-  const url = process.env.LEADS_WEBHOOK_URL;
-  if (!url) {
-    // Not wired to Sheets yet — accept so the UI works, but make it visible.
-    console.info("[leads] captured (LEADS_WEBHOOK_URL not set):", lead);
-    return NextResponse.json({ ok: true });
+  const supabase = supabaseAdmin();
+  if (!supabase) {
+    console.error("[leads] SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set");
+    return json(
+      { success: false, error: "server_error", message: SERVER_ERROR_MESSAGE },
+      500,
+    );
   }
 
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(lead),
-    });
-    if (!res.ok) throw new Error(`Sheets webhook returned ${res.status}`);
-  } catch (err) {
-    // Don't lose the lead silently — log it so it can be recovered from logs.
-    console.error("[leads] failed to send to Google Sheets:", err, lead);
-    return NextResponse.json({ ok: false, error: "Storage failed" }, { status: 502 });
+  // 5, 6 — Request metadata, read server-side only.
+  const userAgent = request.headers.get("user-agent");
+  const ipAddress = clientIp(request);
+
+  // 7 — Duplicate detection: same phone OR same email inside the window.
+  // Catches double-clicks, refresh-after-submit and accidental re-sends; a
+  // genuine second enquiry tomorrow is deliberately still allowed through.
+  // Two `.eq()` lookups rather than one `.or()` string: the latter would mean
+  // interpolating customer input into a PostgREST filter expression, where a
+  // comma or parenthesis in an address changes what the filter means. Both
+  // queries are index-covered (idx_leads_phone, idx_leads_email).
+  const since = new Date(Date.now() - DEDUPE_MINUTES * 60_000).toISOString();
+  const [byPhone, byEmail] = await Promise.all([
+    supabase
+      .from("leads")
+      .select("id")
+      .eq("phone", values.phone)
+      .gt("created_at", since)
+      .limit(1),
+    supabase
+      .from("leads")
+      .select("id")
+      .eq("email", values.email)
+      .gt("created_at", since)
+      .limit(1),
+  ]);
+
+  if (byPhone.error || byEmail.error) {
+    console.error("[leads] duplicate check failed:", byPhone.error ?? byEmail.error);
+    return json(
+      { success: false, error: "server_error", message: SERVER_ERROR_MESSAGE },
+      500,
+    );
+  }
+  if ((byPhone.data?.length ?? 0) > 0 || (byEmail.data?.length ?? 0) > 0) {
+    return json(
+      {
+        success: false,
+        error: "duplicate_submission",
+        message:
+          "This assessment request has already been submitted. We will be in touch shortly.",
+      },
+      409,
+    );
   }
 
-  return NextResponse.json({ ok: true });
+  // 8, 9 — Insert. A failure here is a hard failure: the database is the source
+  // of truth, and we will not tell someone we have their booking when we don't.
+  const { data: lead, error: insertError } = await supabase
+    .from("leads")
+    .insert({
+      ...values,
+      source: "website",
+      status: "new",
+      user_agent: userAgent,
+      ip_address: ipAddress,
+    })
+    .select("id, created_at")
+    .single();
+
+  if (insertError || !lead) {
+    console.error("[leads] insert failed:", insertError, values);
+    return json(
+      { success: false, error: "server_error", message: SERVER_ERROR_MESSAGE },
+      500,
+    );
+  }
+
+  // 10 — Telegram. Best effort; the outcome is recorded, never returned.
+  const telegram = await sendTelegramNotification({
+    id: lead.id,
+    created_at: lead.created_at,
+    full_name: values.full_name,
+    email: values.email,
+    phone: values.phone,
+    postcode: values.postcode,
+    preferred_date: values.preferred_date,
+    preferred_time: values.preferred_time,
+    notes: values.notes,
+    utm_source: values.utm_source,
+    utm_campaign: values.utm_campaign,
+    utm_content: values.utm_content,
+  });
+
+  const { error: notifyUpdateError } = await supabase
+    .from("leads")
+    .update(
+      telegram.sent
+        ? { telegram_sent: true, telegram_error: null }
+        : { telegram_sent: false, telegram_error: telegram.error },
+    )
+    .eq("id", lead.id);
+
+  if (!telegram.sent) {
+    console.error("[leads] telegram notification failed:", telegram.error);
+  }
+  if (notifyUpdateError) {
+    // The lead is saved and the notification result is in the logs; a failure
+    // to write the flag back is not worth failing the request over.
+    console.error("[leads] telegram status writeback failed:", notifyUpdateError);
+  }
+
+  // ===== WHATSAPP INTEGRATION (PHASE 2) =====
+  // When WhatsApp Cloud API is configured:
+  // 1. Read WHATSAPP_PHONE_NUMBER_ID and WHATSAPP_ACCESS_TOKEN from environment variables
+  // 2. Send a template message to the lead's phone number
+  // 3. On success: UPDATE leads SET whatsapp_sent = true WHERE id = lead_id
+  // 4. On failure: UPDATE leads SET whatsapp_error = error.message WHERE id = lead_id
+  // 5. Never throw from this block — same fire-and-forget pattern as Telegram
+  // ===== END WHATSAPP PLACEHOLDER =====
+
+  // 12 — Success. The customer is told the lead landed, which it has.
+  return json(
+    {
+      success: true,
+      lead_id: lead.id,
+      message:
+        "Your assessment request has been submitted. We will confirm your booking shortly.",
+    },
+    201,
+  );
 }
+
+/** 1 — Anything that is not a POST (handoff §5.3). */
+function methodNotAllowed() {
+  return json(
+    {
+      success: false,
+      error: "method_not_allowed",
+      message: "Only POST requests are accepted",
+    },
+    405,
+  );
+}
+
+export const GET = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
