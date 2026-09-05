@@ -61,7 +61,7 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
             onInk && "text-white/45",
           )}
         >
-          Placeholder rating — client to supply.
+          Placeholder rating. Client to supply.
         </span>
       </div>
 
@@ -99,7 +99,7 @@ export function SocialProof({ onInk = false }: { onInk?: boolean }) {
         ))}
       </Stagger>
       <p className={cn("mt-4 text-caption", onInk && "text-white/50")}>
-        Placeholder testimonials — client to supply real reviews before launch.
+        Placeholder testimonials. Client to supply real reviews before launch.
       </p>
     </div>
   );

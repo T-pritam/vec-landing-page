@@ -25,7 +25,7 @@ export function BrandMark({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/logo-badge.png"
+      src="/AEM.png"
       alt={title ?? ""}
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}

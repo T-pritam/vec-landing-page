@@ -6,6 +6,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyMobileCTA } from "@/components/sticky-mobile-cta";
+import { WhatsAppFAB } from "@/components/whatsapp-fab";
 import { Watermark } from "@/components/brand/watermark";
 import { SITE } from "@/lib/site";
 
@@ -20,16 +21,16 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Victorian Energy Upgrades, handled end-to-end`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name}, Victorian Energy Upgrades, handled end-to-end`,
+    template: `%s, ${SITE.name}`,
   },
   description: SITE.description,
   icons: {
-    icon: [{ url: "/logo-badge.png", type: "image/png" }],
-    apple: "/logo-badge.png",
+    icon: [{ url: "/AEM.png", type: "image/png" }],
+    apple: "/AEM.png",
   },
   openGraph: {
-    title: `${SITE.name} — Victorian Energy Upgrades, handled end-to-end`,
+    title: `${SITE.name}, Victorian Energy Upgrades, handled end-to-end`,
     description: SITE.description,
     type: "website",
     locale: "en_AU",
@@ -62,6 +63,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <SiteFooter />
         <StickyMobileCTA />
+        <WhatsAppFAB />
       </body>
     </html>
   );

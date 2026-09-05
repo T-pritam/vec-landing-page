@@ -59,7 +59,7 @@ export function StandaloneProductTemplate({
                   <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-leaf" />
                   <span>
                     <span className="font-semibold">A standalone product.</span>{" "}
-                    Not part of the VEU or Solar Victoria program — there's no
+                    Not part of the VEU or Solar Victoria program. There's no
                     government rebate, certificate or scheme. Simple
                     product-and-install pricing.
                   </span>
@@ -96,7 +96,7 @@ export function StandaloneProductTemplate({
         <SectionHeader
           eyebrow="How it works"
           title="From a quick chat to clean water."
-          lead="A simple supply-and-install — no forms, no scheme paperwork."
+          lead="A simple supply-and-install, no forms, no scheme paperwork."
         />
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {product.howItWorks.map((step, i) => (

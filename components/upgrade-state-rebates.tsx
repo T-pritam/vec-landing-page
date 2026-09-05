@@ -5,6 +5,7 @@ import { ArrowLink } from "@/components/ui/button";
 import { Eyebrow, SectionHeader } from "@/components/ui/section";
 import {
   INCENTIVE_LAYERS,
+  formatAUD,
   formatRange,
   type LayerId,
   type LayerValue,
@@ -80,7 +81,7 @@ export function RebatePanel({
               Combined, up to
             </span>
             <span className="figure text-3xl font-semibold text-ink">
-              <CountUp value={headline} />
+              {formatAUD(headline)}
             </span>
           </div>
         )}

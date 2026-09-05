@@ -22,27 +22,27 @@ export const FAQS: FaqItem[] = [
   {
     category: "Money & eligibility",
     q: "Is it means-tested?",
-    a: "The VEU program is not means-tested — it's open to Victorian households and businesses. Some Solar Victoria components do have income and property thresholds, so we keep the two programs separate when we explain what you qualify for.",
+    a: "The VEU program is not means-tested. It's open to Victorian households and businesses. Some Solar Victoria components do have income and property thresholds, so we keep the two programs separate when we explain what you qualify for.",
   },
   {
     category: "Money & eligibility",
-    q: "Is this “free”?",
-    a: "No. There are no free upgrades under the VEU program — a minimum customer contribution applies. What you get is a large upfront discount. We'll always show you what you'll actually pay.",
+    q: `Is this “free”?`,
+    a: "No. There are no free upgrades under the VEU program. A minimum customer contribution applies. What you get is a large upfront discount. We'll always show you what you'll actually pay.",
   },
   {
     category: "Money & eligibility",
     q: "Who sets the rebate value?",
-    a: "The market. Certificate prices move with supply and demand, not a fixed government rate. The government creates the obligation that makes the market exist and sets the rules — it isn't the buyer.",
+    a: "The market. Certificate prices move with supply and demand, not a fixed government rate. The government creates the obligation that makes the market exist and sets the rules. It isn't the buyer.",
   },
   {
     category: "Money & eligibility",
     q: "Do I need a special provider?",
-    a: "Yes — only a registered Accredited Provider can create the certificates that fund the discount. AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme, so it's handled in-house. It's the single most important thing to check when comparing providers.",
+    a: "Yes. Only a registered Accredited Provider can create the certificates that fund the discount. AEM Energy is a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme, so it's handled in-house. It's the single most important thing to check when comparing providers.",
   },
   {
     category: "Money & eligibility",
     q: "Can I claim more than once?",
-    a: "Yes — for different qualifying upgrades. Many customers stack several upgrades over time.",
+    a: "Yes. For different qualifying upgrades. Many customers stack several upgrades over time.",
   },
   {
     category: "Residential",
@@ -52,7 +52,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Residential",
     q: "How long does it take?",
-    a: "Residential upgrades are fast — often a single visit once you're booked. Larger commercial projects run a longer verification path.",
+    a: "Residential upgrades are fast, often a single visit once you're booked. Larger commercial projects run a longer verification path.",
   },
   {
     category: "Residential",
@@ -67,12 +67,12 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "How large can commercial value get?",
-    a: "Commercial solar and major efficiency projects can reach five figures of combined incentive value. The exact figure depends on the project — we'll model it with you.",
+    a: "Commercial solar and major efficiency projects can reach five figures of combined incentive value. The exact figure depends on the project. We'll model it with you.",
   },
   {
     category: "Business",
     q: "Do you handle compliance and paperwork?",
-    a: "Yes. Backed by our sister concern Aussie Ecomarks, a registered Accredited Provider, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
+    a: "Yes. Backed by our subsidiary Aussie Ecomarks, a registered Accredited Provider, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
   },
 ];
 

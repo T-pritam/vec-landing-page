@@ -18,7 +18,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Talk to the accredited team."
-        lead="Tell us a little about your place and what you're considering. We'll come back with a clear, honest next step — no obligation."
+        lead="Tell us a little about your place and what you're considering. We'll come back with a clear, honest next step, no obligation."
         tone="muted"
         image={PAGE_IMAGE.contact.src}
         imageAlt={PAGE_IMAGE.contact.alt}
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <div>
             <h2 className="text-h3">Get in touch</h2>
             <p className="mt-3 text-body">
-              Prefer to talk? Call us — or leave your details and we'll call you.
+              Prefer to talk? Call us, or leave your details and we'll call you.
             </p>
 
             <dl className="mt-8 space-y-6">

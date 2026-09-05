@@ -21,7 +21,7 @@ export async function generateMetadata({
   const product = getStandaloneProduct(slug);
   if (!product) return {};
   return {
-    title: `${product.longName} — ${product.heroHeadline}`,
+    title: `${product.longName}, ${product.heroHeadline}`,
     description: product.heroSub,
   };
 }

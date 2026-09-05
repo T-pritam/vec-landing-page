@@ -121,7 +121,7 @@ export function LeadForm({
     } catch {
       setSubmitting(false);
       setSubmitError(
-        "Sorry — something went wrong sending that. Please try again, or call us.",
+        "Sorry, something went wrong sending that. Please try again, or call us.",
       );
       return;
     }
@@ -146,8 +146,8 @@ export function LeadForm({
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-body">
           {booking
-            ? "Thanks — we've got your preferred date and time. One of our accredited team will confirm the appointment shortly. No obligation."
-            : "Thanks — we've got your details. One of our accredited team will be in touch shortly to confirm what you qualify for. No obligation."}
+            ? "Thanks, we've got your preferred date and time. One of our accredited team will confirm the appointment shortly. No obligation."
+            : "Thanks, we've got your details. One of our accredited team will be in touch shortly to confirm what you qualify for. No obligation."}
         </p>
       </div>
     );
@@ -248,7 +248,7 @@ export function LeadForm({
         </Button>
         <p className="text-caption">
           By submitting you agree to be contacted about your enquiry. We'll never
-          imply an upgrade is “free” — we'll show you what you'd actually pay. See
+          imply an upgrade is “free”. We will show you what you'd actually pay. See
           our{" "}
           <a href="/privacy" className="underline underline-offset-2">
             privacy notice

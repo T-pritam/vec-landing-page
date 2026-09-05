@@ -12,7 +12,7 @@ import { UPGRADES } from "@/lib/upgrades";
 export const metadata: Metadata = {
   title: "Business & Commercial energy upgrades (C&I)",
   description:
-    "Commercial solar and HVAC upgrades managed end-to-end by AEM Energy, a sister concern of Aussie Ecomarks — a registered Accredited Provider under the VEU scheme. ROI-driven, compliant and credible, with combined value that can reach five figures.",
+    "Commercial solar and HVAC upgrades managed end-to-end by AEM Energy, a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme. ROI-driven, compliant and credible, with combined value that can reach five figures.",
 };
 
 // Commercial-relevant upgrades (everything except residential-only items).
@@ -22,12 +22,12 @@ const OPPORTUNITY = [
   {
     stat: "Five figures",
     label: "possible combined value",
-    body: "Large commercial solar and major efficiency projects can reach six-figure combined value. Modelled per project — indicative, never guaranteed.",
+    body: "Large commercial solar and major efficiency projects can reach six-figure combined value. Modelled per project, indicative, never guaranteed.",
   },
   {
     stat: "One partner",
     label: "for the whole project",
-    body: "Assessment, install, certificate creation and compliance, all managed by AEM Energy and backed by our sister concern Aussie Ecomarks, so your team isn't running the scheme.",
+    body: "Assessment, install, certificate creation and compliance, all managed by AEM Energy and backed by our subsidiary Aussie Ecomarks, so your team isn't running the scheme.",
   },
   {
     stat: "M&V",
@@ -49,7 +49,7 @@ export default function BusinessPage() {
       <PageHero
         eyebrow="Commercial & industrial"
         title="Serious energy projects, managed by the accredited team."
-        lead="For offices, warehouses, retail and industrial sites. Rational, ROI-driven and compliant — we own the whole project so your team doesn't have to."
+        lead="For offices, warehouses, retail and industrial sites. Rational, ROI-driven and compliant. We own the whole project so your team doesn't have to."
         tone="business"
         image={PAGE_IMAGE.business.src}
         imageAlt={PAGE_IMAGE.business.alt}
@@ -61,7 +61,7 @@ export default function BusinessPage() {
       <Section tone="surface">
         <SectionHeader
           eyebrow="The opportunity"
-          title="The numbers are bigger — and so is the need to get it right."
+          title="The numbers are bigger, and so is the need to get it right."
           lead="Commercial value is project-specific. Here's the shape of it; we'll model the real figures with you."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -83,7 +83,7 @@ export default function BusinessPage() {
           ))}
         </div>
         <p className="mt-6 text-caption">
-          Indicative only — commercial value depends entirely on the project,
+          Indicative only. Commercial value depends entirely on the project,
           site and market certificate prices. Not a quote or guarantee.
         </p>
       </Section>
@@ -120,7 +120,7 @@ export default function BusinessPage() {
       <Section tone="muted">
         <SectionHeader
           eyebrow="The managed path"
-          title="A longer, verified process — handled for you."
+          title="A longer, verified process, handled for you."
           lead="Unlike a quick residential install, commercial projects run a measurement & verification path. We manage every stage."
         />
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -145,18 +145,18 @@ export default function BusinessPage() {
           <div>
             <Eyebrow onInk>Accreditation & compliance</Eyebrow>
             <h2 className="text-h2 mt-4 text-white">
-              The compliance burden sits with us — not your business.
+              The compliance burden sits with us, not your business.
             </h2>
             <p className="mt-5 text-white/75">
-              As a full-chain operation backed by our sister concern Aussie
-              Ecomarks — a registered Accredited Provider — we create the
+              As a full-chain operation backed by our subsidiary Aussie
+              Ecomarks, a registered Accredited Provider, we create the
               certificates and carry the program obligations. Your finance and
               facilities teams get a clean, ROI-driven project, not a scheme to
               administer.
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Aussie Ecomarks creates the VEECs — re-tested every year",
+                "Aussie Ecomarks creates the VEECs, re-tested every year",
                 "Measurement & verification handled to method",
                 "Audit-ready documentation across the project",
                 "One accountable partner, start to finish",
@@ -173,7 +173,7 @@ export default function BusinessPage() {
             <p className="mt-5 text-h3 text-white">Credible by design</p>
             <p className="mt-3 text-white/70">
               Most providers that address business do it dryly, and few prove
-              their accreditation. We make it the centrepiece — because for a
+              their accreditation. We make it the centrepiece, because for a
               six-figure decision, credibility is the product.
             </p>
             <Button href={PRIMARY_CTA.href} className="mt-6">
@@ -188,7 +188,7 @@ export default function BusinessPage() {
         <SectionHeader
           eyebrow="Track record"
           title="Projects & partners."
-          lead="Placeholder — client to supply case studies and logos before launch."
+          lead="Placeholder. Client to supply case studies and logos before launch."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[

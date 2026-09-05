@@ -33,6 +33,15 @@ export function UpgradesGrid({
         const loanOnly =
           rebate &&
           Object.values(rebate.layers).every((l) => l?.kind === "loan");
+        // Loan-only upgrades (battery) have no discount layers, so the
+        // discount headline is 0; fall back to the loan's upper bound so the
+        // tile never reads "up to $0".
+        const loanMax = rebate
+          ? Object.values(rebate.layers).reduce(
+              (sum, l) => sum + (l?.kind === "loan" ? l.max : 0),
+              0,
+            )
+          : 0;
         return (
           <Link
             key={u.slug}
@@ -94,7 +103,7 @@ export function UpgradesGrid({
                     flagship ? "text-white" : "text-ink",
                   )}
                 >
-                  up to {formatAUD(headline || 0)}
+                  up to {formatAUD(headline || loanMax)}
                   {loanOnly && (
                     <span className="ml-1 align-middle text-sm font-normal opacity-70">
                       (loan)

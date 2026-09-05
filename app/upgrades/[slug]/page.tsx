@@ -18,7 +18,7 @@ export async function generateMetadata({
   const upgrade = getUpgrade(slug);
   if (!upgrade) return {};
   return {
-    title: `${upgrade.longName} — ${upgrade.heroHeadline}`,
+    title: `${upgrade.longName}, ${upgrade.heroHeadline}`,
     description: upgrade.heroSub,
   };
 }

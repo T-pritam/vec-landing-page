@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/page-hero";
+import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { LeadForm } from "@/components/lead-form";
 import { PhoneIcon, CheckIcon } from "@/components/icons";
-import { PAGE_IMAGE } from "@/lib/images";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,14 +14,33 @@ export const metadata: Metadata = {
 export default function BookAnAssessmentPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Book an assessment"
-        title="Pick a time that suits you."
-        lead="Choose a preferred date and a time slot, and add your details. An accredited team member will confirm your no-obligation assessment — and give you a straight answer on what you'd actually pay."
-        tone="muted"
-        image={PAGE_IMAGE.contact.src}
-        imageAlt={PAGE_IMAGE.contact.alt}
-      />
+      <section className="relative min-h-[70vh] w-full overflow-hidden">
+        <Image
+          src="/images/contact.jpg"
+          alt="A friendly, no-obligation consultation with an accredited team member"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+        />
+        <div className="absolute bottom-16 sm:bottom-20 lg:bottom-24 left-0 p-8 sm:p-12 lg:p-16 z-20">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+            BOOK AN ASSESSMENT
+          </p>
+          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
+            Pick a time that suits you.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg font-medium text-white/80">
+            Choose a preferred date and a time slot, and add your details. An
+            accredited team member will confirm your no-obligation assessment
+            and give you a straight answer on what you&apos;d actually pay.
+          </p>
+        </div>
+      </section>
 
       <Section tone="surface">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -31,7 +49,7 @@ export default function BookAnAssessmentPage() {
             <h2 className="text-h3">What to expect</h2>
             <ul className="mt-6 space-y-2.5">
               {[
-                "A no-obligation assessment of your place and usage",
+                "Assessment of your place and usage",
                 "A clear, honest figure on what you'd actually pay",
                 "One accredited team for assessment, install and paperwork",
                 "3-hour arrival windows, 8am–8pm, so you're not waiting all day",
@@ -59,9 +77,8 @@ export default function BookAnAssessmentPage() {
             </dl>
 
             <p className="mt-8 text-caption">
-              Booking a slot is a request, not a locked appointment — we'll
-              confirm it with you. Contact details are placeholders, client to
-              confirm before launch.
+              Booking a slot is a request, not a locked appointment. We will
+              confirm it with you.
             </p>
           </div>
 

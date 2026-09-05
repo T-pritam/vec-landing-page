@@ -85,7 +85,7 @@ export function BookingDateTime({ invalid }: { invalid?: boolean }) {
       </p>
       {allTodayGone && (
         <p className="mb-2 text-sm text-text-muted">
-          No time slots left today — please pick another date.
+          No time slots left today. Please pick another date.
         </p>
       )}
       <div className="grid grid-cols-2 gap-2.5">

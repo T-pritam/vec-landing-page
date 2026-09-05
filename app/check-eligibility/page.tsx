@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/section";
 export const metadata: Metadata = {
   title: "Check your eligibility",
   description:
-    "A quick, branching eligibility check for homes and businesses. See which upgrades fit and an indicative idea of the combined value — never a guarantee. No obligation.",
+    "A quick, branching eligibility check for homes and businesses. See which upgrades fit and an indicative idea of the combined value, never a guarantee. No obligation.",
 };
 
 export default function CheckEligibilityPage() {
@@ -19,7 +19,7 @@ export default function CheckEligibilityPage() {
             See what you qualify for.
           </h1>
           <p className="text-lead mx-auto mt-5 max-w-xl">
-            A few quick questions — they adapt as you go. You'll get a tailored
+            A few quick questions that adapt as you go. You'll get a tailored
             shortlist of upgrades and an indicative idea of the combined value.
             No obligation, and nothing here is a guarantee.
           </p>
@@ -33,7 +33,7 @@ export default function CheckEligibilityPage() {
       <Section tone="muted" spacing="sm" narrow>
         <p className="text-center text-caption">
           Why we lead with this: of the competitor sites we reviewed, almost none
-          offer a real eligibility check — most just say “request a quote.” This
+          offer a real eligibility check. Most just say “request a quote.” This
           is the honest first step, and it's free to use.
         </p>
       </Section>

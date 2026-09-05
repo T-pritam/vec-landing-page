@@ -33,11 +33,11 @@ export const PAGE_IMAGE: Record<
 > = {
   residential: {
     src: "/images/residential.jpg",
-    alt: "A modern home at dusk — the kind AEM Energy upgrades across Victoria",
+    alt: "A modern home at dusk, the kind AEM Energy upgrades across Victoria",
   },
   business: {
     src: "/images/business.jpg",
-    alt: "A large-scale commercial solar array — the bigger projects AEM Energy manages end-to-end",
+    alt: "A large-scale commercial solar array, the bigger projects AEM Energy manages end-to-end",
   },
   about: {
     src: "/images/about.jpg",

@@ -29,11 +29,11 @@ export const UPGRADE_BRANDS: Record<string, Brand[]> = {
   ],
   battery: [
     { name: "GoodWe", logo: `${B}/goodwe.svg` },
-    { name: "Growatt" },
+    { name: "Growatt", logo: `${B}/Growatt.svg` },
     { name: "FoxESS", logo: `${B}/foxess.png` },
     { name: "Sofar", logo: `${B}/sofar.svg` },
-    { name: "Hiconix" },
-    { name: "Neovolt" },
+    { name: "Hiconics", logo: `${B}/Hiconics.svg` },
+    { name: "Neovolt", logo: `${B}/Neovolt.svg` },
     { name: "Sungrow", logo: `${B}/sungrow.svg` },
     { name: "Tesla", logo: `${B}/tesla.png` },
     { name: "BYD", logo: `${B}/byd.svg` },
@@ -48,14 +48,28 @@ export const UPGRADE_BRANDS: Record<string, Brand[]> = {
   ],
   "heat-pumps": [
     { name: "Emerald", logo: `${B}/emerald.png` },
-    { name: "AGM Energy" },
+    { name: "AGM Energy", logo: `${B}/AGM Energy.svg` },
     { name: "Rinnai", logo: `${B}/rinnai.svg` },
     { name: "Midea", logo: `${B}/midea.svg` },
     { name: "Econova", logo: `${B}/econova.png` },
-    { name: "Ecogenic" },
+    { name: "Ecogenica", logo: `${B}/Ecogenica.svg` },
   ],
 };
 
 export function getUpgradeBrands(slug: string): Brand[] {
   return UPGRADE_BRANDS[slug] ?? [];
+}
+
+export function getAllBrands(): Brand[] {
+  const seen = new Set<string>();
+  const result: Brand[] = [];
+  for (const brands of Object.values(UPGRADE_BRANDS)) {
+    for (const b of brands) {
+      if (!seen.has(b.name)) {
+        seen.add(b.name);
+        result.push(b);
+      }
+    }
+  }
+  return result;
 }

@@ -25,7 +25,7 @@ export function ProductGallery({
         className,
       )}
     >
-      <Carousel slides={slides} ariaLabel={`${name} — product images`} />
+      <Carousel slides={slides} ariaLabel={`${name}, product images`} />
     </div>
   );
 }

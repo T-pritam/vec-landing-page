@@ -265,12 +265,41 @@
   width: max-content;
   animation: brand-marquee var(--marquee-duration, 40s) linear infinite;
 }
-.brand-marquee:hover .brand-marquee-track {
-  animation-play-state: paused;
-}
 @keyframes brand-marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.cta-green {
+  background: linear-gradient(135deg, #3D913C 0%, #6DAF3B 100%);
+  color: #fff;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+.cta-green:hover {
+  background: linear-gradient(135deg, #2E7D32 0%, #3D913C 100%);
+}
+
+@media (max-width: 767px) {
+  .hero-mobile-aircon {
+    object-position: 30% 50%;
+    transform: scale(1.5);
+  }
+  .hero-mobile-heatpump {
+    object-position: 10% 55%;
+    transform: scale(1.5);
   }
 }
 

@@ -38,8 +38,8 @@ export function Logo({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/logo-aem-energy.png"
-      alt="AEM Energy — Smarter Homes"
+      src="/Logo.png"
+      alt="AEM Energy, Smarter Homes"
       className={cn("h-10 w-auto", className)}
     />
   );

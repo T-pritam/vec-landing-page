@@ -1,24 +1,20 @@
 import Link from "next/link";
 import { Logo, PhoneIcon } from "@/components/icons";
-import { TrustStrip } from "@/components/trust-strip";
-import { FooterProofStrip } from "@/components/footer-proof-strip";
 import { Button } from "@/components/ui/button";
 import { SITE, PRIMARY_CTA } from "@/lib/site";
-import { UPGRADES } from "@/lib/upgrades";
-import { STANDALONE_PRODUCTS } from "@/lib/products";
 
 const columns = [
   {
     title: "Products",
     links: [
-      ...UPGRADES.map((u) => ({
-        label: u.name,
-        href: `/upgrades/${u.slug}`,
-      })),
-      ...STANDALONE_PRODUCTS.map((p) => ({
-        label: p.name,
-        href: `/products/${p.slug}`,
-      })),
+      { label: "Solar", href: "/upgrades/solar" },
+      { label: "Battery Storage", href: "/upgrades/battery" },
+      { label: "Reverse Cycle Air Con", href: "/upgrades/air-con" },
+      { label: "Heat Pumps", href: "/upgrades/heat-pumps" },
+      {
+        label: "Distillo Water Filter",
+        href: "/products/distillo-water-filtration",
+      },
     ],
   },
   {
@@ -62,21 +58,19 @@ export function SiteFooter() {
               {PRIMARY_CTA.label}
             </Button>
             */}
-            <Button href={SITE.phoneHref} size="lg" variant="secondary-on-ink">
+            <a
+              href={SITE.phoneHref}
+              className="cta-green inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg"
+            >
               <PhoneIcon className="h-4 w-4" />
               {SITE.phone}
-            </Button>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Trust strip */}
-      <div className="container-page py-12">
-        <TrustStrip onInk />
-      </div>
-
       {/* Link columns */}
-      <div className="container-page grid grid-cols-2 gap-8 pb-12 sm:grid-cols-4">
+      <div className="container-page grid grid-cols-2 gap-8 pt-20 pb-12 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <Logo onInk />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
@@ -85,15 +79,14 @@ export function SiteFooter() {
           <p className="mt-4 text-sm text-white/55">
             {SITE.address}
             <br />
-            {SITE.serviceArea}
-            <br />
             <a
               href={SITE.phoneHref}
               className="text-white/80 hover:text-brand"
             >
               {SITE.phone}
             </a>
-            {" · "}
+            <span className="hidden md:inline">{" · "}</span>
+            <br className="md:hidden" />
             <a
               href={`mailto:${SITE.email}`}
               className="text-white/80 hover:text-brand"
@@ -124,11 +117,6 @@ export function SiteFooter() {
         ))}
       </div>
 
-      {/* State-aware accreditation proof line */}
-      <div className="container-page pb-6">
-        <FooterProofStrip />
-      </div>
-
       {/* Legal line */}
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
@@ -137,7 +125,7 @@ export function SiteFooter() {
             {" "}· ABN {SITE.abn}.
           </p>
           <p className="max-w-2xl sm:text-right">
-            Indicative figures only — not a quote or guarantee. VEU and Solar
+            Indicative figures only, not a quote or guarantee. VEU and Solar
             Victoria are distinct programs; income thresholds apply only to Solar
             Victoria.
           </p>

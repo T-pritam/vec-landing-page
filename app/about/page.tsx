@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/page-hero";
+import Image from "next/image";
+import Link from "next/link";
 import { Section, SectionHeader, Eyebrow } from "@/components/ui/section";
 import { TrustStrip } from "@/components/trust-strip";
 import { SocialProof } from "@/components/sections/social-proof";
 import { CredibilityBand } from "@/components/sections/credibility-band";
 import { CheckIcon, ShieldCheckIcon } from "@/components/icons";
-import { PAGE_IMAGE } from "@/lib/images";
-import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About & Why Us — accreditation, proven",
+  title: "About & Why Us, accreditation, proven",
   description:
-    "AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole delivery chain is how we protect customers.",
+    "AEM Energy is a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole delivery chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
   {
     t: "We own the lead",
-    b: "We talk to you directly — no reselling your details to a third-party installer.",
+    b: "We talk to you directly, no reselling your details to a third-party installer.",
   },
   {
     t: "We own the install",
@@ -25,7 +25,7 @@ const FULL_CHAIN_POINTS = [
   },
   {
     t: "We own the certificates",
-    b: "Only a registered Accredited Provider can create VEECs — that's our sister concern, Aussie Ecomarks — so the value stays in the group, not outsourced.",
+    b: "Only a registered Accredited Provider can create VEECs. That's our subsidiary, Aussie Ecomarks, so the value stays in the group, not outsourced.",
   },
   {
     t: "We own the outcome",
@@ -36,17 +36,40 @@ const FULL_CHAIN_POINTS = [
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="About us"
-        title="Accredited isn't a slogan here. It's the whole business."
-        lead="AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades program. That's a specific, verifiable status, and it's the reason we can do what most providers can't."
-        tone="ink"
-        image={PAGE_IMAGE.about.src}
-        imageAlt={PAGE_IMAGE.about.alt}
-        // Check-eligibility CTA commented out per client request (2026-07-30):
-        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
-        secondary={{ label: SECONDARY_CTA.label, href: SECONDARY_CTA.href }}
-      />
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src="/images/about.jpg"
+          alt="An accredited installer fitting solar panels under a clear sky"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+        />
+        <div className="absolute bottom-16 sm:bottom-20 lg:bottom-24 left-0 p-8 sm:p-12 lg:p-16 z-20">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+            ABOUT US
+          </p>
+          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
+            Accredited isn&apos;t a slogan here. It&apos;s the whole business.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg font-medium text-white/80">
+            AEM Energy is a subsidiary of Aussie Ecomarks, a registered
+            Accredited Provider under the Victorian Energy Upgrades program.
+            That&apos;s a specific, verifiable status, and it&apos;s the
+            reason we can do what most providers can&apos;t.
+          </p>
+          <Link
+            href="/book-an-assessment"
+            className="cta-green mt-8 inline-block rounded-lg px-8 py-4 text-lg"
+          >
+            Book an assessment
+          </Link>
+        </div>
+      </section>
 
       {/* 1 — Who we are */}
       <Section tone="surface">
@@ -59,15 +82,15 @@ export default function AboutPage() {
             <p className="mt-5 text-body">
               Under the VEU program, only a registered Accredited Provider can
               create the tradable certificates (VEECs) that fund the rebates.
-              That accreditation is held by Aussie Ecomarks, our sister concern —
+              That accreditation is held by Aussie Ecomarks, our subsidiary,
               and AEM Energy owns the entire delivery chain: the lead, the
               assessment, the install (via our registered installers), the
               certificate creation, and the sale.
             </p>
             <p className="mt-4 text-body">
               For you, that means a single accountable team and an honest number.
-              We'll never tell you an upgrade is “free” — there's always a
-              minimum contribution — but we will show you a large upfront
+              We'll never tell you an upgrade is “free”. There's always a
+              minimum contribution, but we will show you a large upfront
               discount and exactly what you'd pay.
             </p>
           </div>
@@ -78,7 +101,7 @@ export default function AboutPage() {
             <dl className="mt-4 space-y-4">
               {[
                 ["Trading as", SITE.name],
-                ["Accreditation", "Aussie Ecomarks — Accredited Provider (VEU)"],
+                ["Accreditation", "Aussie Ecomarks, Accredited Provider (VEU)"],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],
                 ["Program running since", "2021"],
@@ -90,7 +113,7 @@ export default function AboutPage() {
               ))}
             </dl>
             <p className="mt-5 text-caption">
-              Accreditation is held by our sister concern, Aussie Ecomarks.
+              Accreditation is held by our subsidiary, Aussie Ecomarks.
             </p>
           </aside>
         </div>
@@ -101,11 +124,11 @@ export default function AboutPage() {
         <SectionHeader
           eyebrow="Proof, not a promise"
           title="Re-tested every single year."
-          lead="Accredited Providers must pass a “fit and proper persons” test and a “competent and capable” test — and renew accreditation annually. Aussie Ecomarks, our sister concern, holds that accreditation — a strong, specific credibility signal that almost no competitor surfaces."
+          lead={'Accredited Providers must pass a “fit and proper persons” test and a “competent and capable” test, and renew accreditation annually. Aussie Ecomarks, our subsidiary, holds that accreditation, a strong, specific credibility signal that almost no competitor surfaces.'}
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            ["Fit & proper", "An annual integrity test — not a one-time tick."],
+            ["Fit & proper", "An annual integrity test, not a one-time tick."],
             ["Competent & capable", "Proven capability to deliver, reassessed every year."],
             ["Renewed annually", "Accreditation lapses if we don't keep meeting the bar."],
           ].map(([t, b]) => (

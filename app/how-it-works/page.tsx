@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/page-hero";
+import Image from "next/image";
+import Link from "next/link";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { FullChain } from "@/components/sections/full-chain";
 import { CheckIcon } from "@/components/icons";
-import { PAGE_IMAGE } from "@/lib/images";
-import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "How It Works — one accountable team, the whole upgrade",
+  title: "How It Works, one accountable team, the whole upgrade",
   description:
-    "How your upgrade actually gets done: one accountable team handles the assessment, the install and every certificate — backed by an Accredited Provider — so you get a genuine upfront discount and do almost nothing.",
+    "How your upgrade actually gets done: one accountable team handles the assessment, the install and every certificate, backed by an Accredited Provider, so you get a real upfront discount and do almost nothing.",
 };
 
 const TIMELINES = [
@@ -38,19 +37,41 @@ const TIMELINES = [
 export default function HowItWorksPage() {
   return (
     <>
-      <PageHero
-        eyebrow="How it works"
-        title={<>One accountable team. The whole upgrade, handled.</>}
-        lead="One accountable team handles the assessment, the install and every certificate. Here is what to expect, and why we quote a genuine upfront discount instead of a “free” headline."
-        tone="muted"
-        image={PAGE_IMAGE["how-it-works"].src}
-        imageAlt={PAGE_IMAGE["how-it-works"].alt}
-        // Check-eligibility CTA commented out per client request (2026-07-30):
-        // primary={{ label: PRIMARY_CTA.label, href: PRIMARY_CTA.href }}
-        secondary={{ label: "Talk to us", href: SECONDARY_CTA.href }}
-      />
+      <section className="relative h-screen w-full overflow-hidden">
+        <Image
+          src="/images/how-it-works.jpg"
+          alt="Close-up of a solar panel surface catching the light"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+        />
+        <div className="absolute bottom-16 sm:bottom-20 lg:bottom-24 left-0 p-8 sm:p-12 lg:p-16 z-20">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+            HOW IT WORKS
+          </p>
+          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white">
+            One accountable team. The whole upgrade, handled.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg font-medium text-white/80">
+            One accountable team handles the assessment, the install and every
+            certificate. Here is what to expect, and why we quote a real
+            upfront discount instead of a &ldquo;free&rdquo; headline.
+          </p>
+          <Link
+            href="/book-an-assessment"
+            className="cta-green mt-8 inline-block rounded-lg px-8 py-4 text-lg"
+          >
+            Talk to us
+          </Link>
+        </div>
+      </section>
 
-      {/* 1 — What to expect (timing) */}
+      {/* 1 - What to expect (timing) */}
       <Section tone="surface">
         <SectionHeader
           eyebrow="What to expect"
@@ -78,12 +99,12 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      {/* 3 — Full chain, in house */}
+      {/* 3 - Full chain, in house */}
       <Section tone="muted">
         <SectionHeader
           eyebrow="Full chain, in house"
           title="We assess. We install. We handle the paperwork. You save."
-          lead="Because our sister concern Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
+          lead="Because our subsidiary Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
         />
         <div className="mt-10">
           <FullChain />

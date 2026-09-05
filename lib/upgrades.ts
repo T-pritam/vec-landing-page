@@ -80,18 +80,18 @@ export const UPGRADES: UpgradeContent[] = [
       "You pay the reduced price, and we handle the certificate paperwork.",
     ],
     fullChain:
-      "Because our sister concern Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
+      "Because our subsidiary Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
     flagship: true,
     commercialAngle:
-      "Commercial rooftop and ground-mount solar can run into five figures of combined value, with a longer measurement & verification path. We run that as a managed project — see the Business journey.",
+      "Commercial rooftop and ground-mount solar can run into five figures of combined value, with a longer measurement & verification path. We run that as a managed project. See the Business journey.",
     faqs: [
       {
         q: "Is rooftop solar means-tested?",
-        a: "The federal STC component is not means-tested. The Solar Victoria rebate layer is — it has income and property thresholds. We keep the two separate so you know exactly which applies to you.",
+        a: "The federal STC component is not means-tested. The Solar Victoria rebate layer is. It has income and property thresholds. We keep the two separate so you know exactly which applies to you.",
       },
       {
         q: "Will it cover my whole bill?",
-        a: "Sizing depends on your roof and usage. We size for the best return rather than promising a zero bill — and we'll show you the indicative numbers before you commit.",
+        a: "Sizing depends on your roof and usage. We size for the best return rather than promising a zero bill, and we'll show you the indicative numbers before you commit.",
       },
       {
         q: "Can I add a battery later?",
@@ -103,38 +103,38 @@ export const UPGRADES: UpgradeContent[] = [
   {
     slug: "heat-pumps",
     name: "Heat Pumps",
-    longName: "Heat pumps — heating, cooling & hot water",
+    longName: "Heat pumps, heating, cooling & hot water",
     icon: "heat-pump",
     tagline:
-      "Heating, cooling and hot water — the clearest three-layer stack (VEU + STC + Solar Victoria).",
+      "Heating, cooling and hot water, the clearest three-layer stack (VEU + STC + Solar Victoria).",
     eyebrow: "Heating, cooling & hot water",
     heroHeadline: "One efficient system for heating, cooling and hot water.",
     heroSub:
-      "A reverse-cycle heat pump replaces old gas or resistive heating — and a heat-pump hot water system is the clearest example of stacking, drawing the VEU discount, federal STCs and, for eligible homes, a Solar Victoria rebate at once.",
+      "A reverse-cycle heat pump replaces old gas or resistive heating, and a heat-pump hot water system is the clearest example of stacking, drawing the VEU discount, federal STCs and, for eligible homes, a Solar Victoria rebate at once.",
     whatItIs: {
       heading: "What you actually get",
-      body: "A right-sized, high-efficiency heat pump installed by our accredited team — for space heating and cooling, hot water, or both — with the combined incentive value already taken off your price.",
+      body: "A right-sized, high-efficiency heat pump installed by our accredited team, for space heating and cooling, hot water, or both, with the combined incentive value already taken off your price.",
       points: [
         "Reverse-cycle heating and cooling, plus efficient heat-pump hot water.",
         "Far lower running cost than gas or old electric storage.",
-        "The VEU discount applied upfront — replacing gas or resistive systems saves the most.",
+        "The VEU discount applied upfront. Replacing gas or resistive systems saves the most.",
         "Heat-pump hot water can stack VEU + federal STCs + a Solar Victoria rebate for eligible homes.",
       ],
     },
     howItWorks: [
-      "We assess your home — heating, cooling and hot-water needs — and size the system.",
+      "We assess your home (heating, cooling and hot-water needs) and size the system.",
       "Our accredited installers complete the changeover.",
       "VEECs (and STCs on eligible hot water) are created and discounted off your price; any Solar Victoria rebate is applied.",
-      "You pay the reduced price — all paperwork handled.",
+      "You pay the reduced price, all paperwork handled.",
     ],
     fullChain:
-      "Stacking three programs cleanly on a hot-water system is exactly where a full-chain operator earns its keep — we line up VEU, STC and Solar Victoria so you don't have to, all in one chain with no hand-offs.",
+      "Stacking three programs cleanly on a hot-water system is exactly where a full-chain operator earns its keep. We line up VEU, STC and Solar Victoria so you don't have to, all in one chain with no hand-offs.",
     commercialAngle:
-      "Commercial sites can upgrade heating/cooling at scale — and high hot-water loads (hospitality, aged care, gyms) make a strong managed VEU project.",
+      "Commercial sites can upgrade heating/cooling at scale, and high hot-water loads (hospitality, aged care, gyms) make a strong managed VEU project.",
     faqs: [
       {
         q: "Does this cover hot water too?",
-        a: "Yes. Heat pumps now cover both space heating/cooling and hot water. A heat-pump hot water system is the clearest stacking example — it can draw VEU, federal STCs and a Solar Victoria rebate together for eligible homes.",
+        a: "Yes. Heat pumps now cover both space heating/cooling and hot water. A heat-pump hot water system is the clearest stacking example. It can draw VEU, federal STCs and a Solar Victoria rebate together for eligible homes.",
       },
       {
         q: "Do I have to remove my gas heater?",
@@ -142,7 +142,7 @@ export const UPGRADES: UpgradeContent[] = [
       },
       {
         q: "Is it means-tested?",
-        a: "VEU is not means-tested — it's open to Victorian households and businesses. Only the Solar Victoria layer (which can apply to heat-pump hot water) has income and property thresholds.",
+        a: "VEU is not means-tested. It's open to Victorian households and businesses. Only the Solar Victoria layer (which can apply to heat-pump hot water) has income and property thresholds.",
       },
     ],
     available: "both",
@@ -152,18 +152,18 @@ export const UPGRADES: UpgradeContent[] = [
     name: "Battery",
     longName: "Home battery storage",
     icon: "battery",
-    tagline: "Store your solar — backed by an interest-free loan, not a discount.",
+    tagline: "Store your solar, backed by an interest-free loan, not a discount.",
     eyebrow: "Energy storage",
     heroHeadline: "Use your solar after dark.",
     heroSub:
-      "A home battery stores the power your panels make during the day. The main support here is a Solar Victoria interest-free loan for eligible homes — that's finance you repay, not a discount, and we're upfront about the difference.",
+      "A home battery stores the power your panels make during the day. The main support here is a Solar Victoria interest-free loan for eligible homes. That's finance you repay, not a discount, and we're upfront about the difference.",
     whatItIs: {
       heading: "What you actually get",
       body: "A correctly-sized battery integrated with your solar, installed by our accredited team.",
       points: [
         "More of your own solar used at home instead of exported cheaply.",
         "Backup options during outages, depending on setup.",
-        "A Solar Victoria interest-free loan for eligible homes — repaid over time.",
+        "A Solar Victoria interest-free loan for eligible homes, repaid over time.",
         "Best value when paired with a well-sized solar system.",
       ],
     },
@@ -171,14 +171,14 @@ export const UPGRADES: UpgradeContent[] = [
       "We review your solar, usage and goals to size storage.",
       "Our accredited installers integrate the battery.",
       "Eligible homes can apply for a Solar Victoria interest-free loan.",
-      "You repay the loan over its term — we explain the real cost first.",
+      "You repay the loan over its term. We explain the real cost first.",
     ],
     fullChain:
-      "We're clear that a battery's support is mostly finance, not a giveaway. Honest framing is the point — you'll see what you actually pay before you commit.",
+      "We're clear that a battery's support is mostly finance, not a giveaway. Honest framing is the point. You'll see what you actually pay before you commit.",
     faqs: [
       {
         q: "Is the battery free or fully rebated?",
-        a: "No. There are no free upgrades. The main support is an interest-free loan for eligible homes — you repay it. We'll show you the real numbers.",
+        a: "No. There are no free upgrades. The main support is an interest-free loan for eligible homes. You repay it. We'll show you the real numbers.",
       },
       {
         q: "Do I need solar first?",
@@ -211,7 +211,7 @@ export const UPGRADES: UpgradeContent[] = [
       "We assess the space and your current unit.",
       "Our accredited installers complete the install.",
       "VEECs are created and discounted off your price.",
-      "You pay the reduced price — paperwork handled.",
+      "You pay the reduced price, paperwork handled.",
     ],
     fullChain:
       "Same full-chain promise: one accredited team for assessment, install and certificates.",

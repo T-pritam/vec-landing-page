@@ -50,7 +50,7 @@ export function CredibilityBand({ className }: { className?: string }) {
           </span>
         ))}
         <span className="text-caption w-full sm:w-auto sm:ml-auto">
-          Official badges — client to supply before launch.
+          Official badges. Client to supply before launch.
         </span>
       </div>
     </div>

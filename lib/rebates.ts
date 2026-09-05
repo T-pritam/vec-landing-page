@@ -39,7 +39,7 @@ export const INCENTIVE_LAYERS: Record<LayerId, IncentiveLayerMeta> = {
     name: "Victorian Energy Upgrades",
     short: "VEU",
     blurb:
-      "A certificate-based discount, applied upfront. Not means-tested — open to Victorian households and businesses.",
+      "A certificate-based discount, applied upfront. Not means-tested. Open to Victorian households and businesses.",
     mechanism:
       "We create VEECs from the energy your upgrade saves and sell them to energy retailers; that value comes back to you as an upfront discount.",
     incomeTested: false,
@@ -104,13 +104,13 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
         min: 1000,
         max: 3300,
         kind: "discount",
-        note: "Federal STCs — scales with system size",
+        note: "Federal STCs, scales with system size",
       },
       solarVictoria: {
         min: 0,
         max: 1400,
         kind: "rebate",
-        note: "Eligible homes only — income & property thresholds",
+        note: "Eligible homes only. Income & property thresholds",
       },
     },
     stackingNote:
@@ -123,7 +123,7 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
         min: 500,
         max: 3000,
         kind: "discount",
-        note: "Heating/cooling or hot water — replacing gas/electric saves most",
+        note: "Heating/cooling or hot water. Replacing gas/electric saves most",
       },
       stc: {
         min: 200,
@@ -135,11 +135,11 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
         min: 0,
         max: 1000,
         kind: "rebate",
-        note: "Hot water, eligible homes only — income & property thresholds",
+        note: "Hot water, eligible homes only. Income & property thresholds",
       },
     },
     stackingNote:
-      "Heat pumps cover heating, cooling and hot water. Heat-pump hot water is the clearest stacking story — it can draw the VEU discount, federal STCs and a Solar Victoria rebate at once for eligible homes.",
+      "Heat pumps cover heating, cooling and hot water. Heat-pump hot water is the clearest stacking story. It can draw the VEU discount, federal STCs and a Solar Victoria rebate at once for eligible homes.",
   },
   battery: {
     slug: "battery",
@@ -148,11 +148,11 @@ export const UPGRADE_REBATES: Record<string, UpgradeRebate> = {
         min: 0,
         max: 8800,
         kind: "loan",
-        note: "Interest-free loan for eligible homes — repaid over time, not a discount",
+        note: "Interest-free loan for eligible homes, repaid over time, not a discount",
       },
     },
     stackingNote:
-      "A battery pairs with solar PV. The main support is a Solar Victoria interest-free loan for eligible homes — that's finance, not a discount, and we say so.",
+      "A battery pairs with solar PV. The main support is a Solar Victoria interest-free loan for eligible homes. That's finance, not a discount, and we say so.",
   },
   "air-con": {
     slug: "air-con",
@@ -176,8 +176,8 @@ export const REBATE_META = {
   region: "Victoria, Australia",
   currency: "AUD",
   disclaimer:
-    "Figures are indicative only and shown as “up to” amounts. Real values change with government policy and market certificate prices, and depend on your property, product and eligibility. Nothing here is a quote or a guarantee.",
-  shortDisclaimer: "Indicative “up to” figures — not a quote or guarantee.",
+    `Figures are indicative only and shown as “up to” amounts. Real values change with government policy and market certificate prices, and depend on your property, product and eligibility. Nothing here is a quote or a guarantee.`,
+  shortDisclaimer: `Indicative “up to” figures, not a quote or guarantee.`,
 } as const;
 
 /* ----------------------------------------------------------------------------

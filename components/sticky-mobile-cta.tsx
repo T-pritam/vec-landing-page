@@ -41,29 +41,12 @@ export function StickyMobileCTA() {
         show ? "translate-y-0" : "translate-y-full",
       )}
     >
-      <div className="flex items-center gap-2.5">
-        <a
-          href={SITE.phoneHref}
-          aria-label={`Call ${SITE.phone}`}
-          className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-hairline text-ink"
-        >
-          <PhoneIcon className="h-5 w-5" />
-        </a>
-        {/* Check-eligibility CTA commented out per client request (2026-07-30).
-        <Link
-          href={PRIMARY_CTA.href}
-          className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-brand font-semibold text-ink"
-        >
-          {PRIMARY_CTA.label}
-        </Link>
-        */}
-        <Link
-          href={SECONDARY_CTA.href}
-          className="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-brand font-semibold text-ink"
-        >
-          {SECONDARY_CTA.label}
-        </Link>
-      </div>
+      <Link
+        href={SECONDARY_CTA.href}
+        className="cta-green inline-flex h-12 w-full items-center justify-center rounded-full"
+      >
+        {SECONDARY_CTA.label}
+      </Link>
     </div>
   );
 }

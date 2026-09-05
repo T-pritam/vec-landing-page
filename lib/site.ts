@@ -9,13 +9,13 @@ export const SITE = {
   // AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited
   // Provider under the Victorian Energy Upgrades (VEU) scheme.
   accreditation:
-    "A sister concern of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme",
-  tagline: "Solar, batteries and heat pumps — upgraded properly.",
+    "A subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme",
+  tagline: "Everything your home runs on, upgraded properly.",
   description:
-    "AEM Energy handles your entire energy upgrade, end to end. As a sister concern of Aussie Ecomarks — a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme — we own the whole chain, from assessment and install to certificates and paperwork, so you get a genuine upfront discount and do almost nothing.",
+    "AEM Energy handles your entire energy upgrade, end to end. As a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, we own the whole chain, from assessment and install to certificates and paperwork, so you get a real upfront discount and do almost nothing.",
   url: "https://aemenergy.com.au",
-  phone: "+61 431 682 748",
-  phoneHref: "tel:+61431682748",
+  phone: "+61 434 623 604",
+  phoneHref: "tel:+61434623604",
   email: "contact@aemenergy.com.au",
   serviceArea: "Victoria, metro and regional",
   address: "3 Envision Close, Pakenham VIC 3810",

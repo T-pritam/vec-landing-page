@@ -184,7 +184,7 @@ export function UpgradeTemplate({ upgrade }: { upgrade: UpgradeContent }) {
           <SectionHeader
             eyebrow="Residential & commercial"
             title="Same accreditation. Two very different projects."
-            lead="Solar scales from a single rooftop to a six-figure commercial install. The journey differs — pick the one that fits."
+            lead="Solar scales from a single rooftop to a six-figure commercial install. The journey differs, so pick the one that fits."
             onInk
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2">

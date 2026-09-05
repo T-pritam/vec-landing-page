@@ -12,7 +12,7 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Residential upgrades for your home",
   description:
-    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a genuine upfront discount, handled end-to-end by AEM Energy, a sister concern of Aussie Ecomarks — a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme.",
+    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a real upfront discount, handled end-to-end by AEM Energy, a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme.",
 };
 
 export default function ResidentialPage() {
@@ -35,7 +35,7 @@ export default function ResidentialPage() {
           <SectionHeader
             eyebrow="Household upgrades"
             title="Choose your upgrade."
-            lead="Every figure here is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail and the eligibility."
+            lead={'Every figure here is indicative and shown as an “up to” amount. Each upgrade has its own page with the detail and the eligibility.'}
           />
         </Reveal>
         <Reveal delay={0.08} className="mt-10">
@@ -47,7 +47,7 @@ export default function ResidentialPage() {
           <SectionHeader
             eyebrow="Also from AEM Energy"
             title="A standalone product, too."
-            lead="Not everything we do is a VEU upgrade. Distillo Water Filtration is a separate product — no rebate or scheme, just a quality system and a clean install."
+            lead="Not everything we do is a VEU upgrade. Distillo Water Filtration is a separate product, no rebate or scheme, just a quality system and a clean install."
           />
           <div className="mt-8">
             <StandaloneProducts />

@@ -189,7 +189,7 @@ export function EligibilityQuiz() {
         {stepId === "interests" && (
           <ChoiceStep
             title="Which upgrades are you interested in?"
-            hint="Pick everything that's on your mind — stacking several is where the value is."
+            hint="Pick everything that's on your mind. Stacking several is where the value is."
             type="multi"
             options={interestOptions}
             selected={answers.interests}
@@ -200,7 +200,7 @@ export function EligibilityQuiz() {
         {stepId === "timing" && (
           <ChoiceStep
             title="When are you looking to go ahead?"
-            hint="A rough idea is fine — it just helps us prioritise."
+            hint="A rough idea is fine, it just helps us prioritise."
             type="single"
             options={TIMING_OPTIONS}
             selected={answers.timing}
@@ -257,7 +257,7 @@ function PostcodeStep({
   return (
     <div>
       <StepHeading
-        title="First — what's your postcode?"
+        title="First, what's your postcode?"
         hint="The Victorian Energy Upgrades program is Victoria-only, so this is where we start."
       />
       <input
@@ -282,10 +282,10 @@ function PostcodeStep({
         >
           {vic ? (
             <>
-              <CheckIcon className="h-4 w-4" /> That's in Victoria — you're in the right place.
+              <CheckIcon className="h-4 w-4" /> That's in Victoria. You're in the right place.
             </>
           ) : (
-            <>That postcode looks outside Victoria — we'll show you what that means.</>
+            <>That postcode looks outside Victoria. We'll show you what that means.</>
           )}
         </p>
       )}
@@ -301,8 +301,8 @@ function AudienceStep({
   onPick: (v: Audience) => void;
 }) {
   const opts: { value: Audience; label: string; desc: string }[] = [
-    { value: "home", label: "My home", desc: "Household upgrades — fast and simple." },
-    { value: "business", label: "My business", desc: "Commercial & industrial — larger, ROI-driven." },
+    { value: "home", label: "My home", desc: "Household upgrades, fast and simple." },
+    { value: "business", label: "My business", desc: "Commercial & industrial, larger, ROI-driven." },
   ];
   return (
     <div>
@@ -542,10 +542,10 @@ function ResultStep({
             >
               {state === "qualify" ? (
                 <>
-                  <CheckIcon className="h-4 w-4" /> Good news — you look eligible
+                  <CheckIcon className="h-4 w-4" /> Good news, you look eligible
                 </>
               ) : (
-                <>Let's talk — your situation looks partial</>
+                <>Let's talk, your situation looks partial</>
               )}
             </span>
 
@@ -556,8 +556,8 @@ function ResultStep({
                 </h2>
                 <p className="mt-3 text-lead">
                   Based on your answers, your site is a good candidate for a
-                  managed VEU project. Commercial value is modelled per project —
-                  and it can reach five figures — so the next step is a site
+                  managed VEU project. Commercial value is modelled per project,
+                  and it can reach five figures, so the next step is a site
                   assessment, not a calculator.
                 </p>
               </>
@@ -565,16 +565,16 @@ function ResultStep({
               <>
                 <h2 className="mt-5 text-h2">
                   {state === "qualify"
-                    ? "Here's what you could stack — indicatively."
-                    : "There's likely value here — let's confirm the detail."}
+                    ? "Here's what you could stack, indicatively."
+                    : "There's likely value here. Let's confirm the detail."}
                 </h2>
                 {state === "partial" && (
                   <p className="mt-3 text-body">
                     {answers.tenure === "rent"
-                      ? "As a renter you can still benefit, but some upgrades need your landlord's sign-off — so we'll talk it through."
+                      ? "As a renter you can still benefit, but some upgrades need your landlord's sign-off, so we'll talk it through."
                       : answers.timing === "researching"
-                        ? "You're still researching — no rush. Here's the indicative picture so you know what's possible."
-                        : "A couple of your answers mean we should confirm the detail with you — here's the indicative picture."}
+                        ? "You're still researching, no rush. Here's the indicative picture so you know what's possible."
+                        : "A couple of your answers mean we should confirm the detail with you. Here's the indicative picture."}
                   </p>
                 )}
                 <div className="mt-5 flex flex-wrap items-end gap-x-3 gap-y-2">
@@ -586,7 +586,7 @@ function ResultStep({
                 </div>
                 <p className="mt-2 text-body">
                   combined indicative value across your selected upgrades
-                  {answers.tenure === "rent" && " (excluding Solar Victoria — owner sign-off needed)"}
+                  {answers.tenure === "rent" && " (excluding Solar Victoria, owner sign-off needed)"}
                   .
                 </p>
 
@@ -616,7 +616,7 @@ function ResultStep({
                     <span className="figure font-semibold text-ink">
                       {formatAUD(stack.loan.max)}
                     </span>{" "}
-                    for storage — finance you repay, not a discount.
+                    for storage, finance you repay, not a discount.
                   </p>
                 )}
               </>
@@ -669,14 +669,14 @@ function ResultStep({
         <p className="mt-2 text-body">
           {state === "outside-scope"
             ? "We'll let you know if a program opens up in your area, or point you toward your state's scheme. No obligation."
-            : "Leave your details and an accredited team member will confirm exactly what you qualify for — and what you'd actually pay. No obligation."}
+            : "Leave your details and an accredited team member will confirm exactly what you qualify for and what you'd actually pay. No obligation."}
         </p>
         <LeadForm
           context={`eligibility-quiz:${state}`}
           defaults={{
             audience: answers.audience,
             postcode: answers.postcode,
-            message: `Eligibility checker —\n${summaryLines.join("\n")}`,
+            message: `Eligibility checker:\n${summaryLines.join("\n")}`,
           }}
           submitLabel={
             state === "outside-scope"
@@ -711,8 +711,8 @@ function OutsideScope({ postcode }: { postcode?: string }) {
       </h2>
       <p className="mt-3 text-lead">
         The Victorian Energy Upgrades program is Victoria-only, so we can't run
-        an upgrade for that address today. Other states have their own schemes —
-        leave your details and we'll point you in the right direction.
+        an upgrade for that address today. Other states have their own schemes.
+        Leave your details and we'll point you in the right direction.
       </p>
     </>
   );

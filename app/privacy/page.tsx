@@ -6,21 +6,21 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy & Terms",
   description:
-    "Privacy notice and terms of use for the Accredited Energy prototype. Placeholder legal content — client to provide final copy before launch.",
+    "Privacy notice and terms of use for the Accredited Energy prototype. Placeholder legal content, client to provide final copy before launch.",
 };
 
 const PRIVACY = [
   {
     h: "What we collect",
-    p: "When you use the eligibility check or a contact form, we collect the details you give us — such as your name, contact details, postcode and the upgrades you're interested in — so we can respond to your enquiry.",
+    p: "When you use the eligibility check or a contact form, we collect the details you give us, such as your name, contact details, postcode and the upgrades you're interested in, so we can respond to your enquiry.",
   },
   {
     h: "How we use it",
-    p: "We use your information to assess what you may be eligible for, to contact you about your enquiry, and to deliver any upgrade you proceed with. We will never imply an upgrade is “free” — we'll always show you what you'd actually pay.",
+    p: `We use your information to assess what you may be eligible for, to contact you about your enquiry, and to deliver any upgrade you proceed with. We will never imply an upgrade is “free”. We will always show you what you'd actually pay.`,
   },
   {
     h: "Who sees it",
-    p: "Your details are handled by our team. As a full-chain operation — a sister concern of Aussie Ecomarks, a registered Accredited Provider — we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
+    p: "Your details are handled by our team. As a full-chain operation, a subsidiary of Aussie Ecomarks, a registered Accredited Provider, we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
   },
   {
     h: "Your choices",
@@ -31,11 +31,11 @@ const PRIVACY = [
 const TERMS = [
   {
     h: "Indicative figures only",
-    p: "All dollar amounts, ranges and combined values shown on this site are indicative and presented as “up to” figures. They are not quotes or guarantees. Real values depend on your property, product, eligibility, government policy and market certificate prices, and can change.",
+    p: `All dollar amounts, ranges and combined values shown on this site are indicative and presented as “up to” figures. They are not quotes or guarantees. Real values depend on your property, product, eligibility, government policy and market certificate prices, and can change.`,
   },
   {
-    h: "No “free” upgrades",
-    p: "There are no free upgrades under the Victorian Energy Upgrades program — a minimum customer contribution applies. Any reference to a discount means a reduction in price, not a zero cost.",
+    h: `No “free” upgrades`,
+    p: "There are no free upgrades under the Victorian Energy Upgrades program. A minimum customer contribution applies. Any reference to a discount means a reduction in price, not a zero cost.",
   },
   {
     h: "Two distinct programs",
@@ -43,7 +43,7 @@ const TERMS = [
   },
   {
     h: "Eligibility & accreditation",
-    p: "Only a registered Accredited Provider can create the certificates (VEECs) that fund the discount — for us, that's our sister concern, Aussie Ecomarks. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
+    p: "Only a registered Accredited Provider can create the certificates (VEECs) that fund the discount. For us, that's our subsidiary, Aussie Ecomarks. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
   },
 ];
 
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Legal"
         title="Privacy & Terms"
-        lead="Placeholder legal content for the prototype — client to provide final copy before launch. The honest-pricing and indicative-figure principles below reflect how the site is built to behave."
+        lead="Placeholder legal content for the prototype. Client to provide final copy before launch. The honest-pricing and indicative-figure principles below reflect how the site is built to behave."
         tone="muted"
       />
 
