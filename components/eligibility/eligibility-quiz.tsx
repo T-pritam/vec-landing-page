@@ -671,29 +671,21 @@ function ResultStep({
             ? "We'll let you know if a program opens up in your area, or point you toward your state's scheme. No obligation."
             : "Leave your details and an accredited team member will confirm exactly what you qualify for and what you'd actually pay. No obligation."}
         </p>
+        {/* Identical to the /book-an-assessment form — same fields, same order,
+            same submit label — so both routes capture a lead the same way. The
+            quiz answers still ride along via `defaults` (they pre-fill postcode
+            and the notes field) and the result panel above already shows them,
+            so the form no longer repeats them in a summary block. */}
         <LeadForm
           context={`eligibility-quiz:${state}`}
+          booking
           defaults={{
             audience: answers.audience,
             postcode: answers.postcode,
             message: `Eligibility checker:\n${summaryLines.join("\n")}`,
           }}
-          submitLabel={
-            state === "outside-scope"
-              ? "Keep me posted"
-              : isBusiness
-                ? "Request a site assessment"
-                : "Confirm my eligibility"
-          }
+          submitLabel="Book my assessment"
           className="mt-5"
-          summary={
-            <div className="rounded-xl bg-surface-muted p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
-                Your answers
-              </p>
-              <p className="mt-1.5 text-sm text-ink">{summaryLines.join(" · ")}</p>
-            </div>
-          }
         />
       </div>
     </div>

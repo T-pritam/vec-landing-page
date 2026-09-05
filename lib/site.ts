@@ -16,6 +16,8 @@ export const SITE = {
   url: "https://aemenergy.com.au",
   phone: "+61 434 623 604",
   phoneHref: "tel:+61434623604",
+  // Same number as `phone`, digits only — wa.me rejects "+" and spaces.
+  whatsappHref: "https://wa.me/61434623604",
   email: "contact@aemenergy.com.au",
   serviceArea: "Victoria, metro and regional",
   address: "3 Envision Close, Pakenham VIC 3810",
