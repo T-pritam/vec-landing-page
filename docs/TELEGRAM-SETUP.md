@@ -453,7 +453,8 @@ moment the new one is issued.
 ```
 
 - **Chat on WhatsApp** opens a WhatsApp conversation with that lead's number —
-  the team contacting them, not an automated message.
+  the team contacting them, not an automated message. Shown for mobiles only;
+  a landline lead shows `☎️ Call +6139…` and its 📞 line reads `(landline)`.
 - Lines are omitted rather than padded: no notes means no 📝 line at all, no
   campaign data means no 📊 line. Missing postcode shows `Not provided`.
 - The timestamp is Melbourne time.

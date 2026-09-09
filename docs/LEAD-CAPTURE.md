@@ -129,7 +129,7 @@ One table, `public.leads`, in project `kgntyyxlxvzrlbjzabmi`. Created by the
 | `created_at` | timestamptz | database | UTC, never the client's clock |
 | `full_name` | text | customer | trimmed, spaces collapsed, letters only |
 | `email` | text | customer | trimmed, lowercased |
-| `phone` | text | customer | normalised to `+614XXXXXXXX` |
+| `phone` | text | customer | mobile or landline, normalised to `+61XXXXXXXXX` |
 | `postcode` | text | customer | nullable, Victorian ranges only |
 | `preferred_date` | date | customer | nullable, ISO, today → +90 days |
 | `preferred_time` | text | customer | nullable, one of four exact labels |
@@ -244,7 +244,7 @@ empty or whitespace-only are stored as `NULL`, never as `""`.
   "error": "validation_error",
   "message": "Please fix the following issues",
   "fields": { "email": "Please enter a valid email address",
-              "phone": "Please enter a valid Australian mobile number (starting with 04 or +614)" } }
+              "phone": "Please enter a valid Australian phone number — mobile (04xx xxx xxx) or landline (02, 03, 07, 08)" } }
 ```
 
 Every failing field is reported at once, so the user fixes everything in one
@@ -259,7 +259,7 @@ for instant feedback, the server because client validation is never trusted.
 |---|---|---|
 | `full_name` | trim, collapse spaces, 2–200 chars, letters (incl. accents) + spaces + hyphens + apostrophes. Digits and `@` rejected. | `Please enter your full name (letters only, at least 2 characters)` |
 | `email` | trim, lowercase, ≤254, one `@`, a dot in the domain, ≥2-char TLD | `Please enter a valid email address` |
-| `phone` | strip spaces/hyphens/parens/dots; accept `04XXXXXXXX`, `614XXXXXXXX`, `+614XXXXXXXX`; store `+614XXXXXXXX` | `Please enter a valid Australian mobile number (starting with 04 or +614)` |
+| `phone` | strip spaces/hyphens/parens/dots; 10 national digits with prefix `02`/`03`/`04`/`07`/`08`; also accepts `61…` and `+61…`; store `+61XXXXXXXXX` | `Please enter a valid Australian phone number — mobile (04xx xxx xxx) or landline (02, 03, 07, 08)` |
 | `postcode` | optional → `NULL`. If given: 4 digits, 3000–3999 or 8000–8999 | `Please enter a valid Victorian postcode (3000-3999 or 8000-8999)` |
 | `preferred_date` | ISO `YYYY-MM-DD`, today → +90 days **in Australia/Melbourne** | `Please select a date from today to 90 days ahead` |
 | `preferred_time` | exactly one of the four labels below | `Please select a preferred time slot` |
@@ -344,7 +344,7 @@ covers what the app sends and how it behaves.
 📅 15 Sep 2026 | 8:00 AM – 11:00 AM
 📝 Interested in solar for our 4-bedroom home
 
-💬 Chat on WhatsApp          ← tap to open WhatsApp with this lead
+💬 Chat on WhatsApp          ← mobiles only; landlines get ☎️ Call instead
 
 📊 Source: facebook | Campaign: spring_solar | Ad: carousel_v2
 🕐 4 Sep 2026, 3:45 PM AEST
@@ -357,7 +357,9 @@ covers what the app sends and how it behaves.
 - The timestamp is Melbourne time, never UTC.
 - 🆔 is the first 8 characters of the UUID; the full one is in the database.
 - The WhatsApp link is `wa.me/<digits>` — the team contacting the lead, not an
-  automated message to them.
+  automated message to them. It appears **only for mobiles**; a landline gets a
+  `☎️ Call` dial link instead, and its 📞 line is suffixed `(landline)`, because a
+  wa.me link for a landline opens a chat nobody will ever answer.
 
 Everything interpolated is HTML-escaped, since `parse_mode: "HTML"` means a `&`
 or `<` in a customer's note would otherwise corrupt or truncate the message.
@@ -493,9 +495,10 @@ their postcode. Postcode validation rejects anything outside 3000–3999 and
 8000–8999, so those visitors see "Please enter a valid Victorian postcode" on a
 pre-filled field and can only submit by entering a postcode that isn't theirs.
 
-**Phone and email are both required, and landlines are rejected.** Per handoff
-§5.4. The form previously accepted either one. This affects commercial enquiries
-that would previously have arrived through `/contact`.
+**Phone and email are both required.** Per handoff §5.4; the form previously
+accepted either one. Landlines *are* accepted (see the phone rules above) — the
+handoff specified mobile-only, but that would have rejected the commercial
+enquiries that used to arrive through `/contact`.
 
 **"Book a site assessment" on `/business` links to `/check-eligibility`.** Both
 routes now end in the same form, but the visitor is sent through the quiz first

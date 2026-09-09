@@ -134,16 +134,55 @@ export function isValidEmail(email: string): boolean {
   return domain.slice(domain.lastIndexOf(".") + 1).length >= 2;
 }
 
+export type PhoneKind = "mobile" | "landline";
+
 /**
- * Australian mobiles only, stored as `+614XXXXXXXX` (exactly 12 characters).
- * Returns null when the input is not a mobile — landlines included.
+ * Australian numbers are always 10 digits nationally: a leading 0, then a
+ * single prefix digit, then eight subscriber digits.
+ *
+ *   04xx xxx xxx   mobile
+ *   02 xxxx xxxx   landline — NSW/ACT
+ *   03 xxxx xxxx   landline — VIC/TAS
+ *   07 xxxx xxxx   landline — QLD
+ *   08 xxxx xxxx   landline — SA/WA/NT
+ *
+ * So the prefix digit is one of 2, 3, 4, 7, 8 and everything else is invalid —
+ * which is what rejects 01, 05, 06, 09 and the 13/1300/1800 service ranges.
+ */
+const PHONE_PREFIX = "[23478]";
+
+/** Local form: leading 0, ten digits total. `0412345678`, `0398765432`. */
+const AU_LOCAL_RE = new RegExp(`^0(${PHONE_PREFIX}\\d{8})$`);
+
+/**
+ * International form, with or without the `+`, and tolerating the leading 0
+ * that people often leave in when they add the country code by hand
+ * (`+61 0412 345 678`). That input is unambiguous, and rejecting it would cost
+ * conversions on an ad-driven form for no benefit.
+ */
+const AU_INTERNATIONAL_RE = new RegExp(`^\\+?610?(${PHONE_PREFIX}\\d{8})$`);
+
+/**
+ * Normalises an Australian mobile or landline to `+61XXXXXXXXX` — exactly 12
+ * characters, `+61` followed by the nine national digits with the trunk 0
+ * dropped. Returns null if it is not a valid Australian number.
+ *
+ * The 12-character shape is depended on downstream: the duplicate-detection
+ * window matches on it exactly, and the Telegram notification strips the `+`
+ * to build a `wa.me` link.
  */
 export function normalisePhone(raw: string): string | null {
   const s = raw.replace(/[\s\-().]/g, "");
-  if (/^04\d{8}$/.test(s)) return `+61${s.slice(1)}`;
-  if (/^614\d{8}$/.test(s)) return `+${s}`;
-  if (/^\+614\d{8}$/.test(s)) return s;
-  return null;
+  const match = AU_LOCAL_RE.exec(s) ?? AU_INTERNATIONAL_RE.exec(s);
+  return match ? `+61${match[1]}` : null;
+}
+
+/**
+ * Mobile or landline, from an already-normalised number. Worth knowing before
+ * offering to text or WhatsApp someone — a landline will never answer either.
+ */
+export function phoneKind(normalised: string): PhoneKind {
+  return normalised.startsWith("+614") ? "mobile" : "landline";
 }
 
 /** Victorian postcodes: 3000–3999 and 8000–8999. */
@@ -184,7 +223,7 @@ export function validateLead(body: Record<string, unknown>): ValidationResult {
   const phone = normalisePhone(rawPhone);
   if (!phone) {
     errors.phone =
-      "Please enter a valid Australian mobile number (starting with 04 or +614)";
+      "Please enter a valid Australian phone number — mobile (04xx xxx xxx) or landline (02, 03, 07, 08)";
   }
 
   // postcode — optional, but Victorian when supplied

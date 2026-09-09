@@ -6,7 +6,7 @@
  * caller records the outcome on the row and returns success either way.
  */
 
-import { TIMEZONE } from "./validation";
+import { TIMEZONE, phoneKind } from "./validation";
 
 const TELEGRAM_TIMEOUT_MS = 8000;
 
@@ -67,11 +67,13 @@ function formatTimestamp(iso: string): string {
 
 /** Builds the §7.2 message. Exported so it can be unit-checked without sending. */
 export function buildTelegramMessage(lead: TelegramLead): string {
+  const kind = phoneKind(lead.phone);
   const lines: string[] = [
     "🔔 <b>NEW LEAD</b>",
     "",
     `👤 ${esc(lead.full_name)}`,
-    `📞 ${esc(lead.phone)}`,
+    // Flagged inline so nobody wastes a text on a landline.
+    `📞 ${esc(lead.phone)}${kind === "landline" ? " (landline)" : ""}`,
     `📧 ${esc(lead.email)}`,
     `📍 ${lead.postcode ? esc(lead.postcode) : "Not provided"}`,
   ];
@@ -82,10 +84,17 @@ export function buildTelegramMessage(lead: TelegramLead): string {
   // No notes means no line at all — never "Not provided".
   if (lead.notes) lines.push(`📝 ${esc(lead.notes)}`);
 
-  // Lets the team tap through from Telegram into a WhatsApp chat with the
-  // lead. wa.me takes digits only, so the leading "+" is stripped.
-  const waDigits = lead.phone.replace(/\D/g, "");
-  lines.push("", `💬 <a href="https://wa.me/${waDigits}">Chat on WhatsApp</a>`);
+  // One-tap action to reach the lead. WhatsApp only for mobiles — a wa.me link
+  // for a landline opens a chat nobody will ever answer, so landlines get a
+  // dial link instead. Either way this is the team contacting the lead, not an
+  // automated message.
+  if (kind === "mobile") {
+    // wa.me takes digits only, so the leading "+" is stripped.
+    const waDigits = lead.phone.replace(/\D/g, "");
+    lines.push("", `💬 <a href="https://wa.me/${waDigits}">Chat on WhatsApp</a>`);
+  } else {
+    lines.push("", `☎️ <a href="tel:${lead.phone}">Call ${esc(lead.phone)}</a>`);
+  }
 
   if (lead.utm_source || lead.utm_campaign || lead.utm_content) {
     lines.push(
