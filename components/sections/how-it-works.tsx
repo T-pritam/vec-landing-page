@@ -39,7 +39,7 @@ export default function HowItWorks() {
     <section>
       <div className="text-center py-16 px-8">
         <h2 className="text-4xl sm:text-5xl font-bold text-gray-900">Four steps. The whole chain, in-house.</h2>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">Because our subsidiary Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, every step sits within one accredited structure.</p>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">Because we work with a registered Accredited Provider and manage the whole job ourselves, every step sits within one accredited structure.</p>
       </div>
       <StackingCards totalCards={steps.length} className="relative">
         {steps.map(({ bgColor, description, image, title, step }, index) => (

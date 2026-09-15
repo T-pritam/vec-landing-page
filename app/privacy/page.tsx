@@ -3,30 +3,13 @@ import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/ui/section";
 import { SITE } from "@/lib/site";
 
+// Route stays at /privacy so existing /privacy#terms links keep working. The
+// privacy policy itself lives at /privacy-policy.
 export const metadata: Metadata = {
-  title: "Privacy & Terms",
+  title: "Terms & Conditions",
   description:
-    "Privacy notice and terms of use for the Accredited Energy prototype. Placeholder legal content, client to provide final copy before launch.",
+    "Terms of use for the AEM Energy website, including how indicative figures, VEU and Solar Victoria eligibility are presented.",
 };
-
-const PRIVACY = [
-  {
-    h: "What we collect",
-    p: "When you use the eligibility check or a contact form, we collect the details you give us, such as your name, contact details, postcode and the upgrades you're interested in, so we can respond to your enquiry.",
-  },
-  {
-    h: "How we use it",
-    p: `We use your information to assess what you may be eligible for, to contact you about your enquiry, and to deliver any upgrade you proceed with. We will never imply an upgrade is “free”. We will always show you what you'd actually pay.`,
-  },
-  {
-    h: "Who sees it",
-    p: "Your details are handled by our team. As a full-chain operation, a subsidiary of Aussie Ecomarks, a registered Accredited Provider, we don't sell your details to third-party installers. Where a service provider helps us operate (for example a CRM or email tool), they only process data on our instructions.",
-  },
-  {
-    h: "Your choices",
-    p: "You can ask us to access, correct or delete your information at any time by emailing us. We keep information only as long as needed for your enquiry or as required by law.",
-  },
-];
 
 const TERMS = [
   {
@@ -43,79 +26,38 @@ const TERMS = [
   },
   {
     h: "Eligibility & accreditation",
-    p: "Only a registered Accredited Provider can create the certificates (VEECs) that fund the discount. For us, that's our subsidiary, Aussie Ecomarks. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
+    p: "Only a registered Accredited Provider can create the certificates (VEECs) that fund the discount. We work with a registered Accredited Provider to handle this. Eligibility for any program is determined at assessment and may differ from indicative results shown here.",
   },
 ];
 
-function LegalBlock({
-  id,
-  kicker,
-  title,
-  intro,
-  items,
-}: {
-  id: string;
-  kicker: string;
-  title: string;
-  intro: string;
-  items: { h: string; p: string }[];
-}) {
-  return (
-    <div id={id} className="scroll-mt-28">
-      <p className="eyebrow">{kicker}</p>
-      <h2 className="text-h2 mt-3">{title}</h2>
-      <p className="text-lead mt-4">{intro}</p>
-      <div className="mt-8 space-y-8">
-        {items.map((it) => (
-          <section key={it.h}>
-            <h3 className="text-h3 text-[1.25rem]">{it.h}</h3>
-            <p className="mt-2 text-body">{it.p}</p>
-          </section>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default function PrivacyPage() {
+export default function TermsPage() {
   return (
     <>
       <PageHero
         eyebrow="Legal"
-        title="Privacy & Terms"
-        lead="Placeholder legal content for the prototype. Client to provide final copy before launch. The honest-pricing and indicative-figure principles below reflect how the site is built to behave."
+        title="Terms & Conditions"
+        lead="By using this site and its tools you accept the following terms."
         tone="muted"
       />
 
       <Section tone="surface" narrow>
-        <div className="rounded-2xl border border-brand/30 bg-brand-tint p-5 text-sm text-ink">
-          <strong className="font-semibold">Prototype notice:</strong> the text
-          below is standard placeholder wording. Replace with reviewed legal copy
-          before go-live.
-        </div>
-
-        <div className="mt-12 space-y-16">
-          <LegalBlock
-            id="privacy"
-            kicker="Privacy notice"
-            title="How we handle your information"
-            intro={`This notice explains how ${SITE.legalName} collects and uses your information when you use this site.`}
-            items={PRIVACY}
-          />
-          <hr className="border-hairline" />
-          <LegalBlock
-            id="terms"
-            kicker="Terms & conditions"
-            title="Using this site"
-            intro="By using this site and its tools you accept the following terms."
-            items={TERMS}
-          />
+        <div id="terms" className="scroll-mt-28 space-y-8">
+          {TERMS.map((it) => (
+            <section key={it.h}>
+              <h2 className="text-h3 text-[1.25rem]">{it.h}</h2>
+              <p className="mt-2 text-body">{it.p}</p>
+            </section>
+          ))}
         </div>
 
         <p className="mt-12 text-caption">
           Last updated: placeholder. Contact:{" "}
           <a href={`mailto:${SITE.email}`} className="underline underline-offset-2">
             {SITE.email}
+          </a>
+          . For how we handle personal information, see our{" "}
+          <a href="/privacy-policy" className="underline underline-offset-2">
+            Privacy Policy
           </a>
           .
         </p>

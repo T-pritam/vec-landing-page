@@ -104,7 +104,7 @@ export default function HowItWorksPage() {
         <SectionHeader
           eyebrow="Full chain, in house"
           title="We assess. We install. We handle the paperwork. You save."
-          lead="Because our subsidiary Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
+          lead="Because we work with a registered Accredited Provider and manage the whole job ourselves, every step sits with one team. No chasing a separate installer, a rebate agent and a certificate trader."
         />
         <div className="mt-10">
           <FullChain />

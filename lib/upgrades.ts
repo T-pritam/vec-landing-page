@@ -80,7 +80,7 @@ export const UPGRADES: UpgradeContent[] = [
       "You pay the reduced price, and we handle the certificate paperwork.",
     ],
     fullChain:
-      "Because our subsidiary Aussie Ecomarks is a registered Accredited Provider and we do the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
+      "Because we work with a registered Accredited Provider and manage the whole job ourselves, the assessment, the install and the certificate creation all sit with one team. You're not chasing a separate installer, a separate rebate agent and a separate paperwork service.",
     flagship: true,
     commercialAngle:
       "Commercial rooftop and ground-mount solar can run into five figures of combined value, with a longer measurement & verification path. We run that as a managed project. See the Business journey.",

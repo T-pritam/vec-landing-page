@@ -31,7 +31,7 @@ const columns = [
     title: "Company",
     links: [
       { label: "Contact", href: "/contact" },
-      { label: "Privacy", href: "/privacy" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms & Conditions", href: "/privacy#terms" },
     ],
   },
@@ -77,8 +77,6 @@ export function SiteFooter() {
             {SITE.tagline}
           </p>
           <p className="mt-4 text-sm text-white/55">
-            {SITE.address}
-            <br />
             <a
               href={SITE.phoneHref}
               className="text-white/80 hover:text-brand"
@@ -120,10 +118,15 @@ export function SiteFooter() {
       {/* Legal line */}
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {SITE.legalName}. {SITE.accreditation}
-            {" "}· ABN {SITE.abn}.
-          </p>
+          <div className="space-y-1">
+            <p className="text-white/60">
+              {SITE.legalName} | ACN {SITE.acn} | ABN {SITE.abn}
+            </p>
+            <p>{SITE.address}</p>
+            <p>
+              © {new Date().getFullYear()} {SITE.legalName}. {SITE.accreditation}.
+            </p>
+          </div>
           <p className="max-w-2xl sm:text-right">
             Indicative figures only, not a quote or guarantee. VEU and Solar
             Victoria are distinct programs; income thresholds apply only to Solar

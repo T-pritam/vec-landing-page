@@ -41,7 +41,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Our accreditation"
             title="What our accreditation actually involves."
-            lead="Plenty of sites say accredited and stop there. The part that matters is that ours, held by our subsidiary Aussie Ecomarks, is re-checked every year and covers the whole job rather than one slice of it."
+            lead="Plenty of sites say accredited and stop there. The part that matters is that ours, held by a registered Accredited Provider, is re-checked every year and covers the whole job rather than one slice of it."
             onInk
           />
         </Reveal>

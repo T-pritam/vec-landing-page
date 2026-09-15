@@ -87,7 +87,7 @@ export default function ContactPage() {
               {[
                 "No obligation, ever",
                 "A straight answer on what you'd pay",
-                "Backed by Aussie Ecomarks, a registered Accredited Provider",
+                "Backed by a registered Accredited Provider",
               ].map((t) => (
                 <li key={t} className="flex items-center gap-2.5 text-body">
                   <CheckIcon className="h-4 w-4 text-success" />

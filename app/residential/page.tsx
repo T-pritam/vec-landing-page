@@ -12,7 +12,7 @@ import { PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Residential upgrades for your home",
   description:
-    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a real upfront discount, handled end-to-end by AEM Energy, a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme.",
+    "Solar, heat pumps (incl. hot water), batteries and air conditioning: household energy upgrades with a real upfront discount, handled end-to-end by AEM Energy, working with a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme.",
 };
 
 export default function ResidentialPage() {

@@ -5,6 +5,7 @@ import { CheckIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { BookingDateTime } from "@/components/booking-datetime";
 import { readUtmData } from "@/components/utm-capture";
+import { trackConversion, type PixelConversion } from "@/components/meta-pixel";
 import { validateLead, type LeadFieldErrors } from "@/lib/leads/validation";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/cn";
@@ -45,6 +46,8 @@ export interface LeadFormDefaults {
 interface LeadFormProps {
   /** Where this instance lives — stored on the lead as `context`. */
   context: string;
+  /** Meta Pixel event fired only after the lead is accepted by /api/leads. */
+  conversion: PixelConversion;
   /** Pre-fill from upstream flows (e.g. the eligibility quiz). */
   defaults?: LeadFormDefaults;
   /** Booking mode — adds the preferred date + time-slot picker. */
@@ -73,6 +76,7 @@ function formatLongDate(isoDate: string): string {
 
 export function LeadForm({
   context,
+  conversion,
   defaults,
   booking = false,
   submitLabel = "Request my callback",
@@ -151,6 +155,7 @@ export function LeadForm({
       });
 
       if (res.status === 201) {
+        trackConversion(conversion);
         setDone({
           firstName: values.full_name.split(" ")[0] || values.full_name,
           date: values.preferred_date,
@@ -338,13 +343,13 @@ export function LeadForm({
           {submitting ? "Submitting…" : submitLabel}
         </Button>
         <p className="text-caption">
-          By submitting you agree to be contacted about your enquiry. We'll never
-          imply an upgrade is “free”. We will show you what you'd actually pay. See
-          our{" "}
-          <a href="/privacy" className="underline underline-offset-2">
-            privacy notice
-          </a>
-          .
+          By submitting this form, you consent to AEM Energy contacting you by
+          phone, SMS and email regarding your enquiry and related energy upgrade
+          products and services. See our{" "}
+          <a href="/privacy-policy" className="underline underline-offset-2">
+            Privacy Policy
+          </a>{" "}
+          for details.
         </p>
       </div>
     </form>

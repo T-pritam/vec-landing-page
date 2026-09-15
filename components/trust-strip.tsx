@@ -9,11 +9,11 @@ import { ShieldCheckIcon } from "@/components/icons";
 const TRUST_POINTS = [
   {
     label: "Backed by an Accredited Provider",
-    detail: "A subsidiary of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme",
+    detail: "Delivered through a registered Accredited Provider under the VEU scheme",
   },
   {
     label: "Re-tested every year",
-    detail: "Aussie Ecomarks passes the fit and proper and competent and capable checks annually",
+    detail: "Our Accredited Provider passes the fit and proper and competent and capable checks annually",
   },
   {
     label: "Full-chain, in-house",

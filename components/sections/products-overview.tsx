@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const HEADING = "Everything your home's energy system needs.";
 const BODY =
-  "From solar and batteries to heat pumps and air conditioning, AEM Energy assesses your place, installs the upgrade and handles every certificate. As a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme, the whole chain sits within one accredited structure, so a real upfront discount reaches you with almost nothing to do.";
+  "From solar and batteries to heat pumps and air conditioning, AEM Energy assesses your place, installs the upgrade and handles every certificate. Working with a registered Accredited Provider under the VEU scheme, the whole chain sits within one accredited structure, so a real upfront discount reaches you with almost nothing to do.";
 
 export function ProductsOverview() {
   const sectionRef = useRef<HTMLElement>(null);

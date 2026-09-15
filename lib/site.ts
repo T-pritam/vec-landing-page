@@ -1,18 +1,19 @@
 /**
  * Site-wide constants. Contact / trading details confirmed by the client
- * (2026-07-30). Accreditation is held by Aussie Ecomarks — AEM Energy is a
- * sister concern that delivers upgrades under that accreditation.
+ * (2026-07-30); address, ACN and ABN checked against the ASIC company extract
+ * (2026-09-15).
  */
 export const SITE = {
   name: "AEM Energy",
   legalName: "AEM Energy Pty Ltd",
-  // AEM Energy is a sister concern of Aussie Ecomarks, a registered Accredited
-  // Provider under the Victorian Energy Upgrades (VEU) scheme.
+  // AEM Energy Pty Ltd is not a subsidiary of any entity (ASIC extract). VEU
+  // accreditation sits with the Accredited Providers we work through — don't
+  // describe any of them as a parent or subsidiary company.
   accreditation:
-    "A subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme",
+    "Upgrades under the Victorian Energy Upgrades (VEU) program are delivered through registered Accredited Providers",
   tagline: "Everything your home runs on, upgraded properly.",
   description:
-    "AEM Energy handles your entire energy upgrade, end to end. As a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, we own the whole chain, from assessment and install to certificates and paperwork, so you get a real upfront discount and do almost nothing.",
+    "AEM Energy handles your entire energy upgrade, end to end. Working with a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, we manage the whole chain, from assessment and install to certificates and paperwork, so you get a real upfront discount and do almost nothing.",
   url: "https://aemenergy.com.au",
   phone: "+61 434 623 604",
   phoneHref: "tel:+61434623604",
@@ -20,7 +21,9 @@ export const SITE = {
   whatsappHref: "https://wa.me/61434623604",
   email: "contact@aemenergy.com.au",
   serviceArea: "Victoria, metro and regional",
-  address: "3 Envision Close, Pakenham VIC 3810",
+  // Principal place of business per the ASIC company extract.
+  address: "Unit 2, 108 Ahern Road, Pakenham VIC 3810",
+  acn: "696 217 651",
   abn: "36 696 217 651",
 } as const;
 

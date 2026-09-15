@@ -37,7 +37,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Money & eligibility",
     q: "Do I need a special provider?",
-    a: "Yes. Only a registered Accredited Provider can create the certificates that fund the discount. AEM Energy is a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the VEU scheme, so it's handled in-house. It's the single most important thing to check when comparing providers.",
+    a: "Yes. Only a registered Accredited Provider can create the certificates that fund the discount. AEM Energy works with a registered Accredited Provider under the VEU scheme to handle this for you. It's the single most important thing to check when comparing providers.",
   },
   {
     category: "Money & eligibility",
@@ -72,7 +72,7 @@ export const FAQS: FaqItem[] = [
   {
     category: "Business",
     q: "Do you handle compliance and paperwork?",
-    a: "Yes. Backed by our subsidiary Aussie Ecomarks, a registered Accredited Provider, we own certificate creation and the compliance obligations, so your team isn't managing the scheme.",
+    a: "Yes. Working with a registered Accredited Provider, we manage certificate creation and the compliance obligations, so your team isn't managing the scheme.",
   },
 ];
 

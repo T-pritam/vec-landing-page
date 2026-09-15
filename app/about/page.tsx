@@ -11,7 +11,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About & Why Us, accreditation, proven",
   description:
-    "AEM Energy is a subsidiary of Aussie Ecomarks, a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, re-tested every year on a fit-and-proper and competent-and-capable basis. Owning the whole delivery chain is how we protect customers.",
+    "AEM Energy works with a registered Accredited Provider under the Victorian Energy Upgrades (VEU) scheme, re-tested every year on a fit-and-proper and competent-and-capable basis. Managing the whole delivery chain is how we protect customers.",
 };
 
 const FULL_CHAIN_POINTS = [
@@ -24,8 +24,8 @@ const FULL_CHAIN_POINTS = [
     b: "Our registered installers do the work to the program's standard.",
   },
   {
-    t: "We own the certificates",
-    b: "Only a registered Accredited Provider can create VEECs. That's our subsidiary, Aussie Ecomarks, so the value stays in the group, not outsourced.",
+    t: "We manage the certificates",
+    b: "Only a registered Accredited Provider can create VEECs. We work with one directly, so certificate creation isn't handed off to an arm's-length third party.",
   },
   {
     t: "We own the outcome",
@@ -57,10 +57,10 @@ export default function AboutPage() {
             Accredited isn&apos;t a slogan here. It&apos;s the whole business.
           </h1>
           <p className="mt-4 max-w-2xl text-lg font-medium text-white/80">
-            AEM Energy is a subsidiary of Aussie Ecomarks, a registered
-            Accredited Provider under the Victorian Energy Upgrades program.
-            That&apos;s a specific, verifiable status, and it&apos;s the
-            reason we can do what most providers can&apos;t.
+            AEM Energy works with a registered Accredited Provider under the
+            Victorian Energy Upgrades program. That&apos;s a specific,
+            verifiable status, and it&apos;s the reason we can do what most
+            providers can&apos;t.
           </p>
           <Link
             href="/book-an-assessment"
@@ -82,10 +82,10 @@ export default function AboutPage() {
             <p className="mt-5 text-body">
               Under the VEU program, only a registered Accredited Provider can
               create the tradable certificates (VEECs) that fund the rebates.
-              That accreditation is held by Aussie Ecomarks, our subsidiary,
-              and AEM Energy owns the entire delivery chain: the lead, the
-              assessment, the install (via our registered installers), the
-              certificate creation, and the sale.
+              We work with a registered Accredited Provider for that, and AEM
+              Energy manages the entire delivery chain for you: the lead, the
+              assessment, the install (via our registered installers), and
+              the sale.
             </p>
             <p className="mt-4 text-body">
               For you, that means a single accountable team and an honest number.
@@ -101,7 +101,7 @@ export default function AboutPage() {
             <dl className="mt-4 space-y-4">
               {[
                 ["Trading as", SITE.name],
-                ["Accreditation", "Aussie Ecomarks, Accredited Provider (VEU)"],
+                ["Accreditation", "Delivered via a registered Accredited Provider (VEU)"],
                 ["ABN", SITE.abn],
                 ["Service area", SITE.serviceArea],
                 ["Program running since", "2021"],
@@ -113,7 +113,8 @@ export default function AboutPage() {
               ))}
             </dl>
             <p className="mt-5 text-caption">
-              Accreditation is held by our subsidiary, Aussie Ecomarks.
+              Accreditation is held by the registered Accredited Provider we
+              work with.
             </p>
           </aside>
         </div>
@@ -124,7 +125,7 @@ export default function AboutPage() {
         <SectionHeader
           eyebrow="Proof, not a promise"
           title="Re-tested every single year."
-          lead={'Accredited Providers must pass a “fit and proper persons” test and a “competent and capable” test, and renew accreditation annually. Aussie Ecomarks, our subsidiary, holds that accreditation, a strong, specific credibility signal that almost no competitor surfaces.'}
+          lead={'Accredited Providers must pass a “fit and proper persons” test and a “competent and capable” test, and renew accreditation annually. The Accredited Provider we work with holds that accreditation, a strong, specific credibility signal that almost no competitor surfaces.'}
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[

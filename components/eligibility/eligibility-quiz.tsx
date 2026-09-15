@@ -678,6 +678,7 @@ function ResultStep({
             so the form no longer repeats them in a summary block. */}
         <LeadForm
           context={`eligibility-quiz:${state}`}
+          conversion="eligibility"
           booking
           defaults={{
             audience: answers.audience,
